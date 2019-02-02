@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+
+    working_directory: ~/vue-ts-firebase-starter
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+
+      - run:
+          name: 'Install dependencies'
+          command: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: 'Run prettier check on project files'
+          command: yarn prettier:check
+
+      - run:
+          name: 'Run linter'
+          command: yarn lint
+
+      - run:
+          name: 'Build'
+          command: yarn build
