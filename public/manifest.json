@@ -1,6 +1,6 @@
 {
-  "name": "vue-ts-firebase-starter",
-  "short_name": "vue-ts-firebase-starter",
+  "name": "vue-firebase-starter-kit",
+  "short_name": "vue-firebase-starter-kit",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
