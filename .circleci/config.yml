@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9
+      - image: circleci/node:8
 
     working_directory: ~/vue-ts-firebase-starter
 
@@ -11,8 +11,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "yarn.lock" }}
+            - v2-dependencies-
 
       - run:
           name: 'Install dependencies'
