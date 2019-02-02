@@ -11,37 +11,37 @@ jobs:
 
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "yarn.lock" }}
-            - v2-dependencies-
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
 
       - run:
           name: 'Install dependencies'
-          command: yarn
+          command: npm i
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run:
           name: 'Run prettier check on project files'
-          command: yarn prettier:check
+          command: npm run prettier:check
 
       - run:
           name: 'Run linter'
-          command: yarn lint
+          command: npm run lint
 
       - run:
           name: 'Run unit tests'
-          command: yarn test:unit
+          command: npm run test:unit
 
       - run:
           name: 'Run e2e tests'
-          command: yarn test:e2e:headless
+          command: npm run test:e2e:headless
 
       - run:
           name: 'Build'
-          command: yarn build
+          command: npm run build
 
 workflows:
   version: 2
