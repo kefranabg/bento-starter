@@ -31,6 +31,10 @@ jobs:
           name: 'Run linter'
           command: yarn lint
 
+       - run:
+          name: 'Run unit tests'
+          command: yarn test:unit
+
       - run:
           name: 'Build'
           command: yarn build
