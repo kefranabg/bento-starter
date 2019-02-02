@@ -36,6 +36,10 @@ jobs:
           command: yarn test:unit
 
       - run:
+          name: 'Run e2e tests'
+          command: yarn test:e2e:headless
+
+      - run:
           name: 'Build'
           command: yarn build
 
