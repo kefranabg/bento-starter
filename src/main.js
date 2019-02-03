@@ -1,10 +1,12 @@
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import Vue from 'vue'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './register-service-worker'
 import './handle-network-status'
 
+OfflinePluginRuntime.install()
 Vue.config.productionTip = false
 
 new Vue({

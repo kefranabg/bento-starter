@@ -1,4 +1,5 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
 module.exports = {
@@ -8,21 +9,10 @@ module.exports = {
       new PrerenderSPAPlugin({
         // Required - The path to the webpack-outputted app to prerender.
         staticDir: path.join(__dirname, 'dist'),
-        // Required - Routes to render.
+        // Required - Routes to prerender.
         routes: ['/', '/about']
-      })
+      }),
+      new OfflinePlugin()
     ]
-  },
-  pwa: {
-    workboxOptions: {
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [
-        /*
-          Here you can add runtime caching
-          See https://developers.google.com/web/tools/workbox/ for more details
-         */
-      ]
-    }
   }
 }
