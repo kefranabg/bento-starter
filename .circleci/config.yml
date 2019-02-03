@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8
+      - image: cypress/base:8
 
     working_directory: ~/vue-ts-firebase-starter
 
@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+            - v1-dependencies
 
       - run:
           name: 'Install dependencies'
@@ -20,7 +20,7 @@ jobs:
 
       - save_cache:
           paths:
-            - node_modules
+            - ~/.cache
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
       - run:
@@ -32,5 +32,19 @@ jobs:
           command: yarn lint
 
       - run:
+          name: 'Run unit tests'
+          command: yarn test:unit
+
+      - run:
+          name: 'Run e2e tests'
+          command: yarn test:e2e:headless
+
+      - run:
           name: 'Build'
           command: yarn build
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
