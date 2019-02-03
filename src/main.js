@@ -7,7 +7,6 @@ import store from './store'
 import './handle-network-status'
 
 OfflinePluginRuntime.install()
-
 Vue.config.productionTip = false
 
 new Vue({
