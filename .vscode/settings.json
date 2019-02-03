@@ -1,5 +1,18 @@
 {
-  "editor.formatOnSave": true,
   "vetur.validation.template": false,
-  "eslint.validate": ["javascript", { "autoFix": true, "language": "vue" }]
+  
+  "prettier.eslintIntegration": true,
+
+  "eslint.autoFixOnSave": true,
+  "eslint.options": { "extensions": [".html", ".js", ".vue"] },
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false
 }
