@@ -9,11 +9,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
-
       - run:
           name: 'Install dependencies'
           command: yarn
@@ -22,6 +17,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
 
       - run:
           name: 'Run prettier check on project files'
