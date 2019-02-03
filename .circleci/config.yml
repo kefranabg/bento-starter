@@ -9,6 +9,11 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies
+
       - run:
           name: 'Install dependencies'
           command: yarn
