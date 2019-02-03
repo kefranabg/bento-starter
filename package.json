@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "offline-plugin": "^5.0.6",
-    "register-service-worker": "^1.5.2",
     "terser": "3.14",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
@@ -24,7 +23,6 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-e2e-cypress": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
-    "@vue/cli-plugin-pwa": "^3.4.0",
     "@vue/cli-plugin-unit-jest": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "@vue/eslint-config-prettier": "^4.0.1",
