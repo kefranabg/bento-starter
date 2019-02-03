@@ -12,5 +12,5 @@
 # A basic redirect rule
 [[redirects]]
   from = "/*"
-  to = "/"
+  to = "/index.html"
 
