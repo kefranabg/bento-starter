@@ -8,3 +8,9 @@
 [build]
   command = "yarn build"
   publish = "dist"
+
+# A basic redirect rule
+[[redirects]]
+  from = "/*"
+  to = "/"
+
