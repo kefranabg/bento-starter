@@ -10,7 +10,8 @@
     "test:e2e:headless": "vue-cli-service test:e2e --headless",
     "test:unit": "vue-cli-service test:unit",
     "prettier:format-all": "prettier --write '**/*.{vue,scss,sass,js}'",
-    "prettier:check": "prettier '**/*.{vue,scss,sass,js}' --list-different"
+    "prettier:check": "prettier '**/*.{vue,scss,sass,js}' --list-different",
+    "audit": "./travis_run_audit.sh"
   },
   "dependencies": {
     "offline-plugin": "^5.0.6",
@@ -32,6 +33,8 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lighthousebot": "https://github.com/ebidel/lighthousebot",
+    "netlify-cli": "^2.6.6",
     "node-sass": "^4.9.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^7.1.0",
