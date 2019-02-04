@@ -8,5 +8,5 @@ install:
   - yarn install
 
 script:
-  - yarn build
-  - ./travis_run_audit
+  - yarn run build
+  - yarn run audit
