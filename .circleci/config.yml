@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8
+      - image: cypress/browsers:chrome69
 
     working_directory: ~/vue-ts-firebase-starter
 
@@ -38,6 +38,10 @@ jobs:
       - run:
           name: 'Run e2e tests'
           command: yarn test:e2e:headless
+
+      - run:
+          name: 'Run lighthouse audit'
+          command: 'yarn audit'
 
       - run:
           name: 'Build'

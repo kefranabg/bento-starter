@@ -2,8 +2,12 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
-module.exports = {
+const config = {
   configureWebpack: {
+    output: {
+      filename: '[name].js',
+      chunkFilename: '[name].js'
+    },
     plugins: [
       /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
       new PrerenderSPAPlugin({
@@ -11,8 +15,16 @@ module.exports = {
         staticDir: path.join(__dirname, 'dist'),
         // Required - Routes to prerender.
         routes: ['/', '/about']
-      }),
-      new OfflinePlugin()
+      })
     ]
   }
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.configureWebpack.plugins = [
+    ...config.configureWebpack.plugins,
+    new OfflinePlugin()
+  ]
+}
+
+module.exports = config
