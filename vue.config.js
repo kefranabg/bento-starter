@@ -14,7 +14,7 @@ const config = {
         // Required - The path to the webpack-outputted app to prerender.
         staticDir: path.join(__dirname, 'dist'),
         // Required - Routes to prerender.
-        routes: ['/', '/about']
+        routes: ['/login']
       })
     ]
   }
@@ -23,7 +23,11 @@ const config = {
 if (process.env.NODE_ENV === 'production') {
   config.configureWebpack.plugins = [
     ...config.configureWebpack.plugins,
-    new OfflinePlugin()
+    new OfflinePlugin({
+      ServiceWorker: {
+        events: true
+      }
+    })
   ]
 }
 

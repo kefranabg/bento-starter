@@ -1,12 +1,15 @@
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import Vue from 'vue'
 
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './handle-network-status'
+import '@/handle-network-status'
+import '@/firebase/init'
 
-OfflinePluginRuntime.install()
+if (process.env.NODE_ENV === 'production') {
+  import('./register-service-worker')
+}
+
 Vue.config.productionTip = false
 
 new Vue({

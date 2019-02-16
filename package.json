@@ -14,6 +14,8 @@
     "audit": "./run_lighthouse_audit.sh"
   },
   "dependencies": {
+    "firebase": "^5.8.3",
+    "firebaseui": "^3.5.2",
     "offline-plugin": "^5.0.6",
     "terser": "3.14",
     "vue": "^2.5.22",

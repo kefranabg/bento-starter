@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './user'
+import authentication from './authentication'
 import app from './app'
 
 Vue.use(Vuex)
@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   modules: {
-    user,
+    authentication,
     app
   }
 })
