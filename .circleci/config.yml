@@ -43,7 +43,7 @@ jobs:
           name: 'Build'
           command: yarn build
 
-       - run:
+      - run:
           name: 'Run lighthouse audit'
           command: 'yarn audit'
 
