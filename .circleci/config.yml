@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8-browsers
+      - image: cypress/browsers:8
 
     working_directory: ~/vue-ts-firebase-starter
 
