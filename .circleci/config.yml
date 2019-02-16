@@ -43,9 +43,9 @@ jobs:
           name: 'Build'
           command: yarn build
 
-      - run:
-          name: 'Run lighthouse audit'
-          command: 'yarn run audit'
+      # - run:
+      #     name: 'Run lighthouse audit'
+      #     command: 'yarn run audit'
 
 workflows:
   version: 2
