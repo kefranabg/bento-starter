@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/browsers:chrome69
+      - image: imton/cypress-chrome71
 
     working_directory: ~/vue-ts-firebase-starter
 
@@ -40,12 +40,12 @@ jobs:
           command: yarn test:e2e:headless
 
       - run:
-          name: 'Run lighthouse audit'
-          command: 'yarn audit'
-
-      - run:
           name: 'Build'
           command: yarn build
+
+      # - run:
+      #     name: 'Run lighthouse audit'
+      #     command: 'yarn run audit'
 
 workflows:
   version: 2

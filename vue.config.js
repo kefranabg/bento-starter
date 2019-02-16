@@ -3,6 +3,12 @@ const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
 const config = {
+  css: {
+    extract: {
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css'
+    }
+  },
   configureWebpack: {
     output: {
       filename: '[name].js',
@@ -14,7 +20,7 @@ const config = {
         // Required - The path to the webpack-outputted app to prerender.
         staticDir: path.join(__dirname, 'dist'),
         // Required - Routes to prerender.
-        routes: ['/', '/about']
+        routes: ['/login']
       })
     ]
   }
@@ -23,7 +29,11 @@ const config = {
 if (process.env.NODE_ENV === 'production') {
   config.configureWebpack.plugins = [
     ...config.configureWebpack.plugins,
-    new OfflinePlugin()
+    new OfflinePlugin({
+      ServiceWorker: {
+        events: true
+      }
+    })
   ]
 }
 
