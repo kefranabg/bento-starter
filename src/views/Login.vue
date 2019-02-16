@@ -2,13 +2,13 @@
   <div class="wrapper">
     <h1>Login</h1>
     <!-- Loader -->
-    <div v-if="userInfos === undefined">
+    <div v-if="user === undefined">
       loading ...
     </div>
 
     <!-- Auth UI -->
     <div
-      v-show="userInfos !== undefined && !userInfos"
+      v-show="user !== undefined && !user"
       id="firebaseui-auth-container"
     ></div>
   </div>
@@ -20,7 +20,7 @@ import firebase from 'firebase/app'
 import firebaseui from 'firebaseui'
 
 export default {
-  computed: mapState('authentication', ['userInfos']),
+  computed: mapState('authentication', ['user']),
   mounted() {
     this.initFirebaseUI()
   },

@@ -7,11 +7,11 @@ export default {
    * @param {Object} firebase user
    */
   login: async ({ commit, dispatch }, firebaseUser) => {
-    const userInfos = await usersDb.read(firebaseUser.uid)
+    const user = await usersDb.read(firebaseUser.uid)
 
-    userInfos
-      ? commit('setUserInfos', userInfos)
-      : await dispatch('createNewUserInfos', firebaseUser)
+    user
+      ? commit('setUser', user)
+      : await dispatch('createNewUser', firebaseUser)
     router.push('/')
   },
 
@@ -20,19 +20,22 @@ export default {
    */
   logout: ({ commit }) => {
     router.push('/login')
-    commit('setUserInfos', null)
+    commit('setUser', null)
   },
 
-  createNewUserInfos: async ({ dispatch }, firebaseUser) => {
+  /**
+   * Create new user from firebase user infos
+   */
+  createNewUser: async ({ dispatch }, firebaseUser) => {
     const providerData = firebaseUser.providerData[0]
     const { displayName, photoURL, email } = providerData
-    const userInfos = {
+    const user = {
       displayName,
       photoURL,
       email
     }
 
-    const createdUserInfos = await usersDb.create(userInfos, firebaseUser.uid)
-    dispatch('setUserInfos', createdUserInfos)
+    const createdUser = await usersDb.create(user, firebaseUser.uid)
+    dispatch('setUser', createdUser)
   }
 }

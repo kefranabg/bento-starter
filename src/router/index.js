@@ -37,10 +37,7 @@ const router = new Router({
  * Redirect user to login page if auth user is not set
  */
 router.beforeEach((to, from, next) => {
-  if (
-    !(to.meta && to.meta.authNotRequired) &&
-    !store.state.authentication.userInfos
-  )
+  if (!(to.meta && to.meta.authNotRequired) && !store.state.authentication.user)
     return next({ path: '/login' })
   next()
 })

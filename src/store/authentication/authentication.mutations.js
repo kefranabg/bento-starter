@@ -1,3 +1,3 @@
 export default {
-  setUserInfos: (state, value) => (state.userInfos = value)
+  setUser: (state, value) => (state.user = value)
 }

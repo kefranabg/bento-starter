@@ -1,3 +1,4 @@
 export default {
-  networkOnLine: true
+  networkOnLine: true,
+  newContentAvailable: false
 }

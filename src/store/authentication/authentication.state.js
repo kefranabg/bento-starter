@@ -1,3 +1,3 @@
 export default {
-  userInfos: undefined
+  user: undefined
 }

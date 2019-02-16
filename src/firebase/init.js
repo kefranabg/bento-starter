@@ -16,6 +16,7 @@ const config = {
 
 firebase.initializeApp(config)
 firebase.firestore().settings({})
+firebase.firestore().enablePersistence()
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
   const actionToDispatch = isNil(firebaseUser) ? 'logout' : 'login'

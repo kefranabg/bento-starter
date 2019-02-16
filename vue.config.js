@@ -32,7 +32,10 @@ if (process.env.NODE_ENV === 'production') {
     new OfflinePlugin({
       ServiceWorker: {
         events: true
-      }
+      },
+      publicPath: '/',
+      appShell: '/',
+      externals: ['/']
     })
   ]
 }

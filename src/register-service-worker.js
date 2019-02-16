@@ -1,4 +1,7 @@
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+import store from '@/store'
+
+import { SET_NEW_CONTENT_AVAILABLE } from '@/store/app/app.mutations'
 
 OfflinePluginRuntime.install({
   // When an update is ready, tell ServiceWorker to take control immediately:
@@ -8,6 +11,6 @@ OfflinePluginRuntime.install({
 
   // Service worker has been updated, ask user to reload page to get the last version
   onUpdated() {
-    console.log('SW has been replaced, reload to get newer version')
+    store.commit(`app/${SET_NEW_CONTENT_AVAILABLE}`, true)
   }
 })
