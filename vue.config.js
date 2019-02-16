@@ -22,7 +22,7 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.configureWebpack.plugins = [
-    config.configureWebpack.plugins,
+    ...config.configureWebpack.plugins,
     new OfflinePlugin()
   ]
 }
