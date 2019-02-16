@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <h1>Login</h1>
     <!-- Loader -->
     <div v-if="userInfos === undefined">
       loading ...

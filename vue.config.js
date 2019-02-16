@@ -3,6 +3,12 @@ const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 
 const config = {
+  css: {
+    extract: {
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css'
+    }
+  },
   configureWebpack: {
     output: {
       filename: '[name].js',
