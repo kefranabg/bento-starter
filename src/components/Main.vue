@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>Hi {{ user.displayName }}.</h1>
+    <p>{{ msg }}</p>
     <div v-if="newContentAvailable">
       New content available. Please <a href="/">refresh</a>
     </div>
@@ -11,7 +12,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Home',
+  name: 'Main',
   props: {
     msg: String
   },
