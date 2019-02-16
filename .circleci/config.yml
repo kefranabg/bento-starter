@@ -40,8 +40,8 @@ jobs:
           command: yarn test:e2e:headless
 
       - run:
-        name: 'Run lighthouse audit'
-        command: 'yarn audit'
+          name: 'Run lighthouse audit'
+          command: 'yarn audit'
 
       - run:
           name: 'Build'
