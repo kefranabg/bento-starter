@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "firebase": "^5.8.3",
+    "register-service-worker": "^1.6.1",
     "terser": "3.14",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
