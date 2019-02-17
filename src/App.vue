@@ -8,7 +8,7 @@
     </div>
     <router-view />
     <div v-if="newContentAvailable">
-      New content available. Please <a href="/">refresh</a>
+      New content available. Please <button @click="refresh">refresh</button>
     </div>
     <logout v-if="user"></logout>
   </div>
@@ -22,6 +22,11 @@ export default {
   computed: {
     ...mapState('app', ['newContentAvailable']),
     ...mapState('authentication', ['user'])
+  },
+  methods: {
+    refresh() {
+      window.location.reload()
+    }
   }
 }
 </script>
