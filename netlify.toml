@@ -17,5 +17,5 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Strict-Transport-Security = "max-age=0"
+    Cache-Control = "public, max-age=0"
+    Strict-Transport-Security = ""
