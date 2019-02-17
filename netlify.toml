@@ -18,4 +18,4 @@
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=0"
-    Strict-Transport-Security = ""
+    Strict-Transport-Security = "max-age=0"
