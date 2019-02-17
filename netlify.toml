@@ -13,3 +13,8 @@
 [[redirects]]
   from = "/*"
   to = "/index.html"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
