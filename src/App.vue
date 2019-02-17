@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     refresh() {
-      window.location.reload()
+      window.location.reload(true)
     }
   }
 }
