@@ -13,8 +13,3 @@
 [[redirects]]
   from = "/*"
   to = "/index.html"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "max-age=3600"
