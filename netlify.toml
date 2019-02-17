@@ -18,3 +18,4 @@
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
+    Strict-Transport-Security = "max-age=0"
