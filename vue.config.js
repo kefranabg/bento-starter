@@ -1,7 +1,7 @@
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
+//const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
-const path = require('path')
+//const path = require('path')
 
 const config = {
   pwa: {
