@@ -2,11 +2,29 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/dashboard">Dashboard</router-link> |
+      <router-link to="/account">Account</router-link> |
+      <router-link to="/login">Login</router-link> |
     </div>
     <router-view />
+    <div v-if="newContentAvailable">
+      New content available. Please <a href="/">refresh</a>
+    </div>
+    <logout v-if="user"></logout>
   </div>
 </template>
+<script>
+import Logout from '@/components/Logout'
+import { mapState } from 'vuex'
+
+export default {
+  components: { Logout },
+  computed: {
+    ...mapState('app', ['newContentAvailable']),
+    ...mapState('authentication', ['user'])
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -20,10 +38,7 @@
   padding: 30px;
   a {
     font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    color: black;
   }
 }
 </style>
