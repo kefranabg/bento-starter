@@ -19,3 +19,4 @@
   [headers.values]
     Cache-Control = "no-cache"
     Strict-Transport-Security = "no-cache"
+    Pragma = "no-cache"
