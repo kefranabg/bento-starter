@@ -17,6 +17,6 @@
 [[headers]]
   for = "/service-worker.js"
   [headers.values]
-    Cache-Control = "max-age=0,no-cache,no-store,must-revalidate"
+    cache-control = "max-age=0,no-cache,no-store,must-revalidate"
     Strict-Transport-Security = "no-cache"
     Pragma = "no-cache"
