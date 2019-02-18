@@ -15,7 +15,6 @@
   to = "/index.html"
 
 [[headers]]
-  for = "/*"
+  for = "/service-worker.js"
   [headers.values]
-    Cache-Control = "public, max-age=0"
-    Strict-Transport-Security = "max-age=0"
+    Cache-Control = "no-cache"

@@ -124,11 +124,8 @@ register('/service-worker.js', {
   updatefound() {
     console.log('New content is downloading.')
   },
-  updated(reg) {
-    reg.unregister().then(() => {
-      store.commit(`app/${SET_NEW_CONTENT_AVAILABLE}`, true)
-    })
-
+  updated() {
+    store.commit(`app/${SET_NEW_CONTENT_AVAILABLE}`, true)
     console.log('New content is available; please refresh.')
   },
   offline() {
