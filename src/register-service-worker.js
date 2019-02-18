@@ -111,7 +111,7 @@ import { SET_NEW_CONTENT_AVAILABLE } from '@/store/app/app.mutations'
 import { register } from 'register-service-worker'
 
 register('/service-worker.js', {
-  registrationOptions: { scope: './' },
+  registrationOptions: { scope: './', updateViaCache: 'none' },
   ready() {
     console.log('Service worker is active.')
   },
