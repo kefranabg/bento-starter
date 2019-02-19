@@ -15,7 +15,7 @@ export default {
   },
 
   /**
-   * Callback fire when user logout
+   * Callback fired when user logout
    */
   logout: ({ commit }) => {
     commit('setUser', null)
