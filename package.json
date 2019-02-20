@@ -11,7 +11,8 @@
     "test:unit": "vue-cli-service test:unit",
     "prettier:format-all": "prettier --write '**/*.{vue,scss,sass,js}'",
     "prettier:check": "prettier '**/*.{vue,scss,sass,js}' --list-different",
-    "firebase:deploy": "firebase deploy --non-interactive --token $FIREBASE_TOKEN"
+    "firebase:deploy": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
+    "bundlesize": "bundlesize"
   },
   "dependencies": {
     "firebase": "^5.8.3",
@@ -33,6 +34,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "bundlesize": "^0.17.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "firebase-tools": "^6.3.1",
@@ -45,6 +47,16 @@
   "resolutions": {
     "terser": "3.14.1"
   },
+  "bundlesize": [
+    {
+      "path": "./dist/chunk-vendors.js",
+      "maxSize": "245 kB"
+    },
+    {
+      "path": "./dist/app.js",
+      "maxSize": "10 kB"
+    }
+  ],
   "eslintConfig": {
     "root": true,
     "env": {
