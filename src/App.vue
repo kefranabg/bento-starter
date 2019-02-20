@@ -10,18 +10,19 @@
     <div v-if="newContentAvailable">
       New content available. Please <button @click="refresh">refresh</button>
     </div>
-    <logout v-if="user"></logout>
+    <logout v-if="isUserLoggedIn"></logout>
   </div>
 </template>
 <script>
 import Logout from '@/components/Logout'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { Logout },
   computed: {
     ...mapState('app', ['newContentAvailable']),
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    ...mapGetters('authentication', ['isUserLoggedIn'])
   },
   methods: {
     refresh() {

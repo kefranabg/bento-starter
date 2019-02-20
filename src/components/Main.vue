@@ -1,19 +1,22 @@
 <template>
   <div class="hello">
-    <h1 v-if="user">Hi {{ user.displayName }}.</h1>
+    <h1 v-if="isUserLoggedIn">Hi {{ user.displayName }}.</h1>
     <p>{{ msg }}</p>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Main',
   props: {
     msg: String
   },
-  computed: mapState('authentication', ['user'])
+  computed: {
+    ...mapGetters('authentication', ['isUserLoggedIn']),
+    ...mapState('authentication', ['user'])
+  }
 }
 </script>
 

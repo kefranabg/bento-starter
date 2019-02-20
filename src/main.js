@@ -3,10 +3,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import '@/handle-network-status'
+import '@/misc/register-service-worker'
+import '@/misc/show-prompt'
+import '@/misc/handle-network-status'
 import '@/firebase/init'
-import '@/register-service-worker'
-import '@/show-prompt'
 
 Vue.config.productionTip = false
 
