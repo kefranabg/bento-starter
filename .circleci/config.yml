@@ -11,7 +11,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package-lock.lock" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
             - v1-dependencies
 
       - run:
@@ -21,7 +21,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.cache
-          key: v1-dependencies-{{ checksum "package-lock.lock" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run:
           name: 'Run prettier check on project files'
