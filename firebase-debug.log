@@ -1,0 +1,20 @@
+[debug] [2019-02-20T15:34:52.270Z] ----------------------------------------------------------------------
+[debug] [2019-02-20T15:34:52.273Z] Command:       /Users/pc/.nvm/versions/node/v10.13.0/bin/node /Users/pc/Documents/Projects/Others/vue-ts-firebase-starter/node_modules/.bin/firebase deploy
+[debug] [2019-02-20T15:34:52.273Z] CLI Version:   6.3.1
+[debug] [2019-02-20T15:34:52.273Z] Platform:      darwin
+[debug] [2019-02-20T15:34:52.273Z] Node Version:  v10.13.0
+[debug] [2019-02-20T15:34:52.274Z] Time:          Wed Feb 20 2019 16:34:52 GMT+0100 (GMT+01:00)
+[debug] [2019-02-20T15:34:52.274Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-20T15:34:52.284Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-20T15:34:52.284Z] > authorizing via signed-in user
+[debug] [2019-02-20T15:34:52.285Z] [iam] checking project vue-firebase-starter-kit for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-02-20T15:34:52.286Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-02-20T15:34:52.286Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-02-20T15:34:52.434Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-20T15:34:52.469Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/vue-firebase-starter-kit:testIamPermissions  
+
+[debug] [2019-02-20T15:34:53.223Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-20T15:34:53.224Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/vue-firebase-starter-kit  
+ 
