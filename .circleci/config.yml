@@ -48,6 +48,7 @@ jobs:
           command: |
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               yarn firebase:deploy
+            fi
 
 workflows:
   version: 2
