@@ -3,7 +3,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 const path = require('path')
 
-const config = {
+let config = {
   pwa: {
     /* Example of dynamic caching : */
     workboxOptions: {
@@ -18,12 +18,6 @@ const config = {
           }
         }
       ]
-    }
-  },
-  css: {
-    extract: {
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
     }
   },
   configureWebpack: {
@@ -43,6 +37,9 @@ const config = {
   }
 }
 
+/**
+ * Additional config for production
+ */
 if (process.env.NODE_ENV === 'production') {
   config.configureWebpack.plugins = [
     ...config.configureWebpack.plugins,
@@ -51,6 +48,15 @@ if (process.env.NODE_ENV === 'production') {
       generateStatsFile: true
     })
   ]
+  config = {
+    ...config,
+    css: {
+      extract: {
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[id].css'
+      }
+    }
+  }
 }
 
 module.exports = config
