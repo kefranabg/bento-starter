@@ -1,50 +1,55 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/dashboard">Dashboard</router-link> |
-      <router-link to="/account">Account</router-link> |
-      <router-link to="/login">Login</router-link> |
+    <nav-bar></nav-bar>
+    <div class="main-wrapper">
+      <router-view />
     </div>
-    <router-view />
-    <div v-if="newContentAvailable">
-      New content available. Please <button @click="refresh">refresh</button>
-    </div>
-    <logout v-if="isUserLoggedIn"></logout>
+
+    <new-content-available-toastr
+      v-if="newContentAvailable"
+      class="new-content-available-toastr"
+    ></new-content-available-toastr>
   </div>
 </template>
 <script>
-import Logout from '@/components/Logout'
-import { mapState, mapGetters } from 'vuex'
+import NavBar from '@/components/NavBar'
+import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
+import { mapState } from 'vuex'
 
 export default {
-  components: { Logout },
-  computed: {
-    ...mapState('app', ['newContentAvailable']),
-    ...mapState('authentication', ['user']),
-    ...mapGetters('authentication', ['isUserLoggedIn'])
-  },
-  methods: {
-    refresh() {
-      window.location.reload()
-    }
-  }
+  components: { NavBar, NewContentAvailableToastr },
+  computed: mapState('app', ['newContentAvailable'])
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: black;
+body {
+  margin: 0;
+
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+
+    .new-content-available-toastr {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .main-wrapper {
+      padding: 20px;
+
+      .page-wrapper {
+        width: 60%;
+        margin: auto;
+
+        @media screen and (max-width: 1000px) {
+          width: 100%;
+        }
+      }
+    }
   }
 }
 </style>

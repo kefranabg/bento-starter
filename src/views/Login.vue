@@ -1,18 +1,14 @@
 <template>
-  <div class="wrapper">
-    <h1>Login</h1>
+  <div class="page-wrapper">
+    <h1 class="login-page-title">Login page</h1>
     <!-- Loader -->
     <div v-if="user === undefined">
       loading ...
     </div>
 
     <!-- Auth UI -->
-    <div
-      v-show="user !== undefined && !user"
-      id="firebaseui-auth-container"
-      @click="login"
-    >
-      login
+    <div class="login-btn" v-show="user !== undefined && !user" @click="login">
+      Login with google
     </div>
   </div>
 </template>
@@ -46,4 +42,32 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '@/theme/variables.scss';
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .login-page-title {
+    text-align: center;
+  }
+
+  .login-btn {
+    margin-top: 20px;
+    cursor: pointer;
+    padding: 5px 20px;
+    border: 1px solid;
+    display: inline-block;
+    border-radius: 3px;
+    border-color: #2c3e50;
+
+    &:hover {
+      color: $vue-color;
+      border-color: $vue-color;
+    }
+  }
+}
+</style>

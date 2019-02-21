@@ -21,7 +21,7 @@ const router = new Router({
       }
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home,
       meta: {
@@ -42,13 +42,7 @@ const router = new Router({
       component: () =>
         import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
     },
-    {
-      path: '/account',
-      name: 'account',
-      component: () =>
-        import(/* webpackChunkName: "dashboard" */ '@/views/Account.vue')
-    },
-    { path: '*', redirect: '/' }
+    { path: '*', redirect: '/home' }
   ]
 })
 

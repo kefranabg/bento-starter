@@ -1,5 +1,6 @@
 import usersDb from '@/firebase/users-db'
 import router from '@/router'
+import { isNil } from 'lodash'
 
 export default {
   /**
@@ -9,9 +10,11 @@ export default {
   login: async ({ commit, dispatch }, firebaseUser) => {
     const user = await usersDb.read(firebaseUser.uid)
 
-    user
-      ? commit('setUser', user)
-      : await dispatch('createNewUser', firebaseUser)
+    isNil(user)
+      ? await dispatch('createNewUser', firebaseUser)
+      : commit('setUser', user)
+
+    dispatch('products/getUserProducts', null, { root: true })
   },
 
   /**
@@ -19,6 +22,7 @@ export default {
    */
   logout: ({ commit }) => {
     commit('setUser', null)
+    commit('products/setProducts', null, { root: true })
 
     const currentRouter = router.app.$route
     if (!(currentRouter.meta && currentRouter.meta.authNotRequired)) {
@@ -29,7 +33,7 @@ export default {
   /**
    * Create new user from firebase user infos
    */
-  createNewUser: async ({ dispatch }, firebaseUser) => {
+  createNewUser: async ({ commit }, firebaseUser) => {
     const providerData = firebaseUser.providerData[0]
     const { displayName, photoURL, email } = providerData
     const user = {
@@ -39,6 +43,6 @@ export default {
     }
 
     const createdUser = await usersDb.create(user, firebaseUser.uid)
-    dispatch('setUser', createdUser)
+    commit('setUser', createdUser)
   }
 }
