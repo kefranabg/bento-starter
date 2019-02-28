@@ -6,6 +6,7 @@ import store from './store'
 import '@/misc/register-service-worker'
 import '@/misc/show-prompt'
 import '@/misc/handle-network-status'
+import '@/misc/handle-authentication'
 import '@/firebase/init'
 
 Vue.config.productionTip = false

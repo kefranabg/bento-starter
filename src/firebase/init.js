@@ -1,9 +1,6 @@
 import firebase from 'firebase/app'
-import { isNil } from 'lodash'
 import 'firebase/firestore'
 import 'firebase/auth'
-
-import store from '@/store'
 
 const config = {
   apiKey: 'AIzaSyCYfRz6wyhXKOLIpVCcSRWw0_tWiabJl44',
@@ -17,8 +14,3 @@ const config = {
 firebase.initializeApp(config)
 firebase.firestore().settings({})
 firebase.firestore().enablePersistence({ experimentalTabSynchronization: true })
-
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  const actionToDispatch = isNil(firebaseUser) ? 'logout' : 'login'
-  store.dispatch(`authentication/${actionToDispatch}`, firebaseUser)
-})
