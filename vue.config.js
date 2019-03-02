@@ -17,7 +17,8 @@ let config = {
             cacheName: 'fonts.googleapis'
           }
         }
-      ]
+      ],
+      navigateFallback: '/index.html'
     }
   },
   configureWebpack: {
@@ -31,7 +32,7 @@ let config = {
         // Required - The path to the webpack-outputted app to prerender.
         staticDir: path.join(__dirname, 'dist'),
         // Required - Routes to prerender.
-        routes: ['/login', '/']
+        routes: ['/login', '/home', '/']
       })
     ]
   }
