@@ -12,12 +12,9 @@ self.__precacheManifest = [].concat(self.__precacheManifest || [])
 workbox.precaching.suppressWarnings()
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
-workbox.routing.registerNavigationRoute(
-  workbox.precaching.getCacheKeyForURL('/index.html'),
-  {
-    blacklist: [new RegExp('authType=signInViaRedirect')]
-  }
-)
+workbox.routing.registerNavigationRoute('/index.html', {
+  blacklist: [new RegExp('/__/auth/handler')]
+})
 
 workbox.routing.registerRoute(
   /^https:\/\/fonts/,
