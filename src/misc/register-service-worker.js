@@ -4,7 +4,6 @@ import store from '@/store'
 
 if (process.env.NODE_ENV === 'production') {
   register('/service-worker.js', {
-    registrationOptions: { scope: './' },
     ready() {
       console.log('Service worker is active.')
     },
