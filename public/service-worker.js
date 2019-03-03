@@ -13,7 +13,7 @@ workbox.precaching.suppressWarnings()
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
 workbox.routing.registerNavigationRoute('/index.html', {
-  blacklist: [new RegExp('/__/auth/handler')]
+  blacklist: [new RegExp('/__/auth/handler'), new RegExp('/__/auth/iframe')]
 })
 
 workbox.routing.registerRoute(

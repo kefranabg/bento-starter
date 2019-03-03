@@ -36,7 +36,7 @@ export default {
   methods: {
     login() {
       const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(provider)
+      firebase.auth().signInWithPopup(provider)
     }
   }
 }
