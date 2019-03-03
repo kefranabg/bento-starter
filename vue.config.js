@@ -6,19 +6,9 @@ const path = require('path')
 let config = {
   pwa: {
     /* Example of dynamic caching : */
+    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [
-        {
-          urlPattern: new RegExp('^https://fonts'),
-          handler: 'staleWhileRevalidate',
-          options: {
-            cacheName: 'fonts.googleapis'
-          }
-        }
-      ],
-      navigateFallback: '/index.html'
+      swSrc: path.join('public', 'service-worker.js')
     }
   },
   configureWebpack: {
