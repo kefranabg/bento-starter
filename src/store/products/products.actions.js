@@ -1,14 +1,11 @@
-import createUserProductsDb from '@/firebase/user-products-db'
-
 export default {
   /**
    * Fetch products of current loggedin user
    */
   getUserProducts: async ({ rootState, commit }) => {
-    const user = rootState.authentication.user
-    const userProductsDb = createUserProductsDb(user.id)
+    const userProductDb = rootState.db.userProductDb
 
-    const products = await userProductsDb.readAll()
+    const products = await userProductDb.readAll()
     commit('setProducts', products)
   },
 
@@ -16,11 +13,10 @@ export default {
    * Create a product for current loggedin user
    */
   createUserProduct: async ({ rootState, commit }, product) => {
-    const user = rootState.authentication.user
-    const userProductsDb = createUserProductsDb(user.id)
+    const userProductDb = rootState.db.userProductDb
 
     commit('setProductCreationPending', true)
-    const createdProduct = await userProductsDb.create(product)
+    const createdProduct = await userProductDb.create(product)
     commit('addProduct', createdProduct)
     commit('setProductCreationPending', false)
   },
@@ -42,8 +38,7 @@ export default {
   deleteUserProduct: async ({ rootState, commit, getters }, productId) => {
     if (getters.isProductDeletionPending(productId)) return
 
-    const user = rootState.authentication.user
-    const userProductsDb = createUserProductsDb(user.id)
+    const userProductsDb = rootState.db.userProductDb
 
     commit('addProductDeletionPending', productId)
     await userProductsDb.delete(productId)
