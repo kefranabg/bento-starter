@@ -43,7 +43,8 @@
     "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21",
-    "webpack-bundle-analyzer": "^3.0.4"
+    "webpack-bundle-analyzer": "^3.0.4",
+    "webpack-merge": "^4.2.1"
   },
   "resolutions": {
     "terser": "3.14.1"
