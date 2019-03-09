@@ -18,12 +18,12 @@ let config = {
     },
     plugins: [
       /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
-      // new PrerenderSPAPlugin({
-      //   // Required - The path to the webpack-outputted app to prerender.
-      //   staticDir: path.join(__dirname, 'dist'),
-      //   // Required - Routes to prerender.
-      //   routes: ['/login', '/home', '/']
-      // })
+      new PrerenderSPAPlugin({
+        // Required - The path to the webpack-outputted app to prerender.
+        staticDir: path.join(__dirname, 'dist'),
+        // Required - Routes to prerender.
+        routes: ['/login', '/home', '/']
+      })
     ]
   }
 }
