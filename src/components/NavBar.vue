@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" :class="{ offline: !networkOnLine }">
     <div class="navbar-item">
       <router-link to="/home">Home</router-link>
     </div>
@@ -7,15 +7,16 @@
       <router-link to="/dashboard">Dashboard</router-link>
     </div>
     <div class="spacer"></div>
-    <div v-if="!isUserLoggedIn" class="navbar-item">
+    <div v-if="!isUserLoggedIn && networkOnLine" class="navbar-item">
       <router-link to="/login">Login</router-link>
     </div>
-    <template v-if="isUserLoggedIn">
+    <template v-if="isUserLoggedIn && networkOnLine">
       <img class="user-picture" :src="user.photoURL" alt="Avatar" />
       <div class="navbar-item logout-item" @click="logout">
         Logout
       </div>
     </template>
+    <div v-if="!networkOnLine" class="offline-label">Offline</div>
   </div>
 </template>
 
@@ -26,7 +27,8 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
-    ...mapState('authentication', ['user'])
+    ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine'])
   },
   methods: {
     async logout() {
@@ -45,6 +47,10 @@ export default {
   align-items: center;
   height: $navbar-height;
   background: $navbar-color;
+
+  &.offline {
+    background: $navbar-offline-color;
+  }
 
   .spacer {
     flex: 1;
@@ -73,6 +79,14 @@ export default {
   .user-picture {
     max-height: 40px;
     border-radius: 50%;
+  }
+
+  .offline-label {
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    margin-right: 5px;
   }
 }
 </style>
