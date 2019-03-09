@@ -1,4 +1,5 @@
 export default {
   networkOnLine: true,
-  newContentAvailable: false
+  newContentAvailable: false,
+  showAddToHomeScreenModalForApple: false
 }

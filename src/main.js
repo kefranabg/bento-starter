@@ -4,10 +4,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/misc/register-service-worker'
-import '@/misc/show-prompt'
 import '@/misc/handle-network-status'
 import '@/firebase/init'
 import '@/misc/handle-authentication'
+import '@/misc/handle-apple-install-prompt'
 
 Vue.config.productionTip = false
 
