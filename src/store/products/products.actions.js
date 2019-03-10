@@ -22,7 +22,7 @@ export default {
   },
 
   /**
-   * Create a new product current loggedin user and reset product name input
+   * Create a new product for current loggedin user and reset product name input
    */
   triggerAddProductAction: ({ dispatch, state, commit }) => {
     if (state.productNameToCreate === '') return
