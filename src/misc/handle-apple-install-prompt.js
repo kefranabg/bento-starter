@@ -5,5 +5,15 @@ const showPromptForIos =
   !window.navigator.standalone
 
 if (showPromptForIos) {
-  store.commit('app/setShowAddToHomeScreenModalForApple', true)
+  const now = Date.now()
+  const addToHomeIosPromptLastDate = localStorage.getItem(
+    'addToHomeIosPromptLastDate'
+  )
+  const limitDate = addToHomeIosPromptLastDate
+    ? new Date(parseInt(addToHomeIosPromptLastDate))
+    : new Date()
+  limitDate.setMonth(addToHomeIosPromptLastDate.getMonth() + 1)
+  if (now >= limitDate.getTime()) {
+    store.commit('app/setShowAddToHomeScreenModalForApple', true)
+  }
 }
