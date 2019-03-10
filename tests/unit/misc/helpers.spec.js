@@ -23,7 +23,6 @@ describe('helpers', () => {
       UsersDB.mockImplementationOnce(() => ({
         create: () => Promise.resolve(newUser)
       }))
-      UsersDB.mockResolvedValue()
       const createdUser = await helpers.createNewUserFromFirebaseAuthUser(
         firebaseUser
       )
