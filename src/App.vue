@@ -11,7 +11,7 @@
     ></new-content-available-toastr>
     <apple-add-to-home-screen-modal
       class="apple-add-to-home-screen-modal"
-      @close="setShowAddToHomeScreenModalForApple(false)"
+      @close="closeAddToHomeScreenModalForApple(false)"
       v-if="showAddToHomeScreenModalForApple"
     >
     </apple-add-to-home-screen-modal>
@@ -21,7 +21,7 @@
 import NavBar from '@/components/NavBar'
 import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: { NavBar, NewContentAvailableToastr, AppleAddToHomeScreenModal },
@@ -29,7 +29,7 @@ export default {
     'newContentAvailable',
     'showAddToHomeScreenModalForApple'
   ]),
-  methods: mapMutations('app', ['setShowAddToHomeScreenModalForApple'])
+  methods: mapActions('app', ['closeAddToHomeScreenModalForApple'])
 }
 </script>
 
