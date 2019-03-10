@@ -1,19 +1,21 @@
 import router from '@/router'
 import { isNil } from 'lodash'
+import { createNewUserFromFirebaseAuthUser } from '@/misc/helpers'
 
 export default {
   /**
    * Callback fired when user login
    * @param {Object} firebase user
    */
-  login: async ({ commit, dispatch, rootState }, firebaseUser) => {
+  login: async ({ commit, dispatch, rootState }, firebaseAuthUser) => {
     const userDb = rootState.db.userDb
-    const user = await userDb.read(firebaseUser.uid)
+    const userFromFirebase = await userDb.read(firebaseAuthUser.uid)
 
-    isNil(user)
-      ? await dispatch('createNewUser', firebaseUser)
-      : commit('setUser', user)
+    const user = isNil(userFromFirebase)
+      ? await createNewUserFromFirebaseAuthUser(firebaseAuthUser)
+      : userFromFirebase
 
+    commit('setUser', user)
     dispatch('db/initUserProductDb', user, { root: true })
     dispatch('products/getUserProducts', null, { root: true })
   },
@@ -30,22 +32,5 @@ export default {
     if (!(currentRouter.meta && currentRouter.meta.authNotRequired)) {
       router.push('/login')
     }
-  },
-
-  /**
-   * Create new user from firebase user infos
-   */
-  createNewUser: async ({ commit, rootState }, firebaseUser) => {
-    const providerData = firebaseUser.providerData[0]
-    const { displayName, photoURL, email } = providerData
-    const user = {
-      displayName,
-      photoURL,
-      email
-    }
-
-    const userDb = rootState.db.userDb
-    const createdUser = await userDb.create(user, firebaseUser.uid)
-    commit('setUser', createdUser)
   }
 }
