@@ -1,20 +1,18 @@
 service cloud.firestore {
   match /databases/{database}/documents {
   function authenticated() { return request.auth.uid != null }
-  function isMe() { return request.auth.uid == request.resource.data.userId }
   
     match /users/{userId} {
-       allow get: if authenticated();
-			 allow list: if authenticated();
-       allow create: if authenticated() && isMe();
-       allow update, delete: if authenticated() && isMe();
+       allow get: if authenticated() && request.auth.uid == userId;
+       allow create: if authenticated() && request.auth.uid == userId;
+       allow update, delete: if authenticated() && request.auth.uid == userId;
     }
 
     match /users/{userId}/products/{productId} {
-      allow get: if authenticated();
-			allow list: if authenticated();
-      allow create: if authenticated() && isMe();
-      allow update, delete: if authenticated() && isMe();
+      allow get: if authenticated() && request.auth.uid == userId;
+			allow list: if authenticated() && request.auth.uid == userId;
+      allow create: if authenticated() && request.auth.uid == userId;
+      allow update, delete: if authenticated() && request.auth.uid == userId;
     }
   }
 }
