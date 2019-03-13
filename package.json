@@ -19,6 +19,7 @@
     "register-service-worker": "^1.6.1",
     "terser": "3.14",
     "vue": "^2.5.22",
+    "vue-head": "^2.1.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

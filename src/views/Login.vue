@@ -2,9 +2,7 @@
   <div class="page-wrapper">
     <h1 class="login-page-title">Login page</h1>
     <!-- Loader -->
-    <div v-if="user === undefined">
-      loading ...
-    </div>
+    <div v-if="user === undefined">loading ...</div>
 
     <!-- Auth UI -->
     <div class="login-btn" v-show="user !== undefined && !user" @click="login">
@@ -19,6 +17,17 @@ import { isNil } from 'lodash'
 import firebase from 'firebase/app'
 
 export default {
+  head: {
+    title: {
+      inner: 'Login'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Sign in or sign up to vuejs-firebase-starter-kit.'
+      }
+    ]
+  },
   computed: mapState('authentication', ['user']),
   watch: {
     user: {
