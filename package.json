@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "export NODE_ENV=production && vue-cli-service build",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:e2e:headless": "vue-cli-service test:e2e --headless",
@@ -12,7 +12,8 @@
     "prettier:format-all": "prettier --write '**/*.{vue,scss,sass,js}'",
     "prettier:check": "prettier '**/*.{vue,scss,sass,js}' --list-different",
     "firebase:deploy": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
-    "bundlesize": "bundlesize"
+    "bundlesize": "bundlesize",
+    "now-build": "vue-cli-service build"
   },
   "dependencies": {
     "firebase": "^5.8.3",
