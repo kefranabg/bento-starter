@@ -13,11 +13,6 @@ const environmentConfiguration = fs.existsSync(environmentConfigurationPath)
 const config = merge(
   defaultConfiguration,
   environmentConfiguration
-  // function(objValue, srcValue) {
-  //   if (isArray(objValue)) {
-  //     return objValue.concat(srcValue)
-  //   }
-  // }
 )
 
 module.exports = config
