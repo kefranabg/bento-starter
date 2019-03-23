@@ -10,9 +10,6 @@ const environmentConfiguration = fs.existsSync(environmentConfigurationPath)
   ? require(environmentConfigurationPath)
   : {}
 
-const config = merge(
-  defaultConfiguration,
-  environmentConfiguration
-)
+const config = merge(defaultConfiguration, environmentConfiguration)
 
 module.exports = config
