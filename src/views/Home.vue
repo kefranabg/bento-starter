@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <h1 class="home-page-title">{{appTitle}}</h1>
+    <h1 class="home-page-title">{{ appTitle }}</h1>
   </div>
 </template>
 
