@@ -10,14 +10,6 @@ const environmentConfiguration = fs.existsSync(environmentConfigurationPath)
   ? require(environmentConfigurationPath)
   : {}
 
-const config = merge(
-  defaultConfiguration,
-  environmentConfiguration
-  // function(objValue, srcValue) {
-  //   if (isArray(objValue)) {
-  //     return objValue.concat(srcValue)
-  //   }
-  // }
-)
+const config = merge(defaultConfiguration, environmentConfiguration)
 
 module.exports = config
