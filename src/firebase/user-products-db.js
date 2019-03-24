@@ -5,5 +5,3 @@ export class UserProductsDB extends GenericDB {
     super(`users/${userId}/products`)
   }
 }
-
-export default userId => new UserProductsDB(userId)

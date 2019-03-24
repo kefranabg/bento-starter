@@ -39,10 +39,10 @@ const router = new Router({
       }
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
+      path: '/products',
+      name: 'products',
       component: () =>
-        import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
+        import(/* webpackChunkName: "products" */ '@/views/Products.vue')
     },
     { path: '*', redirect: '/home' }
   ]

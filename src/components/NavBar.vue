@@ -4,7 +4,7 @@
       <router-link to="/home">Home</router-link>
     </div>
     <div class="navbar-item">
-      <router-link to="/dashboard">Dashboard</router-link>
+      <router-link to="/products">Products</router-link>
     </div>
     <div class="spacer"></div>
     <div v-if="!isUserLoggedIn && networkOnLine" class="navbar-item">

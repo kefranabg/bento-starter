@@ -5,5 +5,3 @@ export class UsersDB extends GenericDB {
     super('users')
   }
 }
-
-export default new UsersDB()
