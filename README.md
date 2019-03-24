@@ -30,8 +30,6 @@ vue-firebase-starter-kit is a stack that intends to provide a simple, well confi
 
 * Google authentication :bust_in_silhouette:
 * Offline support :mobile_phone_off:
-* Static files caching :floppy_disk:
-* Dynamic data caching with firestore :floppy_disk:
 * Client `New version available` prompt on new app deployments :new:
 * `Add to home screen` prompt for ios & android :heavy_plus_sign:
 * Smart redirection for auth protected routes :leftwards_arrow_with_hook:
