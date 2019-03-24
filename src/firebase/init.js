@@ -3,12 +3,12 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 const config = {
-  apiKey: 'AIzaSyCYfRz6wyhXKOLIpVCcSRWw0_tWiabJl44',
-  authDomain: 'vue-firebase-starter-kit.firebaseapp.com',
-  databaseURL: 'https://vue-firebase-starter-kit.firebaseio.com',
-  projectId: 'vue-firebase-starter-kit',
-  storageBucket: '',
-  messagingSenderId: '353733958620'
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID
 }
 
 firebase.initializeApp(config)
