@@ -1,4 +1,4 @@
-import { UsersDB } from '@/firebase/users-db'
+import UsersDB from '@/firebase/users-db'
 
 export default {
   /**

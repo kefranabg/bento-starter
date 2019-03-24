@@ -1,7 +1,19 @@
-jest.mock('@/firebase/generic-db')
+jest.mock('@/firebase/user-products-db', () => ({
+  UserProductsDB: jest.mock()
+}))
+
+const mockReadAll = jest.fn()
+const mockCreate = jest.fn()
+const mockDelete = jest.fn()
+jest.mock('@/firebase/user-products-db', () =>
+  jest.fn().mockImplementation(() => ({
+    readAll: mockReadAll,
+    create: mockCreate,
+    delete: mockDelete
+  }))
+)
+
 import actions from '@/store/products/products.actions'
-import { UsersDB } from '@/firebase/users-db'
-import { UserProductsDB } from '@/firebase/user-products-db'
 
 const commit = jest.fn()
 const dispatch = jest.fn()
@@ -9,42 +21,36 @@ const userId = 11
 const user = { id: userId }
 const product1 = { id: 1, name: 'product1' }
 const product2 = { id: 2, name: 'product2' }
-const userDb = new UsersDB()
-const userProductDb = new UserProductsDB(11)
-const isProductDeletionPendingFn = jest.fn()
 const rootState = {
   authentication: {
     user
-  },
-  db: {
-    userDb,
-    userProductDb
   }
 }
 const getters = {
-  isProductDeletionPending: isProductDeletionPendingFn
+  isProductDeletionPending: jest.fn()
 }
 
 afterEach(() => {
   commit.mockReset()
   dispatch.mockReset()
-  userProductDb.readAll.mockReset()
-  userProductDb.create.mockReset()
-  isProductDeletionPendingFn.mockReset()
+  mockReadAll.mockReset()
+  mockCreate.mockReset()
+  mockDelete.mockReset()
+  getters.isProductDeletionPending.mockReset()
 })
 
 describe('products module action', () => {
   describe('getUserProducts', () => {
     it('should set products with ones owned by the current user', async () => {
-      userProductDb.readAll.mockResolvedValue([product1, product2])
-      await actions.getUserProducts({ commit, rootState }, product1)
+      mockReadAll.mockResolvedValue([product1, product2])
+      await actions.getUserProducts({ commit, rootState })
       expect(commit).toHaveBeenCalledWith('setProducts', [product1, product2])
     })
   })
 
   describe('createUserProduct', () => {
     it('should set product creation as pending first', async () => {
-      userProductDb.create.mockResolvedValue(product2)
+      mockCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState })
       expect(commit).toHaveBeenNthCalledWith(
         1,
@@ -53,12 +59,12 @@ describe('products module action', () => {
       )
     })
     it('should add product', async () => {
-      userProductDb.create.mockResolvedValue(product2)
+      mockCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState }, product1)
       expect(commit).toHaveBeenNthCalledWith(2, 'addProduct', product2)
     })
     it('should set product creation as not pending after adding product', async () => {
-      userProductDb.create.mockResolvedValue(product2)
+      mockCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState }, product1)
       expect(commit).toHaveBeenNthCalledWith(
         3,
@@ -102,7 +108,7 @@ describe('products module action', () => {
   describe('deleteUserProduct', () => {
     describe('when the product is currently being deleted', () => {
       beforeEach(() => {
-        isProductDeletionPendingFn.mockReturnValue(true)
+        getters.isProductDeletionPending.mockReturnValue(true)
       })
       it('should not do anything', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
@@ -111,7 +117,7 @@ describe('products module action', () => {
     })
     describe('when the product is not currently being deleted', () => {
       beforeEach(() => {
-        isProductDeletionPendingFn.mockReturnValue(false)
+        getters.isProductDeletionPending.mockReturnValue(false)
       })
       it('should set product as deletion pending first', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
@@ -127,7 +133,7 @@ describe('products module action', () => {
       })
       it('should remove product in db', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
-        expect(userProductDb.delete).toHaveBeenCalledWith(1)
+        expect(mockDelete).toHaveBeenCalledWith(1)
       })
       it('should set product as not deletion pending after having removed the product', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)

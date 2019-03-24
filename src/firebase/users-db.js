@@ -1,6 +1,6 @@
 import GenericDB from './generic-db'
 
-export class UsersDB extends GenericDB {
+export default class UsersDB extends GenericDB {
   constructor() {
     super('users')
   }
