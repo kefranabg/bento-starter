@@ -21,6 +21,7 @@ vue-firebase-starter-kit is a stack that intends to provide a simple and well co
 * [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering :page_facing_up:
 * [Optionnal] [CircleCI](https://circleci.com/) : continuous integration :green_heart:
 * [Optionnal] [Netlify](https://www.netlify.com/) : hosting / continuous deployment :rocket:
+* [Optionnal] [Bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes :file_folder:
 
 ## Pre-requisites
 
@@ -29,7 +30,7 @@ vue-firebase-starter-kit is a stack that intends to provide a simple and well co
 
 ## Setup 
 
-### [Step 1] Installation
+### Step 1 - Installation
 
 ``` 
 git clone https://github.com/kefranabg/vuejs-firebase-starter-kit.git
@@ -38,9 +39,9 @@ cp .env.example .env.local
 npm i
 ```
 
-### [Step 2] Firebase configuration
+### Step 2 - Firebase configuration
 
-* Create a new firebase project with the [firebase console](https://console.firebase.google.com).
+* Create a new firebase project with the [firebase console](https://console.firebase.google.com)
 * Create a cloud firestore database
 * Enable Google as a sign-in provider for authentication
 * In your firebase project home page, click `add an application` button then click the web icon project.
@@ -50,11 +51,15 @@ You're done ! You can now run `npm run serve` and start your app development ! :
 
 However we recommand you to go through `step 3` and `step 4` to get a better developer experience :sunglasses:
 
-### [Step 3 (Optionnal)] CircleCI configuration for continuous integration
+### Step 3 (Optionnal) - CircleCI configuration for continuous integration
 
 Documentation in progress :memo:
 
-### [Step 4 (Optionnal)] Netlify configuration for continuous deployment
+### Step 4 (Optionnal) - Netlify configuration for continuous deployment
+
+Documentation in progress :memo:
+
+### Step 5 (Optionnal) - Bundlesize configuration for bundle size control
 
 Documentation in progress :memo:
 
