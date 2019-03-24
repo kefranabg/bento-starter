@@ -1,3 +1,4 @@
+# Allows to redirect routes that are not prerendered to vue-router
 [[redirects]]
   from = "/*"
   to = "/index.html"

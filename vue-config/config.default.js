@@ -1,6 +1,8 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const path = require('path')
 
+const prerenderedRoutesList = ['/login', '/home', '/']
+
 module.exports = {
   pwa: {
     /* Example of dynamic caching : */
@@ -20,7 +22,7 @@ module.exports = {
         // Required - The path to the webpack-outputted app to prerender.
         staticDir: path.join(__rootDirname),
         // Required - Routes to prerender.
-        routes: ['/login', '/home', '/']
+        routes: prerenderedRoutesList
       })
     ]
   }
