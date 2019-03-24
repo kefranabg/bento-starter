@@ -59,7 +59,7 @@ npx firebase deploy
 
 **You're done ! You can now run `npm run serve` and start your app development !** :tada:
 
-However we recommand you to go through `step 3` and `step 4` to get a better developer experience :sunglasses:
+However we recommand you to go through optionnal steps to get a better developer experience :sunglasses:
 
 ### Step 3 (Optionnal) - CircleCI configuration for continuous integration
 
