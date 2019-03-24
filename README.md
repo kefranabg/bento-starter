@@ -20,7 +20,7 @@ vue-firebase-starter-kit is a stack that intends to provide a well configured en
 * [Eslint](https://eslint.org/) : control code quality :rotating_light:
 * [Jest](https://jestjs.io/) : unit testing :white_check_mark:
 * [Cypress](https://www.cypress.io/) : e2e testing :white_check_mark:
-* [Vue meta](https://github.com/nuxt/vue-meta) : meta description per page :mag:
+* [Vue head](https://github.com/ktquez/vue-head) : meta description per page :mag:
 * [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering :page_facing_up:
 * [Optionnal] [CircleCI](https://circleci.com/) : continuous integration :green_heart:
 * [Optionnal] [Netlify](https://www.netlify.com/) : hosting / continuous deployment :rocket:
