@@ -12,9 +12,7 @@
     </div>
     <template v-if="isUserLoggedIn && networkOnLine">
       <img class="user-picture" :src="user.photoURL" alt="Avatar" />
-      <div class="navbar-item logout-item" @click="logout">
-        Logout
-      </div>
+      <div class="navbar-item logout-item" @click="logout">Logout</div>
     </template>
     <div v-if="!networkOnLine" class="offline-label">Offline</div>
   </div>
