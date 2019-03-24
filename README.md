@@ -43,6 +43,16 @@ npm i
 
 * Create a new firebase project with the [firebase console](https://console.firebase.google.com)
 * Create a cloud firestore database
+* Back to vuejs-firebase-starter-kit project, open a console and run :
+```
+npm i -g npx
+
+# login with the with the account you used to create the firebase project
+npx firebase login
+
+# the following command will deploy firestore security rules located in `src/firebase/firestore.rules`
+npx firebase deploy
+```
 * Enable Google as a sign-in provider for authentication
 * In your firebase project home page, click `add an application` button then click the web icon project.
 From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in vuejs-firebase-starter-kit project
