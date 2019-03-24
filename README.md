@@ -47,7 +47,7 @@ npm i
 * In your firebase project home page, click `add an application` button then click the web icon project.
 From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in vuejs-firebase-starter-kit project
 
-You're done ! You can now run `npm run serve` and start your app development ! :tada:
+**You're done ! You can now run `npm run serve` and start your app development !** :tada:
 
 However we recommand you to go through `step 3` and `step 4` to get a better developer experience :sunglasses:
 
