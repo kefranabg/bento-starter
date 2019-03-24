@@ -52,7 +52,11 @@ However we recommand you to go through `step 3` and `step 4` to get a better dev
 
 ### [Step 3 (Optionnal)] CircleCI configuration for continuous integration
 
+Documentation in progress :memo:
+
 ### [Step 4 (Optionnal)] Netlify configuration for continuous deployment
+
+Documentation in progress :memo:
 
 ## Commands
 
