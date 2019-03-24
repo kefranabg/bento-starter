@@ -6,7 +6,9 @@
 
 Demo :point_right: [https://vue-firebase-starter-kit.netlify.com](https://vue-firebase-starter-kit.netlify.com)
 
-vue-firebase-starter-kit is a stack that intends to provide a simple, well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs. The stack is made up of :
+vue-firebase-starter-kit is a stack that intends to provide a simple, well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
+
+**The stack is made up of :**
 
 * [Vue.js](https://vuejs.org/) : front-end framework :metal:
 * [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development :wrench:
@@ -22,6 +24,18 @@ vue-firebase-starter-kit is a stack that intends to provide a simple, well confi
 * [Optionnal] [CircleCI](https://circleci.com/) : continuous integration :green_heart:
 * [Optionnal] [Netlify](https://www.netlify.com/) : hosting / continuous deployment :rocket:
 * [Optionnal] [Bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes :file_folder:
+
+
+**App embedded features :**
+
+* Google authentication :bust_in_silhouette:
+* Offline support :mobile_phone_off:
+* Static files caching :floppy_disk:
+* Dynamic data caching with firestore :floppy_disk:
+* Client `New version available` prompt on new app deployments :new:
+* `Add to home screen` prompt for ios & android :heavy_plus_sign:
+* Smart redirection for auth protected routes :leftwards_arrow_with_hook:
+* Dashboard page example to demonstrate app data management with firebase :sparkles:
 
 ## Pre-requisites
 
