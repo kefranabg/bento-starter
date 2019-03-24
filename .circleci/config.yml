@@ -47,13 +47,6 @@ jobs:
           name: 'Check bundles sizes'
           command: npm run bundlesize
 
-      - run:
-          name: 'Firebase deploy'
-          command: |
-            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-              npm run firebase:deploy
-            fi
-
 workflows:
   version: 2
   build-and-deploy:

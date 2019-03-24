@@ -8,6 +8,17 @@
 import { mapState } from 'vuex'
 
 export default {
+  head: {
+    title: {
+      inner: 'Home'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'The front page of vuejs-firebase-starter-kit.'
+      }
+    ]
+  },
   computed: mapState('app', ['appTitle'])
 }
 </script>
