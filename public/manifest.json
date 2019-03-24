@@ -1,6 +1,6 @@
 {
   "name": "vue-firebase-starter-kit",
-  "short_name": "vue-firebase-sk",
+  "short_name": "vue-fsk",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
