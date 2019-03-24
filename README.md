@@ -1,14 +1,60 @@
-[![CircleCI](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4e57ab36-3c83-46b6-bf38-7b3d2c7ac986/deploy-status)](https://app.netlify.com/sites/vue-firebase-starter-kit/deploys)
+[![CircleCI](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master)
 
 
-# vue-firebase-starter-kit
+# Welcome to vue-firebase-starter-kit :wave:
 
-## Project setup
+Demo :point_right: [https://vue-firebase-starter-kit.netlify.com](https://vue-firebase-starter-kit.netlify.com)
 
-```
+vue-firebase-starter-kit is a stack that intends to provide a simple and well configured starting point for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs. The stack is made up of :
+
+* [Vue.js](https://vuejs.org/) front-end framework :metal:
+* [Vue-cli](https://cli.vuejs.org/) standard tooling for vue.js development :wrench:
+* [Vuex](https://vuex.vuejs.org/) state management :repeat:
+* [Firestore](https://firebase.google.com/products/firestore/) cloud NoSQL Database :floppy_disk:
+* [Firebase authentication](https://firebase.google.com/products/firestore/) for easy authentication :bust_in_silhouette:
+* [PWA support](https://www.npmjs.com/package/@vue/cli-plugin-pwa) progressive web app support :iphone:
+* [Prettier](https://prettier.io/) code formating rules :lipstick:
+* [Eslint](https://eslint.org/) control code quality :rotating_light:
+* [Jest](https://jestjs.io/) unit testing :white_check_mark:
+* [Cypress](https://www.cypress.io/) e2e testing :white_check_mark:
+* [Optionnal] [Prerendeing](https://github.com/chrisvfritz/prerender-spa-plugin) pages prerendering :page_facing_up:
+* [Optionnal] [CircleCI](https://circleci.com/) continuous integration :green_heart:
+* [Optionnal] [Netlify](https://www.netlify.com/) hosting / continuous deployment :rocket:
+
+## Pre-requisites
+
+* node@9.3.0+
+* npm@5.5.0+
+
+## Setup 
+
+### [Step 1] Installation
+
+``` 
+https://github.com/kefranabg/vuejs-firebase-starter-kit.git
+cd vuejs-firebase-starter-kit
+cp .env.example .env.local
 npm i
 ```
+
+### [Step 2] Firebase configuration
+
+* Create a new firebase project with the [firebase console](https://console.firebase.google.com).
+* Create a cloud firestore database
+* Enable Google as a sign-in provider for authentication
+* In your firebase project home page, click `add an application` then click the web icon project.
+From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in vuejs-firebase-starter-kit your project
+
+You're done ! You can now run `npm run serve` and start your app development ! :tada:
+
+However we recommand you to go through `step 3` and `step 4` to get a better developer experience :sunglasses:
+
+### [Step 3 (Optionnal)] CircleCI configuration for continuous integration
+
+### [Step 4 (Optionnal)] Netlify configuration for continuous deployment
+
+## Commands
 
 ### Compiles and hot-reloads for development
 
