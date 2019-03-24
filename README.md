@@ -8,19 +8,19 @@ Demo :point_right: [https://vue-firebase-starter-kit.netlify.com](https://vue-fi
 
 vue-firebase-starter-kit is a stack that intends to provide a simple and well configured starting point for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs. The stack is made up of :
 
-* [Vue.js](https://vuejs.org/) front-end framework :metal:
-* [Vue-cli](https://cli.vuejs.org/) standard tooling for vue.js development :wrench:
-* [Vuex](https://vuex.vuejs.org/) state management :repeat:
-* [Firestore](https://firebase.google.com/products/firestore/) cloud NoSQL Database :floppy_disk:
-* [Firebase authentication](https://firebase.google.com/products/firestore/) for easy authentication :bust_in_silhouette:
-* [PWA support](https://www.npmjs.com/package/@vue/cli-plugin-pwa) progressive web app support :iphone:
-* [Prettier](https://prettier.io/) code formating rules :lipstick:
-* [Eslint](https://eslint.org/) control code quality :rotating_light:
-* [Jest](https://jestjs.io/) unit testing :white_check_mark:
-* [Cypress](https://www.cypress.io/) e2e testing :white_check_mark:
-* [Optionnal] [Prerendeing](https://github.com/chrisvfritz/prerender-spa-plugin) pages prerendering :page_facing_up:
-* [Optionnal] [CircleCI](https://circleci.com/) continuous integration :green_heart:
-* [Optionnal] [Netlify](https://www.netlify.com/) hosting / continuous deployment :rocket:
+* [Vue.js](https://vuejs.org/) : front-end framework :metal:
+* [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development :wrench:
+* [Vuex](https://vuex.vuejs.org/) : state management :repeat:
+* [Firestore](https://firebase.google.com/products/firestore/) : cloud NoSQL Database :floppy_disk:
+* [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication :bust_in_silhouette:
+* [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support :iphone:
+* [Prettier](https://prettier.io/) : code formating rules :lipstick:
+* [Eslint](https://eslint.org/) : control code quality :rotating_light:
+* [Jest](https://jestjs.io/) : unit testing :white_check_mark:
+* [Cypress](https://www.cypress.io/) : e2e testing :white_check_mark:
+* [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering :page_facing_up:
+* [Optionnal] [CircleCI](https://circleci.com/) : continuous integration :green_heart:
+* [Optionnal] [Netlify](https://www.netlify.com/) : hosting / continuous deployment :rocket:
 
 ## Pre-requisites
 
@@ -32,7 +32,7 @@ vue-firebase-starter-kit is a stack that intends to provide a simple and well co
 ### [Step 1] Installation
 
 ``` 
-https://github.com/kefranabg/vuejs-firebase-starter-kit.git
+git clone https://github.com/kefranabg/vuejs-firebase-starter-kit.git
 cd vuejs-firebase-starter-kit
 cp .env.example .env.local
 npm i
