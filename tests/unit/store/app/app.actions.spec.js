@@ -17,7 +17,7 @@ describe('app module action', () => {
     })
     it('should save the close modal date into the localstorage', () => {
       const now = Date.now()
-      Date.now = jest.genMockFunction().mockReturnValue(now)
+      jest.spyOn(Date, 'now').mockImplementation(() => now)
       actions.closeAddToHomeScreenModalForApple({ commit })
       expect(localStorage.getItem('addToHomeIosPromptLastDate')).toEqual(
         now.toString()
