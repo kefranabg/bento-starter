@@ -11,6 +11,18 @@ import ProductList from '@/components/ProductList'
 import AddProduct from '@/components/AddProduct'
 
 export default {
+  head: {
+    title: {
+      inner: 'Dashboard'
+    },
+    meta: [
+      {
+        name: 'description',
+        content:
+          'A list of all your information about vuejs-firebase-starter-kit.'
+      }
+    ]
+  },
   components: { ProductList, AddProduct }
 }
 </script>
