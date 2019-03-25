@@ -76,7 +76,7 @@ npx firebase deploy
 
 **You're done ! :tada:**
 
-**Your project is now available on firebasehosting**
+**Your project is now available on firebase hosting**
 
 **You can now run `npm run serve` and start your app development !** 
 
