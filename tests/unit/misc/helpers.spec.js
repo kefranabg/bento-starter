@@ -1,5 +1,4 @@
 import helpers from '@/misc/helpers'
-import UsersDB from '@/firebase/users-db'
 
 const mockCreate = jest.fn()
 jest.mock('@/firebase/users-db', () =>
