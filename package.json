@@ -11,6 +11,7 @@
     "test:unit": "vue-cli-service test:unit",
     "prettier:format-all": "prettier --write '**/*.{vue,scss,sass,js}'",
     "prettier:check": "prettier '**/*.{vue,js}' --list-different",
+    "firebase:deploy": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
     "bundlesize": "bundlesize"
   },
   "dependencies": {

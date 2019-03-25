@@ -1,4 +1,3 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4e57ab36-3c83-46b6-bf38-7b3d2c7ac986/deploy-status)](https://app.netlify.com/sites/vue-firebase-starter-kit/deploys)
 [![CircleCI](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master)
 
 
@@ -22,8 +21,7 @@ vue-firebase-starter-kit is a stack that intends to provide a well configured en
 * [Cypress](https://www.cypress.io/) : e2e testing :white_check_mark:
 * [Vue head](https://github.com/ktquez/vue-head) : meta description per page :mag:
 * [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering :page_facing_up:
-* [Optionnal] [CircleCI](https://circleci.com/) : continuous integration :green_heart:
-* [Optionnal] [Netlify](https://www.netlify.com/) : hosting / continuous deployment :rocket:
+* [Optionnal] [CircleCI](https://circleci.com/) : continuous integration/deployment :green_heart:
 * [Optionnal] [Bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes :file_folder:
 
 
@@ -56,6 +54,7 @@ npm i
 
 * Create a new firebase project with the [firebase console](https://console.firebase.google.com)
 * Create a cloud firestore database
+* Create a firebase hosting domain
 * Enable Google as a sign-in provider for authentication
 * In your firebase project home page, click `add an application` button then click the web icon project.
 From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in vuejs-firebase-starter-kit project
@@ -66,23 +65,26 @@ npm i -g npx
 # login with the with the account you used to create the firebase project
 npx firebase login
 
-# the following command will deploy firestore security rules located in `src/firebase/firestore.rules`
+# login with the account you used to create the firebase project,
+# select the project you've just created and use "default" as alias 
+npx firebase use --add
+
+# Build the app and deploy
+npm run build
 npx firebase deploy
 ```
 
-**You're done ! You can now run `npm run serve` and start your app development !** :tada:
+**You're done ! :tada:**
+**Your project is now available on firebasehosting**
+**You can now run `npm run serve` and start your app development !** 
 
 However we recommand you to go through optionnal steps to get a better developer experience :sunglasses:
 
-### Step 3 (Optionnal) - CircleCI configuration for continuous integration
+### Step 3 (Optionnal) - CircleCI configuration for continuous integration/deployment
 
 Documentation in progress :memo:
 
-### Step 4 (Optionnal) - Netlify configuration for continuous deployment
-
-Documentation in progress :memo:
-
-### Step 5 (Optionnal) - Bundlesize configuration for bundle size control
+### Step 4 (Optionnal) - Bundlesize configuration for bundle size control
 
 Documentation in progress :memo:
 
