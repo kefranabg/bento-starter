@@ -4,7 +4,7 @@
 
 # Welcome to vue-firebase-starter-kit :wave:
 
-Demo :point_right: [https://vue-firebase-starter-kit.netlify.com](https://vue-firebase-starter-kit.netlify.com)
+Demo :point_right: [https://vue-firebase-starter-kit.firebaseapp.com](https://vue-firebase-starter-kit.firebaseapp.com)
 
 vue-firebase-starter-kit is a stack that intends to provide a well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
 
