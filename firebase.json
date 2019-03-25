@@ -1,5 +1,22 @@
 {
   "firestore": {
     "rules": "./src/firebase/firestore.rules"
+  },
+  "hosting": {
+    "headers": [
+      { "source":"/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}] }
+    ],
+    "public": "dist/",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }
