@@ -32,7 +32,7 @@ vue-firebase-starter-kit is a stack that intends to provide a well configured en
 * Client `New version available` prompt on new app deployments :new:
 * `Add to home screen` prompt for ios & android :heavy_plus_sign:
 * Smart redirection for auth protected routes :leftwards_arrow_with_hook:
-* Products page example to demonstrate app data management with firebase :sparkles:
+* Products page example to demonstrate app data management with firestore :sparkles:
 
 ## Pre-requisites
 
@@ -75,7 +75,9 @@ npx firebase deploy
 ```
 
 **You're done ! :tada:**
+
 **Your project is now available on firebasehosting**
+
 **You can now run `npm run serve` and start your app development !** 
 
 However we recommand you to go through optionnal steps to get a better developer experience :sunglasses:
