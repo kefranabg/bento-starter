@@ -1,4 +1,4 @@
-import helpers from '@/misc/helpers'
+import { createNewUserFromFirebaseAuthUser } from '@/misc/helpers'
 
 const mockCreate = jest.fn()
 jest.mock('@/firebase/users-db', () =>
@@ -21,9 +21,7 @@ describe('helpers', () => {
     it('should set user with the created user', async () => {
       const firebaseUser = { providerData: [user] }
       mockCreate.mockResolvedValue(Promise.resolve(newUser))
-      const createdUser = await helpers.createNewUserFromFirebaseAuthUser(
-        firebaseUser
-      )
+      const createdUser = await createNewUserFromFirebaseAuthUser(firebaseUser)
 
       expect(createdUser).toBe(newUser)
     })
