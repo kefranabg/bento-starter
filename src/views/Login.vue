@@ -24,7 +24,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'Sign in or sign up to vuejs-firebase-starter-kit.'
+        content: 'Sign in or sign up to bento-starter.'
       }
     ]
   },

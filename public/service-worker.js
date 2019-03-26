@@ -1,4 +1,4 @@
-workbox.core.setCacheNameDetails({ prefix: 'vue-firebase-starter-kit' })
+workbox.core.setCacheNameDetails({ prefix: 'bento-starter' })
 
 workbox.skipWaiting()
 workbox.clientsClaim()

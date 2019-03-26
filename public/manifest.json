@@ -1,6 +1,6 @@
 {
-  "name": "vue-firebase-starter-kit",
-  "short_name": "vue-fsk",
+  "name": "bento-starter",
+  "short_name": "bento",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

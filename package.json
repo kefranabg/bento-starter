@@ -1,5 +1,5 @@
 {
-  "name": "vue-firebase-starter-kit",
+  "name": "bento-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,6 @@
     "bundlesize": "bundlesize"
   },
   "dependencies": {
-    "@vue/cli-service": "^3.4.0",
     "firebase": "^5.8.3",
     "register-service-worker": "^1.6.1",
     "terser": "3.14",
@@ -26,6 +25,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.122",
+    "@vue/cli-service": "^3.4.0",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-e2e-cypress": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
