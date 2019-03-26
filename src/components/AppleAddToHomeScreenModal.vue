@@ -4,7 +4,7 @@
       <div class="close" @click="$emit('close')"></div>
       <div class="main-content">
         <img class="app-logo" src="@/assets/logo.png" />
-        <h3 class="title">Install vue firebase starter kit</h3>
+        <h3 class="title">Install bento starter</h3>
         <p class="description">
           Install this application to your home screen for quickly and easy
           access when you're on the go.
