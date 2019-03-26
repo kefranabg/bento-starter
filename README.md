@@ -1,11 +1,11 @@
-[![CircleCI](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/vuejs-firebase-starter-kit/tree/master)
+[![CircleCI](https://circleci.com/gh/kefranabg/bento-starter/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/bento-starter/tree/master)
 
 
-# Welcome to vue-firebase-starter-kit :wave:
+# Welcome to bento-starter :wave:
 
-Demo :point_right: [https://vue-firebase-starter-kit.firebaseapp.com](https://vue-firebase-starter-kit.firebaseapp.com)
+Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
 
-vue-firebase-starter-kit is a stack that intends to provide a well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
+bento-starter is a stack that intends to provide a well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
 
 **The stack is made up of :**
 
@@ -44,8 +44,8 @@ vue-firebase-starter-kit is a stack that intends to provide a well configured en
 ### Step 1 - Installation
 
 ``` 
-git clone https://github.com/kefranabg/vuejs-firebase-starter-kit.git
-cd vuejs-firebase-starter-kit
+git clone https://github.com/kefranabg/bento-starter.git
+cd bento-starter
 cp .env.example .env.local
 npm i
 ```
@@ -54,11 +54,10 @@ npm i
 
 * Create a new firebase project with the [firebase console](https://console.firebase.google.com)
 * Create a cloud firestore database
-* Create a firebase hosting domain
 * Enable Google as a sign-in provider for authentication
 * In your firebase project home page, click `add an application` button then click the web icon project.
-From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in vuejs-firebase-starter-kit project
-* Back to vuejs-firebase-starter-kit project, open a console and run :
+From here you can copy the config object and replace the config variable in `/src/firebase/init.js` in bento-starter project
+* Back to bento-starter project, open a console and run :
 ```
 npm i -g npx
 

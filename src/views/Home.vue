@@ -15,7 +15,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'The front page of vuejs-firebase-starter-kit.'
+        content: 'The front page of bento-starter.'
       }
     ]
   },
