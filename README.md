@@ -33,7 +33,7 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 * `New version available` prompt on new app deployments :new:
 * `Add to home screen` prompt for ios & android :heavy_plus_sign:
 * Smart redirection for auth protected routes :leftwards_arrow_with_hook:
-* Products page example to demonstrate app data management with firestore :sparkles:
+* Products page example to demonstrate app data management with firestore and vuex :sparkles:
 
 **Lighthouse score:**
 
