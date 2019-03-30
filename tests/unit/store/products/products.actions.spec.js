@@ -2,14 +2,14 @@ jest.mock('@/firebase/user-products-db', () => ({
   UserProductsDB: jest.mock()
 }))
 
-const mockReadAll = jest.fn()
-const mockCreate = jest.fn()
-const mockDelete = jest.fn()
+const mockUsersDbReadAll = jest.fn()
+const mockUsersDbCreate = jest.fn()
+const mockUsersDbDelete = jest.fn()
 jest.mock('@/firebase/user-products-db', () =>
   jest.fn().mockImplementation(() => ({
-    readAll: mockReadAll,
-    create: mockCreate,
-    delete: mockDelete
+    readAll: mockUsersDbReadAll,
+    create: mockUsersDbCreate,
+    delete: mockUsersDbDelete
   }))
 )
 
@@ -17,6 +17,7 @@ import actions from '@/store/products/products.actions'
 
 const commit = jest.fn()
 const dispatch = jest.fn()
+const isProductDeletionPending = jest.fn()
 const userId = 11
 const user = { id: userId }
 const product1 = { id: 1, name: 'product1' }
@@ -27,22 +28,22 @@ const rootState = {
   }
 }
 const getters = {
-  isProductDeletionPending: jest.fn()
+  isProductDeletionPending
 }
 
 afterEach(() => {
   commit.mockReset()
   dispatch.mockReset()
-  mockReadAll.mockReset()
-  mockCreate.mockReset()
-  mockDelete.mockReset()
-  getters.isProductDeletionPending.mockReset()
+  mockUsersDbReadAll.mockReset()
+  mockUsersDbCreate.mockReset()
+  mockUsersDbDelete.mockReset()
+  isProductDeletionPending.mockReset()
 })
 
 describe('products module action', () => {
   describe('getUserProducts', () => {
     it('should set products with ones owned by the current user', async () => {
-      mockReadAll.mockResolvedValue([product1, product2])
+      mockUsersDbReadAll.mockResolvedValue([product1, product2])
       await actions.getUserProducts({ commit, rootState })
       expect(commit).toHaveBeenCalledWith('setProducts', [product1, product2])
     })
@@ -50,7 +51,7 @@ describe('products module action', () => {
 
   describe('createUserProduct', () => {
     it('should set product creation as pending first', async () => {
-      mockCreate.mockResolvedValue(product2)
+      mockUsersDbCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState })
       expect(commit).toHaveBeenNthCalledWith(
         1,
@@ -58,13 +59,15 @@ describe('products module action', () => {
         true
       )
     })
+
     it('should add product', async () => {
-      mockCreate.mockResolvedValue(product2)
+      mockUsersDbCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState }, product1)
       expect(commit).toHaveBeenNthCalledWith(2, 'addProduct', product2)
     })
+
     it('should set product creation as not pending after adding product', async () => {
-      mockCreate.mockResolvedValue(product2)
+      mockUsersDbCreate.mockResolvedValue(product2)
       await actions.createUserProduct({ commit, rootState }, product1)
       expect(commit).toHaveBeenNthCalledWith(
         3,
@@ -79,23 +82,28 @@ describe('products module action', () => {
       const state = {
         productNameToCreate: ''
       }
+
       it('should not set input name to empty', () => {
         actions.triggerAddProductAction({ dispatch, state, commit })
         expect(commit).not.toHaveBeenCalled()
       })
+
       it('should not dispatch create product action', () => {
         actions.triggerAddProductAction({ dispatch, state, commit })
         expect(dispatch).not.toHaveBeenCalled()
       })
     })
+
     describe('when the name of the product is not empty', () => {
       const state = {
         productNameToCreate: 'todo'
       }
+
       it('should set input name to empty', () => {
         actions.triggerAddProductAction({ dispatch, state, commit })
         expect(commit).toHaveBeenCalledWith('setProductNameToCreate', '')
       })
+
       it('should dispatch create product action', () => {
         actions.triggerAddProductAction({ dispatch, state, commit })
         expect(dispatch).toHaveBeenCalledWith('createUserProduct', {
@@ -107,19 +115,16 @@ describe('products module action', () => {
 
   describe('deleteUserProduct', () => {
     describe('when the product is currently being deleted', () => {
-      beforeEach(() => {
-        getters.isProductDeletionPending.mockReturnValue(true)
-      })
       it('should not do anything', async () => {
+        isProductDeletionPending.mockReturnValue(true)
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
         expect(commit).not.toHaveBeenCalled()
       })
     })
+
     describe('when the product is not currently being deleted', () => {
-      beforeEach(() => {
-        getters.isProductDeletionPending.mockReturnValue(false)
-      })
       it('should set product as deletion pending first', async () => {
+        getters.isProductDeletionPending.mockReturnValue(false)
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
         expect(commit).toHaveBeenNthCalledWith(
           1,
@@ -127,14 +132,17 @@ describe('products module action', () => {
           1
         )
       })
+
       it('should remove product in store', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
         expect(commit).toHaveBeenNthCalledWith(2, 'removeProductById', 1)
       })
+
       it('should remove product in db', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
-        expect(mockDelete).toHaveBeenCalledWith(1)
+        expect(mockUsersDbDelete).toHaveBeenCalledWith(1)
       })
+
       it('should set product as not deletion pending after having removed the product', async () => {
         await actions.deleteUserProduct({ commit, rootState, getters }, 1)
         expect(commit).toHaveBeenNthCalledWith(

@@ -16,6 +16,7 @@ describe('app module mutation', () => {
       })
     })
   })
+
   describe('setNewContentAvailable', () => {
     it('should set new content available state to the value given in parameter', () => {
       const state = {
@@ -31,6 +32,7 @@ describe('app module mutation', () => {
       })
     })
   })
+
   describe('setShowAddToHomeScreenModalForApple', () => {
     it('should set show add to home screen modal for apple state to the value given in parameter', () => {
       const state = {
