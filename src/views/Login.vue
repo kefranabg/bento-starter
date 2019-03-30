@@ -4,6 +4,7 @@
     <!-- Loader -->
     <div v-if="user === undefined">loading ...</div>
 
+    <p v-if="loginError">{{ loginError }}</p>
     <!-- Auth UI -->
     <div class="login-btn" v-show="user !== undefined && !user" @click="login">
       Login with google
@@ -12,11 +13,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
 
 export default {
+  data: () => ({ loginError: null }),
   head: {
     title: {
       inner: 'Login'
@@ -43,9 +45,18 @@ export default {
     }
   },
   methods: {
-    login() {
+    ...mapMutations('authentication', ['setUser']),
+    async login() {
+      this.loginError = null
       const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(provider)
+      this.setUser(undefined)
+
+      try {
+        await firebase.auth().signInWithPopup(provider)
+      } catch (err) {
+        this.loginError = err
+        this.setUser(null)
+      }
     }
   }
 }
