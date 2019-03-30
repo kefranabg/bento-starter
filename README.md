@@ -34,6 +34,10 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 * Smart redirection for auth protected routes :leftwards_arrow_with_hook:
 * Products page example to demonstrate app data management with firestore :sparkles:
 
+**Lighthouse score:**
+
+![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ligthouse-score.jpg)
+
 ## Pre-requisites
 
 * node@9.3.0+
