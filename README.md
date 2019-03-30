@@ -1,11 +1,12 @@
 [![CircleCI](https://circleci.com/gh/kefranabg/bento-starter/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/bento-starter/tree/master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 # Welcome to bento-starter :wave:
 
 Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
 
-:bento: bento-starter is a stack that intends to provide a well configured environment for vuejs applications. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
+:bento: bento-starter is a stack that provides a full environment to quickly build applications with your team. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
 
 **The stack is made up of :**
 
@@ -133,4 +134,4 @@ npm run test:unit
 
 ## Known issues
 
-* **IOS:** When app is launched in standalone mode (add to home screen workflow), Google auth redirection is not working on IOS. This will probably be fixed with IOS [12.2](https://twitter.com/mhartington/status/1089293403089784832). Referenced issue : [#47](https://github.com/kefranabg/bento-starter/issues/47)
+* **IOS:** When app is launched in standalone mode (add to home screen workflow), Google auth redirection is not working on IOS. This is a PWA issue on IOS that will probably be fixed with IOS [12.2](https://twitter.com/mhartington/status/1089293403089784832). Referenced issue : [#47](https://github.com/kefranabg/bento-starter/issues/47)
