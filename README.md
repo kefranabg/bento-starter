@@ -88,6 +88,17 @@ However we recommand you to go through optionnal steps to get a better developer
 
 ### Step 3 (Optionnal) - CircleCI configuration for continuous integration/deployment
 
+We've built a CircleCI configuration that will trigger the following actions when you're pushing to your github repository.
+In order :
+
+* Check that all project files matches the prettier format : `npm run prettier:check`
+* Run the linter : `npm run lint`
+* Run unit tests : `npm run test:unit`
+* Run e2e tests : `npm run test:e2e:headless`
+* Build the project : `npm run build`
+* Check your js bundles sizes : `npm run bundlesize`
+* **Eventually** deploy the built project to firebase hosting if the targeted branch is **master** `npm run firebase:deploy`
+
 Documentation in progress :memo:
 
 ### Step 4 (Optionnal) - Bundlesize configuration for bundle size control
