@@ -99,7 +99,36 @@ In order :
 * Check your js bundles sizes : `npm run bundlesize`
 * **Eventually** deploy the built project to firebase hosting if the targeted branch is **master** `npm run firebase:deploy`
 
-Documentation in progress :memo:
+**For this step, it is asumed that you already have a github repository for your bento-starter project.**
+
+Steps :
+
+* Go to [https://circleci.com](https://circleci.com)
+* Login with your github account
+* Authorize CircleCI to look into your github projects
+* Add a new project
+* Select your github repository you are using to host bento-starter project
+* Choose `Linux` for operating system and `Node` for the language
+* From here, the next circle ci steps should be to add a `.circleci/config.yml` file to your project **but you don't have to !** We've added and configured this file for you. You can directly start your first CircleCI build by clicking `Start building` button.
+
+
+Now your build will fail and this is normal :sweat_smile: It's because of the deployment step (`npm run firebase:deploy`). We need to authorize circle ci to deploy on our firebase hosting project. For this we just need to add a firebase token to circle ci :
+
+* Back to a terminal run the following command :
+
+```
+npx firebase login:ci
+```
+
+* Login with you google account and authorize firebase-cli. The command will print out a token that looks like this :
+
+``` 
+1/PXcLCJ5BXAZ7ciFwkrrpikUbnMAMX8xRFmt16pLYudg9
+```
+
+* Copy this token and in your CircleCI project interface, go to => Settings => Environment Variables => Click `Add Variable` button. Fot the env variable name, use `FIREBASE_TOKEN` and for the value, use the token you got from the `firebase login:ci` command.
+
+Now if you manually trigger a build, the workflow should execute without error :tada:
 
 ### Step 4 (Optionnal) - Bundlesize configuration for bundle size control
 
