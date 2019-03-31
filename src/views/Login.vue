@@ -1,12 +1,23 @@
 <template>
   <div class="page-wrapper">
     <h1 class="login-page-title">Login page</h1>
+
     <!-- Loader -->
-    <div v-if="user === undefined">loading ...</div>
+    <div data-test="loader" v-show="user === undefined">loading ...</div>
+
+    <!-- Offline instruction -->
+    <div data-test="offline-instruction" v-show="!networkOnLine">
+      Please check your connection, login feature is not available offline.
+    </div>
 
     <p v-if="loginError">{{ loginError }}</p>
     <!-- Auth UI -->
-    <div class="login-btn" v-show="user !== undefined && !user" @click="login">
+    <div
+      data-test="login-btn"
+      class="login-btn"
+      v-show="user !== undefined && !user && networkOnLine"
+      @click="login"
+    >
       Login with google
     </div>
   </div>
@@ -30,7 +41,10 @@ export default {
       }
     ]
   },
-  computed: mapState('authentication', ['user']),
+  computed: {
+    ...mapState('authentication', ['user']),
+    ...mapState('app', ['networkOnLine'])
+  },
   watch: {
     user: {
       handler(user) {
