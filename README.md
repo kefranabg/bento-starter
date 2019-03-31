@@ -109,7 +109,7 @@ Steps :
 * Add a new project
 * Select your github repository you are using to host bento-starter project
 * Choose `Linux` for operating system and `Node` for the language
-* From here, the next circle ci steps should be to add a `.circleci/config.yml` file to your project **but you don't have to !** We've added and configured this file for you. You can directly start your first CircleCI build by clicking `Start building` button.
+* You can directly start your first CircleCI build by clicking `Start building` button.
 
 
 Now your build will fail and this is normal :sweat_smile: It's because of the deployment step (`npm run firebase:deploy`). We need to authorize circle ci to deploy on our firebase hosting project. For this we just need to add a firebase token to circle ci :
