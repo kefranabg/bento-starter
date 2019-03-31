@@ -130,9 +130,9 @@ npx firebase login:ci
 
 Now if you manually trigger a build, the workflow should execute without error :tada:
 
-### Step 4 (Optionnal) - Bundlesize configuration for bundle size control
+### Step 4 (Optionnal) - Enable bundle size status for github pull requests 
 
-Documentation in progress :memo:
+To enable bundle size status, follow [these steps](https://github.com/siddharthkp/bundlesize#2-build-status)
 
 ## Commands
 
