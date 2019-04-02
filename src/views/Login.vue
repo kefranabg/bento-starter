@@ -66,7 +66,7 @@ export default {
       this.setUser(undefined)
 
       try {
-        await firebase.auth().signInWithPopup(provider)
+        await firebase.auth().signInWithRedirect(provider)
       } catch (err) {
         this.loginError = err
         this.setUser(null)
