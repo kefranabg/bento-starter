@@ -10,30 +10,30 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 
 **The stack is made up of :**
 
-* [Vue.js](https://vuejs.org/) : front-end framework :metal:
-* [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development :wrench:
-* [Vuex](https://vuex.vuejs.org/) : state management :repeat:
-* [Firestore](https://firebase.google.com/products/firestore/) : cloud NoSQL Database :floppy_disk:
-* [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication :bust_in_silhouette:
-* [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support :iphone:
-* [Prettier](https://prettier.io/) : code formating rules :lipstick:
-* [Eslint](https://eslint.org/) : control code quality :rotating_light:
-* [Jest](https://jestjs.io/) : unit testing :white_check_mark:
-* [Cypress](https://www.cypress.io/) : e2e testing :white_check_mark:
-* [Vue head](https://github.com/ktquez/vue-head) : meta description per page :mag:
-* [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering :page_facing_up:
-* [Optionnal] [CircleCI](https://circleci.com/) : continuous integration/deployment :green_heart:
-* [Optionnal] [Bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes :file_folder:
+* :metal: [Vue.js](https://vuejs.org/) : front-end framework 
+* :wrench: [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development 
+* :repeat: [Vuex](https://vuex.vuejs.org/) : state management 
+* :floppy_disk: [Firestore](https://firebase.google.com/products/firestore/) : cloud NoSQL Database 
+* :bust_in_silhouette: [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication 
+* :iphone: [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support 
+* :lipstick: [Prettier](https://prettier.io/) : code formating rules 
+* :rotating_light: [Eslint](https://eslint.org/) : control code quality 
+* :white_check_mark: [Jest](https://jestjs.io/) : unit testing 
+* :white_check_mark: [Cypress](https://www.cypress.io/) : e2e testing 
+* :mag: [Vue head](https://github.com/ktquez/vue-head) : meta description per page 
+* :page_facing_up: [Optionnal] [Prerender SPA plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering 
+* :green_heart: [Optionnal] [CircleCI](https://circleci.com/) : continuous integration/deployment 
+* :file_folder: [Optionnal] [Bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes 
 
 
 **App embedded features :**
 
-* Google authentication :bust_in_silhouette:
-* Offline support :mobile_phone_off:
-* `New version available` prompt on new app deployments :new:
-* `Add to home screen` prompt for ios & android :heavy_plus_sign:
-* Smart redirection for auth protected routes :leftwards_arrow_with_hook:
-* Products page example to demonstrate app data management with firestore and vuex :sparkles:
+* :bust_in_silhouette: Google authentication 
+* :mobile_phone_off: Offline support 
+* :new: `New version available` prompt on new app deployments 
+* :heavy_plus_sign: `Add to home screen` prompt for ios & android 
+* :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
+* :sparkles: Products page example to demonstrate app data management with firestore and vuex 
 
 **Lighthouse score:**
 
