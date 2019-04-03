@@ -64,9 +64,14 @@ export default {
       this.loginError = null
       const provider = new firebase.auth.GoogleAuthProvider()
       this.setUser(undefined)
+      const isAppInStandaloneMode =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone
 
       try {
-        await firebase.auth().signInWithRedirect(provider)
+        isAppInStandaloneMode
+          ? await firebase.auth().signInWithRedirect(provider)
+          : await firebase.auth().signInWithPopup(provider)
       } catch (err) {
         this.loginError = err
         this.setUser(null)
