@@ -1,6 +1,9 @@
+![Bento-starter](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/bento-starter.svg?sanitize=true)
+<br />
+<br />
+
 [![CircleCI](https://circleci.com/gh/kefranabg/bento-starter/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/bento-starter/tree/master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 # Welcome to bento-starter :wave:
 
