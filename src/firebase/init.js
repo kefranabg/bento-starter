@@ -1,5 +1,4 @@
 import firebase from 'firebase/app'
-import 'firebase/firestore'
 import 'firebase/auth'
 
 // The configuration below is not sensitive data. You can serenely add your config here
@@ -13,5 +12,3 @@ const config = {
 }
 
 firebase.initializeApp(config)
-firebase.firestore().settings({})
-firebase.firestore().enablePersistence({ experimentalTabSynchronization: true })
