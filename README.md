@@ -9,7 +9,7 @@
 
 Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
 
-:bento: bento-starter is a stack that provides a full environment to quickly build applications with your team. As this project is a template project and not a CLI, you have access to entire app configuration so you can change it according to your needs.
+:bento: bento-starter is a stack that provides a full environment to quickly build applications with your team. As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
 
 **The stack is made up of :**
 
