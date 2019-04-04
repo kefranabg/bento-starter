@@ -3,7 +3,7 @@
     <h1 class="login-page-title">Login page</h1>
 
     <!-- Loader -->
-    <div data-test="loader" v-show="user === undefined">loading ...</div>
+    <div data-test="loader" v-show="user === undefined">Authenticating...</div>
 
     <!-- Offline instruction -->
     <div data-test="offline-instruction" v-show="!networkOnLine">
@@ -64,14 +64,9 @@ export default {
       this.loginError = null
       const provider = new firebase.auth.GoogleAuthProvider()
       this.setUser(undefined)
-      const isAppInStandaloneMode =
-        window.matchMedia('(display-mode: standalone)').matches ||
-        window.navigator.standalone
 
       try {
-        isAppInStandaloneMode
-          ? await firebase.auth().signInWithRedirect(provider)
-          : await firebase.auth().signInWithPopup(provider)
+        await firebase.auth().signInWithRedirect(provider)
       } catch (err) {
         this.loginError = err
         this.setUser(null)

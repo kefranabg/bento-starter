@@ -8,6 +8,7 @@ import '@/misc/handle-network-status'
 import '@/firebase/init'
 import '@/misc/handle-authentication'
 import '@/misc/handle-apple-install-prompt'
+import '@/misc/pwacompat'
 
 Vue.config.productionTip = false
 
