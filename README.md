@@ -49,6 +49,6 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 
 ## Documentation 
 
-Want to setup this stack for your project ?
+Want to setup this stack ?
 
-The full [documentation is available here](https://bento-starter.netlify.com/)
+:point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
