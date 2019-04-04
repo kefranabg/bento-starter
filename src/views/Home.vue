@@ -1,6 +1,7 @@
 <template>
   <div class="page-wrapper">
     <h1 class="home-page-title">{{ appTitle }}</h1>
+    <img src="@/assets/img/bento-starter.svg" />
   </div>
 </template>
 
@@ -24,7 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-page-title {
-  text-align: center;
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .home-page-title {
+    text-align: center;
+  }
 }
 </style>
