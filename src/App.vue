@@ -37,10 +37,17 @@ export default {
 body {
   margin: 0;
 
+  a {
+    font-weight: 500;
+    text-decoration: none;
+  }
+
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
     color: #2c3e50;
 
     .new-content-available-toastr {
@@ -62,6 +69,7 @@ body {
     }
 
     .main-wrapper {
+      margin-top: 3.6rem;
       padding: 20px;
 
       .page-wrapper {

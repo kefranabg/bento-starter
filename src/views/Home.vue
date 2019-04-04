@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/theme/variables.scss';
+
 .page-wrapper {
   display: flex;
   flex-direction: column;
@@ -43,7 +45,6 @@ export default {
   }
 
   .home-page-title {
-    margin-top: 3rem;
     text-align: center;
   }
 
@@ -56,7 +57,7 @@ export default {
     border-radius: 4px;
     transition: background-color 0.1s ease;
     box-sizing: border-box;
-    border-bottom: 1px solid #389d70;
+    border-bottom: 1px solid $vue-color;
     text-decoration: none;
     width: fit-content;
     font-weight: 500;
