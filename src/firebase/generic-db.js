@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import firestore from './async-firestore'
 import { isNil, keys, cloneDeep } from 'lodash'
 
 export default class GenericDB {
@@ -12,7 +13,7 @@ export default class GenericDB {
    * @param id
    */
   async create(data, id = null) {
-    const collectionRef = firebase.firestore().collection(this.collectionPath)
+    const collectionRef = (await firestore()).collection(this.collectionPath)
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp()
 
     const dataToCreate = {
@@ -45,8 +46,7 @@ export default class GenericDB {
    * @param id
    */
   async read(id) {
-    const result = await firebase
-      .firestore()
+    const result = (await firestore())
       .collection(this.collectionPath)
       .doc(id)
       .get()
@@ -63,8 +63,8 @@ export default class GenericDB {
    * Read all documents in the collection following constraints
    * @param constraints
    */
-  readAll(constraints = null) {
-    const collectionRef = firebase.firestore().collection(this.collectionPath)
+  async readAll(constraints = null) {
+    const collectionRef = (await firestore()).collection(this.collectionPath)
     let query = collectionRef
 
     if (constraints) {
@@ -91,8 +91,7 @@ export default class GenericDB {
     const clonedData = cloneDeep(data)
     delete clonedData.id
 
-    await firebase
-      .firestore()
+    await (await firestore())
       .collection(this.collectionPath)
       .doc(id)
       .update({
@@ -107,9 +106,8 @@ export default class GenericDB {
    * Delete a document in the collection
    * @param id
    */
-  delete(id) {
-    return firebase
-      .firestore()
+  async delete(id) {
+    return (await firestore())
       .collection(this.collectionPath)
       .doc(id)
       .delete()
