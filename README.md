@@ -40,7 +40,7 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 
 **Lighthouse score:**
 
-![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ligthouse-score.jpg)
+![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
 ## Pre-requisites
 
