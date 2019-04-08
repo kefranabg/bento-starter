@@ -1,9 +1,10 @@
 <template>
   <div class="page-wrapper">
     <h1 class="home-page-title">{{ appTitle }}</h1>
-    <img class="logo" src="@/assets/img/bento-starter.svg" />
+    <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
 
     <a
+      rel="noopener"
       class="documentation-link"
       target="_blank"
       href="https://bento-starter.netlify.com/"
@@ -52,7 +53,7 @@ export default {
     display: inline-block;
     font-size: 1.2rem;
     color: #fff;
-    background-color: #3eaf7c;
+    background-color: #5d6788;
     padding: 0.8rem 1.6rem;
     border-radius: 4px;
     transition: background-color 0.1s ease;

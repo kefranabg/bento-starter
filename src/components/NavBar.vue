@@ -1,7 +1,7 @@
 <template>
   <header class="navbar" :class="{ offline: !networkOnLine }">
     <router-link to="/home">
-      <img class="logo" src="@/assets/img/bento-starter.svg" />
+      <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
       <span class="site-name">
         Bento<span class="can-hide">Starter</span></span
       ></router-link
