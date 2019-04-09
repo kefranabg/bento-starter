@@ -4,8 +4,8 @@ const path = require('path')
 const prerenderedRoutesList = ['/login', '/home', '/']
 
 module.exports = {
+  /* See https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa for more details */
   pwa: {
-    /* Example of dynamic caching : */
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: path.join('public', 'service-worker.js')

@@ -11,5 +11,5 @@ export default async () => {
       .enablePersistence({ experimentalTabSynchronization: true })
     loaded = true
   }
-  return Promise.resolve(firebase.firestore())
+  return firebase.firestore()
 }

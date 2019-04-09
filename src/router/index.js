@@ -9,6 +9,8 @@ import store from '@/store'
 Vue.use(Router)
 Vue.use(Head)
 
+/* If you don't know about VueRouter, please refer to https://router.vuejs.org/ */
+
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
