@@ -42,10 +42,6 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
-## Pre-requisites
-
-* node@9.3.0+
-* npm@5.5.0+
 
 ## Documentation 
 
