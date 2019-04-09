@@ -9,7 +9,7 @@
 
 Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
 
-:bento: bento-starter is a stack that provides a full environment to quickly build PWA applications with your team. As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
+:bento: bento-starter is an Open-Source Full-Stack solution that helps you build fast and maintainable production web applications using frameworks, tools and configurations such as Vue.js, Firebase, Progressive Web Apps support... As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
 
 **The stack is made up of :**
 
@@ -42,10 +42,6 @@ Demo :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
-## Pre-requisites
-
-* node@9.3.0+
-* npm@5.5.0+
 
 ## Documentation 
 
