@@ -64,7 +64,7 @@ jobs:
           at: .
       - run:
           name: 'Run e2e tests'
-          command: $(npm bin)/cypress run --headless 
+          command: $(npm bin)/cypress run
 
   build:
     executor: default-executor
