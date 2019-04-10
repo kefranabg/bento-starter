@@ -26,19 +26,15 @@ jobs:
             - ~/.cache
           key: v6-dependencies-{{ checksum "package-lock.json" }}
 
-      - run:
-          name: 'Run e2e tests'
-          command: npm run test:e2e:headless
-
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ..
+          paths: ..
 
   check-prettier:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Run prettier check on project files'
           command: npm run prettier:check
@@ -47,7 +43,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Run linter'
           command: npm run lint
@@ -56,7 +52,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Run unit tests'
           command: npm run test:unit
@@ -65,7 +61,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Run e2e tests'
           command: $(npm bin)/cypress run
@@ -74,7 +70,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Build'
           command: npm run build
@@ -83,7 +79,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Check bundles sizes'
           command: npm run bundlesize
@@ -92,7 +88,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ..
       - run:
           name: 'Firebase deploy'
           command: |
@@ -114,15 +110,15 @@ workflows:
       - run-unit-tests:
           requires:
             - install-dependencies
-      # - run-e2e-tests:
-      #     requires:
-      #       - install-dependencies
+      - run-e2e-tests:
+          requires:
+            - install-dependencies
       - build:
           requires:
             - check-prettier
             - check-linter
             - run-unit-tests
-            # - run-e2e-tests
+            - run-e2e-tests
       - check-bundles-sizes:
           requires:
             - build
