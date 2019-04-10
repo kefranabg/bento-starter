@@ -3,10 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: circleci/node:lts
-  cypress-executor:
-    docker:
-      - image: cypress/base:8
+      - image: cypress/base:10
 
 jobs:
   install-dependencies:
@@ -61,7 +58,7 @@ jobs:
           command: npm run test:unit
 
   run-e2e-tests:
-    executor: cypress-executor
+    executor: default-executor
     steps:
       - attach_workspace:
           at: .
