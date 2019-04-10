@@ -60,7 +60,7 @@ jobs:
           command: npm run test:unit
 
   run-e2e-tests:
-    executor: cypress/base
+    executor: cypress/base:10
     steps:
       - attach_workspace:
           at: .
