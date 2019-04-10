@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: imton/cypress-chrome71
+      - image: circleci/node:ts
 
 jobs:
   install-dependencies:
