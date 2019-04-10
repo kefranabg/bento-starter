@@ -8,7 +8,6 @@ executors:
 jobs:
   install-dependencies:
     executor: default-executor
-
     steps:
       - checkout
 
@@ -27,42 +26,49 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
   check-prettier:
+    executor: default-executor
     steps:
       - run:
           name: 'Run prettier check on project files'
           command: npm run prettier:check
 
   check-linter:
+    executor: default-executor
     steps:
       - run:
           name: 'Run linter'
           command: npm run lint
 
   run-unit-tests:
+    executor: default-executor
     steps:
       - run:
           name: 'Run unit tests'
           command: npm run test:unit
 
   run-e2e-tests:
+    executor: default-executor
     steps:
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
 
   build:
+    executor: default-executor
     steps:
       - run:
           name: 'Build'
           command: npm run build
 
   check-bundles-sizes:
+    executor: default-executor
     steps:
       - run:
           name: 'Check bundles sizes'
           command: npm run bundlesize
 
   deploy:
+    executor: default-executor
     steps:
       - run:
           name: 'Firebase deploy'
