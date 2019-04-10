@@ -22,7 +22,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/.cache
+            - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
