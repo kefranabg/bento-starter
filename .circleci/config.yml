@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: 'Run e2e tests'
-          command: $(npm bin)/cypress run
+          command: npm run test:e2e
 
       - persist_to_workspace:
           root: .
