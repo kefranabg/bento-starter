@@ -13,8 +13,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v5-dependencies-{{ checksum "package-lock.json" }}
-            - v5-dependencies
+            - v6-dependencies-{{ checksum "package-lock.json" }}
+            - v6-dependencies
 
       - run:
           name: 'Install dependencies'
@@ -24,7 +24,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-          key: v5-dependencies-{{ checksum "package-lock.json" }}
+          key: v6-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
