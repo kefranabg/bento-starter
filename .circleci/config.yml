@@ -13,8 +13,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "package-lock.json" }}
-            - v4-dependencies
+            - v5-dependencies-{{ checksum "package-lock.json" }}
+            - v5-dependencies
 
       - run:
           name: 'Install dependencies'
@@ -24,7 +24,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-          key: v4-dependencies-{{ checksum "package-lock.json" }}
+          key: v5-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
@@ -64,7 +64,7 @@ jobs:
           at: .
       - run:
           name: 'Run e2e tests'
-          command: npm run test:e2e:headless
+          command: $(npm bin)/cypress run --headless 
 
   build:
     executor: default-executor
