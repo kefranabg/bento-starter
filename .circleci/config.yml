@@ -6,7 +6,7 @@ executors:
       - image: circleci/node:lts
   cypress-executor:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:8
 
 jobs:
   install-dependencies:
@@ -16,17 +16,18 @@ jobs:
 
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package-lock.json" }}
-            - v3-dependencies
+            - v4-dependencies-{{ checksum "package-lock.json" }}
+            - v4-dependencies
 
       - run:
           name: 'Install dependencies'
-          command: npm i
+          command: npm ci
 
       - save_cache:
           paths:
+            - ~/.npm
             - ~/.cache
-          key: v3-dependencies-{{ checksum "package-lock.json" }}
+          key: v4-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
