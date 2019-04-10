@@ -26,7 +26,7 @@ jobs:
             - ~/.cache
           key: v6-dependencies-{{ checksum "package-lock.json" }}
 
-       - run:
+      - run:
           name: 'Run e2e tests'
           command: $(npm bin)/cypress run
 
