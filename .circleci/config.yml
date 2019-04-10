@@ -1,10 +1,13 @@
 version: 2
-jobs:
-  build:
+
+executors:
+  default-executor:
     docker:
       - image: imton/cypress-chrome71
 
-    working_directory: ~/vue-ts-firebase-starter
+jobs:
+  install-dependencies:
+    executor: default-executor
 
     steps:
       - checkout
@@ -23,30 +26,44 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
+  check-prettier:
+    steps:
       - run:
           name: 'Run prettier check on project files'
           command: npm run prettier:check
 
+  check-linter:
+    steps:
       - run:
           name: 'Run linter'
           command: npm run lint
 
+  run-unit-tests:
+    steps:
       - run:
           name: 'Run unit tests'
           command: npm run test:unit
 
+  run-e2e-tests:
+    steps:
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
 
+  build:
+    steps:
       - run:
           name: 'Build'
           command: npm run build
 
+  check-bundles-sizes:
+    steps:
       - run:
           name: 'Check bundles sizes'
           command: npm run bundlesize
 
+  deploy:
+    steps:
       - run:
           name: 'Firebase deploy'
           command: |
@@ -58,4 +75,34 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - install-dependencies
+      - check-prettier:
+        requires:
+          - install-dependencies
+
+      - check-linter:
+        requires:
+          - install-dependencies
+
+      - run-unit-tests:
+        requires:
+          - install-dependencies
+
+      - run-e2e-tests:
+        requires:
+          - install-dependencies
+
+      - build:
+        requires:
+          - check-prettier
+          - check-linter
+          - run-unit-tests
+          - run-e2e-tests
+
+      - check-bundles-sizes:
+        requires:
+          - build
+
+      - deploy:
+        requires:
+          - check-bundles-sizes
