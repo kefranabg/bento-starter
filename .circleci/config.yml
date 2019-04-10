@@ -27,14 +27,14 @@ jobs:
           key: v6-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
-          root: ..
-          paths: ..
+          root: .
+          paths: .
 
   check-prettier:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Run prettier check on project files'
           command: npm run prettier:check
@@ -43,7 +43,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Run linter'
           command: npm run lint
@@ -52,7 +52,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Run unit tests'
           command: npm run test:unit
@@ -61,7 +61,11 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
+      - restore_cache:
+          keys:
+            - v6-dependencies-{{ checksum "package-lock.json" }}
+            - v6-dependencies
       - run:
           name: 'Run e2e tests'
           command: $(npm bin)/cypress run
@@ -70,7 +74,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Build'
           command: npm run build
@@ -79,7 +83,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Check bundles sizes'
           command: npm run bundlesize
@@ -88,7 +92,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: ..
+          at: .
       - run:
           name: 'Firebase deploy'
           command: |
