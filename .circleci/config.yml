@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: 'Run e2e tests'
-          command: npm run test:e2e
+          command: npm run test:e2e:headless
 
       - persist_to_workspace:
           root: .
