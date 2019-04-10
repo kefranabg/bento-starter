@@ -25,9 +25,15 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
+      - persist_to_workspace:
+          root: .
+          paths: .
+
   check-prettier:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Run prettier check on project files'
           command: npm run prettier:check
@@ -35,6 +41,8 @@ jobs:
   check-linter:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Run linter'
           command: npm run lint
@@ -42,6 +50,8 @@ jobs:
   run-unit-tests:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Run unit tests'
           command: npm run test:unit
@@ -49,6 +59,8 @@ jobs:
   run-e2e-tests:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
@@ -56,6 +68,8 @@ jobs:
   build:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Build'
           command: npm run build
@@ -63,6 +77,8 @@ jobs:
   check-bundles-sizes:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Check bundles sizes'
           command: npm run bundlesize
@@ -70,6 +86,8 @@ jobs:
   deploy:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Firebase deploy'
           command: |
