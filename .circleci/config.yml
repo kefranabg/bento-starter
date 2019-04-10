@@ -16,8 +16,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package-lock.json" }}
-            - v2-dependencies
+            - v3-dependencies-{{ checksum "package-lock.json" }}
+            - v3-dependencies
 
       - run:
           name: 'Install dependencies'
@@ -25,8 +25,8 @@ jobs:
 
       - save_cache:
           paths:
-            - node_modules
-          key: v2-dependencies-{{ checksum "package-lock.json" }}
+            - ~/.cache
+          key: v3-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
