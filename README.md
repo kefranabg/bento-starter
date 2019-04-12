@@ -3,9 +3,8 @@
 
 # Welcome to bento-starter :wave:
 
-<br />
-<br />
 ![Bento-starter](https://raw.githubusercontent.com/kefranabg/bento-starter/master/src/assets/img/bento-starter.svg?sanitize=true)
+
 <br />
 <br />
 
