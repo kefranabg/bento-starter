@@ -15,6 +15,12 @@
 
 As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
 
+## :book: Documentation 
+
+Want to setup this stack ?
+
+:point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
+
 ## Demo
 
 :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
@@ -24,6 +30,10 @@ As this project is a template project and not a CLI, you have access to the enti
 ![demo](https://user-images.githubusercontent.com/9840435/56022522-30ba0980-5d0c-11e9-8c61-23a9f91a926f.gif)
 
 <br />
+
+**Lighthouse score:**
+
+![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
 **The stack is made up of :**
 
@@ -51,17 +61,6 @@ As this project is a template project and not a CLI, you have access to the enti
 * :heavy_plus_sign: `Add to home screen` prompt for ios & android 
 * :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
 * :sparkles: Products page example to demonstrate app data management with firestore and vuex 
-
-**Lighthouse score:**
-
-![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
-
-
-## :book: Documentation 
-
-Want to setup this stack ?
-
-:point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
 
 ## License
 
