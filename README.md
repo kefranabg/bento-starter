@@ -19,7 +19,7 @@ As this project is a template project and not a CLI, you have access to the enti
 
 Want to setup this stack ?
 
-:point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
+:point_right: The full documentation is available [here](https://bento-starter.netlify.com/)
 
 ## Demo
 
