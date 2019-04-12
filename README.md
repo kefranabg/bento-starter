@@ -62,6 +62,9 @@ Want to setup this stack ?
 * :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
 * :sparkles: Products page example to demonstrate app data management with firestore and vuex 
 
+## Show your support
+⭐️ this repo
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
