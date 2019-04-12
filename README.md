@@ -59,3 +59,7 @@
 Want to setup this stack ?
 
 :point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
