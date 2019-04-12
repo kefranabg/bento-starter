@@ -55,7 +55,7 @@
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
 
-## Documentation 
+## :book: Documentation 
 
 Want to setup this stack ?
 
