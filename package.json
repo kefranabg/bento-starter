@@ -59,8 +59,16 @@
       "maxSize": "155 kB"
     },
     {
+      "path": "./dist/chunk-firestore.js",
+      "maxSize": "95 kB"
+    },
+    {
       "path": "./dist/app.js",
       "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/client-chunk-*.js",
+      "maxSize": "5 kB"
     }
   ],
   "eslintConfig": {
