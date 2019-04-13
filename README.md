@@ -57,7 +57,7 @@ Want to setup this stack ?
 **App embedded features :**
 
 * :bust_in_silhouette: Google authentication 
-* :mobile_phone_off: Offline support 
+* :mobile_phone_off: Offline support (dynamic & static caching)
 * :new: `New version available` prompt on new app deployments 
 * :heavy_plus_sign: `Add to home screen` prompt for ios & android 
 * :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
