@@ -1,5 +1,6 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const path = require('path')
+const RemoveDefaultManifestPlugin = require('./webpack-plugins/remove-default-manifest-plugin')
 
 const prerenderedRoutesList = ['/login', '/home', '/']
 
@@ -17,6 +18,7 @@ module.exports = {
       chunkFilename: '[name].js'
     },
     plugins: [
+      new RemoveDefaultManifestPlugin(),
       /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
       new PrerenderSPAPlugin({
         // Required - The path to the webpack-outputted app to prerender.
