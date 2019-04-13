@@ -41,6 +41,7 @@ Want to setup this stack ?
 * :wrench: [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development 
 * :repeat: [Vuex](https://vuex.vuejs.org/) : state management 
 * :floppy_disk: [Firestore](https://firebase.google.com/products/firestore/) : cloud NoSQL Database 
+* :house: [Firebase hosting](https://firebase.google.com/products/hosting/) : fast and secure web hosting
 * :bust_in_silhouette: [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication 
 * :iphone: [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support 
 * :lipstick: [Prettier](https://prettier.io/) : code formating rules 
