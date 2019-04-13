@@ -38,7 +38,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
-    "bundlesize": "^0.17.1",
+    "bundlesize": "github:kefranabg/bundlesize",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
     "firebase-tools": "^6.6.0",
