@@ -37,7 +37,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'Sign in or sign up to bento-starter.'
+        content: 'Sign in or sign up to bento-starter'
       }
     ]
   },
@@ -67,7 +67,9 @@ export default {
 
       try {
         await firebase.auth().signInWithRedirect(provider)
+        console.log('ok')
       } catch (err) {
+        console.log('ko', err)
         this.loginError = err
         this.setUser(null)
       }

@@ -12,8 +12,9 @@ self.__precacheManifest = [].concat(self.__precacheManifest || [])
 workbox.precaching.suppressWarnings()
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
+// Redirect to index.html if sw cannot find matching route
 workbox.routing.registerNavigationRoute('/index.html', {
-  /* Routes user by firebase auth  */
+  /* Do not redirect routes used by firebase auth  */
   blacklist: [new RegExp('/__/auth/handler'), new RegExp('/__/auth/iframe')]
 })
 

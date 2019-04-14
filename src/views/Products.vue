@@ -11,17 +11,6 @@ import ProductList from '@/components/ProductList'
 import AddProduct from '@/components/AddProduct'
 
 export default {
-  head: {
-    title: {
-      inner: 'Products'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'A list of all your information about bento-starter.'
-      }
-    ]
-  },
   components: { ProductList, AddProduct }
 }
 </script>

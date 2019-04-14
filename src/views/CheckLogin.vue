@@ -19,11 +19,11 @@ export default {
           this.$router.push('/')
         }
 
-        isNil(user)
-          ? this.$router.push(
-              `/login?redirectUrl=${this.$route.query.redirectUrl}`
-            )
-          : this.$router.push(this.$route.query.redirectUrl)
+        const redirectUrl = isNil(user)
+          ? `/login?redirectUrl=${this.$route.query.redirectUrl}`
+          : this.$route.query.redirectUrl
+
+        this.$router.push(redirectUrl)
       },
       immediate: true
     }
