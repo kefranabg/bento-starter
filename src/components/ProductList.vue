@@ -10,6 +10,7 @@
       :index="index"
       :key="product.id"
       :isProductDeletionPending="isProductDeletionPending(product.id)"
+      :disableActions="!networkOnLine"
       @deleteProduct="deleteUserProduct"
       :data="product"
     ></product-item>
@@ -24,7 +25,8 @@ export default {
   components: { ProductItem },
   computed: {
     ...mapGetters('products', ['isProductDeletionPending']),
-    ...mapState('products', ['products'])
+    ...mapState('products', ['products']),
+    ...mapState('app', ['networkOnLine'])
   },
   methods: mapActions('products', ['deleteUserProduct'])
 }
