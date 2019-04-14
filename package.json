@@ -15,7 +15,7 @@
     "bundlesize": "bundlesize"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.0.1",
     "firebase": "^5.9.4",
     "register-service-worker": "^1.6.2",
     "terser": "3.17",
@@ -37,7 +37,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
-    "bundlesize": "^0.17.1",
+    "bundlesize": "github:kefranabg/bundlesize",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
     "firebase-tools": "^6.6.0",
@@ -57,8 +57,16 @@
       "maxSize": "155 kB"
     },
     {
+      "path": "./dist/chunk-firestore.js",
+      "maxSize": "95 kB"
+    },
+    {
       "path": "./dist/app.js",
-      "maxSize": "10 kB"
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/client-chunk-*.js",
+      "maxSize": "5 kB"
     }
   ],
   "eslintConfig": {
