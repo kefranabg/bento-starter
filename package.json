@@ -17,6 +17,7 @@
   "dependencies": {
     "core-js": "^3.0.1",
     "firebase": "^5.9.4",
+    "is_js": "^0.9.0",
     "register-service-worker": "^1.6.2",
     "terser": "3.17",
     "vue": "^2.6.10",
