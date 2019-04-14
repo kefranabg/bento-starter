@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && npm run remove-manifest-extralink",
-    "remove-manifest-extralink": "replace '<link rel=manifest href=/manifest.json>' '' ./dist/index.html",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:e2e:headless": "vue-cli-service test:e2e --headless",
@@ -44,7 +43,6 @@
     "firebase-tools": "^6.6.0",
     "node-sass": "^4.11.0",
     "prerender-spa-plugin": "^3.4.0",
-    "replace": "^1.1.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.3.2",
