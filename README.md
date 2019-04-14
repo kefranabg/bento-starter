@@ -31,11 +31,11 @@ Want to setup this stack ?
 
 <br />
 
-**Lighthouse score:**
+**Lighthouse score :**
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
-**Optionnal CircleCI preconfigured workflow**
+**Optionnal CircleCI preconfigured workflow :**
 
 ![CI Worflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
 
