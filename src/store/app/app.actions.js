@@ -1,6 +1,6 @@
 export default {
   /**
-   * Close the "add to screen" modal for apple
+   * Closes "add to home screen" modal for apple
    */
   closeAddToHomeScreenModalForApple: async ({ commit }) => {
     localStorage.setItem('addToHomeIosPromptLastDate', Date.now())

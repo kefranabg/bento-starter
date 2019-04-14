@@ -24,7 +24,7 @@ export default {
     meta: [
       {
         name: 'description',
-        content: 'The front page of bento-starter.'
+        content: 'Bento-starter home page'
       }
     ]
   },

@@ -46,7 +46,7 @@ export default class GenericDB {
    * @param id
    */
   async read(id) {
-    const result = (await firestore())
+    const result = await (await firestore())
       .collection(this.collectionPath)
       .doc(id)
       .get()

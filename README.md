@@ -11,7 +11,7 @@
 
 <br />
 
-:bento: **bento-starter** is an Open-Source Full-Stack solution that helps you to build fast and maintainable web applications using tools like Vue.js, Firebase, Progressive Web Apps support... The goal of this project is to provide a powerfull and well configured stack (with CI/CD, hosting...) so you can focus on writing your web application very quickly.
+:bento: **bento-starter** is an Open-Source Full-Stack solution that helps you to build fast and maintainable web applications using tools like Vue.js, Firebase, Progressive Web Apps support, dynamic offline support... The goal of this project is to provide a powerfull and well configured stack (with CI/CD, hosting...) so you can focus on writing your web application very quickly.
 
 As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
 
@@ -19,7 +19,7 @@ As this project is a template project and not a CLI, you have access to the enti
 
 Want to setup this stack ?
 
-:point_right: The full [documentation is available here](https://bento-starter.netlify.com/)
+:point_right: The full documentation is available [here](https://bento-starter.netlify.com/)
 
 ## Demo
 
@@ -31,9 +31,13 @@ Want to setup this stack ?
 
 <br />
 
-**Lighthouse score:**
+**Lighthouse score :**
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
+
+**Optionnal CircleCI preconfigured workflow :**
+
+![CI Worflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
 
 **The stack is made up of :**
 
@@ -41,6 +45,7 @@ Want to setup this stack ?
 * :wrench: [Vue-cli](https://cli.vuejs.org/) : standard tooling for vue.js development 
 * :repeat: [Vuex](https://vuex.vuejs.org/) : state management 
 * :floppy_disk: [Firestore](https://firebase.google.com/products/firestore/) : cloud NoSQL Database 
+* :house: [Firebase hosting](https://firebase.google.com/products/hosting/) : fast and secure web hosting
 * :bust_in_silhouette: [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication 
 * :iphone: [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support 
 * :lipstick: [Prettier](https://prettier.io/) : code formating rules 
@@ -56,11 +61,15 @@ Want to setup this stack ?
 **App embedded features :**
 
 * :bust_in_silhouette: Google authentication 
-* :mobile_phone_off: Offline support 
+* :mobile_phone_off: Offline support (dynamic & static caching)
 * :new: `New version available` prompt on new app deployments 
 * :heavy_plus_sign: `Add to home screen` prompt for ios & android 
 * :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
-* :sparkles: Products page example to demonstrate app data management with firestore and vuex 
+* :sparkles: Products page example to demonstrate app data management with firestore and vuex
+* :muscle: Better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
+
+## Show your support
+⭐️ this repo
 
 ## License
 
