@@ -1,3 +1,5 @@
+import actions from '@/store/products/products.actions'
+
 jest.mock('@/firebase/user-products-db', () => ({
   UserProductsDB: jest.mock()
 }))
@@ -12,8 +14,6 @@ jest.mock('@/firebase/user-products-db', () =>
     delete: mockUsersDbDelete
   }))
 )
-
-import actions from '@/store/products/products.actions'
 
 const commit = jest.fn()
 const dispatch = jest.fn()

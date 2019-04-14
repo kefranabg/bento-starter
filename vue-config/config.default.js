@@ -1,4 +1,4 @@
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const PrerenderSPAPlugin = require('prerender-spa-plugin') // eslint-disable-line
 const path = require('path')
 const RemoveDefaultManifestPlugin = require('./webpack-plugins/remove-default-manifest-plugin')
 
