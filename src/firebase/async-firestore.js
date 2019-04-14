@@ -6,7 +6,7 @@ let loaded = false
 
 export default async () => {
   if (!loaded) {
-    await import('firebase/firestore')
+    await import(/* webpackChunkName: "chunk-firestore" */ 'firebase/firestore')
     firebase.firestore().settings({})
     firebase
       .firestore()
