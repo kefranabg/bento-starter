@@ -65,7 +65,8 @@ Want to setup this stack ?
 * :new: `New version available` prompt on new app deployments 
 * :heavy_plus_sign: `Add to home screen` prompt for ios & android 
 * :leftwards_arrow_with_hook: Smart redirection for auth protected routes 
-* :sparkles: Products page example to demonstrate app data management with firestore and vuex 
+* :sparkles: Products page example to demonstrate app data management with firestore and vuex
+* :muscle: brings better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
 
 ## Show your support
 ⭐️ this repo
