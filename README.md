@@ -35,6 +35,10 @@ Want to setup this stack ?
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
+**Optionnal CircleCI preconfigured workflow**
+
+![CI Worflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
+
 **The stack is made up of :**
 
 * :metal: [Vue.js](https://vuejs.org/) : front-end framework 
