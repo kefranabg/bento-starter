@@ -12,8 +12,8 @@ import ProductList from '@/components/ProductList'
 import AddProduct from '@/components/AddProduct'
 
 export default {
-  computed: mapState('app', ['networkOnLine']),
-  components: { ProductList, AddProduct }
+  components: { ProductList, AddProduct },
+  computed: mapState('app', ['networkOnLine'])
 }
 </script>
 

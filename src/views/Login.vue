@@ -3,19 +3,19 @@
     <h1 class="login-page-title">Login page</h1>
 
     <!-- Loader -->
-    <div data-test="loader" v-show="user === undefined">Authenticating...</div>
+    <div v-show="user === undefined" data-test="loader">Authenticating...</div>
 
     <!-- Offline instruction -->
-    <div data-test="offline-instruction" v-show="!networkOnLine">
+    <div v-show="!networkOnLine" data-test="offline-instruction">
       Please check your connection, login feature is not available offline.
     </div>
 
     <p v-if="loginError">{{ loginError }}</p>
     <!-- Auth UI -->
     <div
+      v-show="user !== undefined && !user && networkOnLine"
       data-test="login-btn"
       class="login-btn"
-      v-show="user !== undefined && !user && networkOnLine"
       @click="login"
     >
       Login with google

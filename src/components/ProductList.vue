@@ -1,18 +1,18 @@
 <template>
   <div>
-    <p class="infos-label" v-if="products === null">Loading...</p>
-    <p class="infos-label" v-if="products && !products.length">
+    <p v-if="products === null" class="infos-label">Loading...</p>
+    <p v-if="products && !products.length" class="infos-label">
       You don't have any product yet
     </p>
     <product-item
-      class="product-row"
       v-for="(product, index) in products"
-      :index="index"
       :key="product.id"
-      :isProductDeletionPending="isProductDeletionPending(product.id)"
-      :disableActions="!networkOnLine"
-      @deleteProduct="deleteUserProduct"
+      class="product-row"
+      :index="index"
+      :is-product-deletion-pending="isProductDeletionPending(product.id)"
+      :disable-actions="!networkOnLine"
       :data="product"
+      @deleteProduct="deleteUserProduct"
     ></product-item>
   </div>
 </template>

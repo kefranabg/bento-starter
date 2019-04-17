@@ -10,9 +10,9 @@
       class="new-content-available-toastr"
     ></new-content-available-toastr>
     <apple-add-to-home-screen-modal
+      v-if="showAddToHomeScreenModalForApple"
       class="apple-add-to-home-screen-modal"
       @close="closeAddToHomeScreenModalForApple(false)"
-      v-if="showAddToHomeScreenModalForApple"
     >
     </apple-add-to-home-screen-modal>
   </div>
