@@ -1,0 +1,127 @@
+{
+  "name": "bento-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e:headless": "vue-cli-service test:e2e --headless",
+    "test:unit": "vue-cli-service test:unit",
+    "prettier:format-all": "prettier --write '**/*.{vue,scss,sass,js}'",
+    "prettier:check": "prettier '**/*.{vue,js}' --list-different",
+    "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
+    "bundlesize": "bundlesize"
+  },
+  "dependencies": {
+    "core-js": "^3.0.1",
+    "firebase": "^5.9.4",
+    "is_js": "^0.9.0",
+    "lodash": "^4.17.11",
+    "pwacompat": "^2.0.8",
+    "register-service-worker": "^1.6.2",
+    "terser": "3.17",
+    "vue": "^2.6.10",
+    "vue-head": "^2.1.1",
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.123",
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.6.0",
+    "@vue/cli-plugin-eslint": "^3.6.0",
+    "@vue/cli-plugin-pwa": "^3.6.0",
+    "@vue/cli-plugin-unit-jest": "^3.6.3",
+    "@vue/cli-service": "^3.6.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "bundlesize": "github:kefranabg/bundlesize",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-google": "^0.12.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-vue": "^5.2.2",
+    "firebase-tools": "^6.6.0",
+    "node-sass": "^4.11.0",
+    "prerender-spa-plugin": "^3.4.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.10",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/chunk-vendors.js",
+      "maxSize": "155 kB"
+    },
+    {
+      "path": "./dist/chunk-firestore.js",
+      "maxSize": "95 kB"
+    },
+    {
+      "path": "./dist/app.js",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/client-chunk-*.js",
+      "maxSize": "6 kB"
+    }
+  ],
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "http://localhost/",
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setup.js"
+  }
+}
