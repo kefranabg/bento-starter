@@ -5,9 +5,11 @@
 [![Dependencies](https://img.shields.io/david/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter)
 [![DevDependencies](https://img.shields.io/david/dev/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter?type=dev)
 
-# Welcome to bento-starter :wave:
+<h1 align="center">Welcome to bento-starter :wave:</h1>
 
-![Bento-starter](https://raw.githubusercontent.com/kefranabg/bento-starter/master/src/assets/img/bento-starter.svg?sanitize=true)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/kefranabg/bento-starter/master/src/assets/img/bento-starter.svg?sanitize=true" alt="Bento-starter"/>
+</p>
 
 <br />
 
@@ -27,7 +29,9 @@ Want to setup this stack ?
 
 <br />
 
-![demo](https://user-images.githubusercontent.com/9840435/56022522-30ba0980-5d0c-11e9-8c61-23a9f91a926f.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/9840435/56022522-30ba0980-5d0c-11e9-8c61-23a9f91a926f.gif" alt="demo"/>
+</p>
 
 <br />
 
