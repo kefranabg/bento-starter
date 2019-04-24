@@ -39,7 +39,7 @@ Want to setup this stack ?
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
-**Optionnal CircleCI preconfigured workflow :**
+**Optional CircleCI preconfigured workflow :**
 
 ![CI Worflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
 
@@ -57,9 +57,9 @@ Want to setup this stack ?
 - :white_check_mark: [Jest](https://jestjs.io/) : unit testing
 - :white_check_mark: [Cypress](https://www.cypress.io/) : e2e testing
 - :mag: [Vue head](https://github.com/ktquez/vue-head) : meta description per page
-- :page_facing_up: [Optionnal][prerender spa plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering
-- :green_heart: [Optionnal][circleci](https://circleci.com/) : continuous integration/deployment
-- :package: [Optionnal][bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes
+- :page_facing_up: [Optional][prerender spa plugin](https://github.com/chrisvfritz/prerender-spa-plugin) : pages prerendering
+- :green_heart: [Optional][circleci](https://circleci.com/) : continuous integration/deployment
+- :package: [Optional][bundlesize](https://github.com/siddharthkp/bundlesize) : control your js bundles sizes
 
 **App embedded features :**
 
@@ -128,9 +128,9 @@ npx firebase deploy
 **Your project is now available on firebase hosting**.<br />
 **You can also run `npm run serve` and start your app development !**
 
-However we recommand you to go through optionnal steps to get a better developer experience :sunglasses:
+However we recommand you to go through Optional steps to get a better developer experience :sunglasses:
 
-### Step 3 (Optionnal) - Continuous integration/deployment
+### Step 3 (Optional) - Continuous integration/deployment
 
 🕙 Estimated time → **5 minutes**
 <br />
