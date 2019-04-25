@@ -41,7 +41,7 @@ Want to setup this stack ?
 
 **Optional CircleCI preconfigured workflow :**
 
-![CI Worflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
+![CI Workflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
 
 **The stack is made up of :**
 
@@ -52,7 +52,7 @@ Want to setup this stack ?
 - :house: [Firebase hosting](https://firebase.google.com/products/hosting/) : fast and secure web hosting
 - :bust_in_silhouette: [Firebase authentication](https://firebase.google.com/products/firestore/) : for easy authentication
 - :iphone: [PWA](https://www.npmjs.com/package/@vue/cli-plugin-pwa) : progressive web app support
-- :lipstick: [Prettier](https://prettier.io/) : code formating rules
+- :lipstick: [Prettier](https://prettier.io/) : code formatting rules
 - :rotating_light: [Eslint](https://eslint.org/) : control code quality
 - :white_check_mark: [Jest](https://jestjs.io/) : unit testing
 - :white_check_mark: [Cypress](https://www.cypress.io/) : e2e testing
@@ -80,7 +80,7 @@ Want to setup this stack ?
 
 ### Tips
 
-We highly recommand to use [VSCode](https://code.visualstudio.com/) with the following plugins to get a better development experience :
+We highly recommend to use [VSCode](https://code.visualstudio.com/) with the following plugins to get a better development experience :
 
 - Prettier
 - Eslint
@@ -128,7 +128,7 @@ npx firebase deploy
 **Your project is now available on firebase hosting**.<br />
 **You can also run `npm run serve` and start your app development !**
 
-However we recommand you to go through Optional steps to get a better developer experience :sunglasses:
+However we recommend you to go through Optional steps to get a better developer experience :sunglasses:
 
 ### Step 3 (Optional) - Continuous integration/deployment
 
