@@ -4,6 +4,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/vuesion/vuesion/graphs/commit-activity)
 [![Dependencies](https://img.shields.io/david/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter)
 [![DevDependencies](https://img.shields.io/david/dev/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter?type=dev)
+<a href="https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY" target="_blank"><img src="https://home-assistant.io/images/supported_brands/slack.png" height="20px" /></a> 
 
 <h1 align="center">Welcome to bento-starter :wave:</h1>
 
@@ -78,6 +79,10 @@ Want to setup this stack ?
 ## Show your support
 
 ⭐️ this repo
+
+## 💬 Chat
+
+Want to chat with us  ? 👉 [join bento-starter slack](https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY)
 
 ## License
 
