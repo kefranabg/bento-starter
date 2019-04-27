@@ -22,4 +22,4 @@ https://gitmoji.carloscuesta.me/
 
 ### Adding new feature
 
-Ideally you should open a suggestion issue on [GitHub](https://github.com/kefranabg/bento-starter). We will talk about that !
+Ideally you should open a suggestion issue on [GitHub](https://github.com/kefranabg/bento-starter) or talk with the community on [Slack](https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY).
