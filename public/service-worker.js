@@ -1,8 +1,5 @@
 workbox.core.setCacheNameDetails({ prefix: 'bento-starter' })
 
-workbox.skipWaiting()
-workbox.clientsClaim()
-
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -26,3 +23,7 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+
+addEventListener('message', messageEvent => {
+  if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
+})

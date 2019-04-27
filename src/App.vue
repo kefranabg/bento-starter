@@ -8,6 +8,8 @@
     <new-content-available-toastr
       v-if="newContentAvailable"
       class="new-content-available-toastr"
+      :refreshing-app="refreshingApp"
+      @refresh="serviceWorkerSkipWaiting"
     ></new-content-available-toastr>
     <apple-add-to-home-screen-modal
       v-if="showAddToHomeScreenModalForApple"
@@ -21,15 +23,18 @@
 import NavBar from '@/components/NavBar'
 import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   components: { NavBar, NewContentAvailableToastr, AppleAddToHomeScreenModal },
-  computed: mapState('app', [
-    'newContentAvailable',
-    'showAddToHomeScreenModalForApple'
-  ]),
-  methods: mapActions('app', ['closeAddToHomeScreenModalForApple'])
+  computed: {
+    ...mapGetters('app', ['newContentAvailable']),
+    ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])
+  },
+  methods: mapActions('app', [
+    'closeAddToHomeScreenModalForApple',
+    'serviceWorkerSkipWaiting'
+  ])
 }
 </script>
 
