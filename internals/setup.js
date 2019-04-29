@@ -15,6 +15,11 @@ const addCheckMark = require('./helpers/checkmark')
 const addXMark = require('./helpers/xmark')
 const npmConfig = require('./helpers/get-npm-config')
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
 process.stdin.resume()
 process.stdin.setEncoding('utf8')
 
@@ -112,6 +117,34 @@ function askUserIfWeShouldRemoveRepo() {
       /* eslint-disable-next-line no-unused-expressions */
       answer === 'y' ? resolve(true) : resolve(false)
     })
+  })
+}
+
+/**
+ * Ask user for new origin for this repository. If provided, call git remote add origin
+ * @returns {Promise<any>}
+ */
+const askUserForNewRemote = () => {
+  return new Promise((resolve, reject) => {
+    rl.question(
+      '\nEnter new remote for this repository [Enter to cancel]: ',
+      origin => {
+        if (origin) {
+          exec(`git remote add origin ${origin}`, error => {
+            if (error) {
+              reject(error)
+            } else {
+              resolve(true)
+            }
+          })
+        } else {
+          process.stdout.write(
+            'No remote added, run git remote add origin <url> to add one'
+          )
+          resolve(false)
+        }
+      }
+    )
   })
 }
 
@@ -319,6 +352,7 @@ function reportError(error) {
 
   if (error) {
     process.stdout.write('\n\n')
+    rl.close()
     addXMark(() => process.stderr.write(chalk.red(` ${error}\n`)))
     process.exit(1)
   }
@@ -329,6 +363,7 @@ function reportError(error) {
  */
 function endProcess() {
   clearInterval(interval)
+  rl.close()
   process.stdout.write(chalk.blue('\n\nDone!\n'))
   process.exit(0)
 }
@@ -358,14 +393,19 @@ function endProcess() {
   await removeSetupScript().catch(reason => reportError(reason))
 
   if (repoRemoved) {
-    process.stdout.write('\n')
-    interval = animateProgress('Initialising new repository')
-    process.stdout.write('Initialising new repository')
+    process.stdout.write('\nInitialising new repository')
 
     try {
       await initGitRepository()
       await addToGitRepository()
       await commitToGitRepository()
+      process.stdout.write('\nInitial commit created.')
+      const newRemoteCreated = await askUserForNewRemote()
+      if (newRemoteCreated) {
+        process.stdout.write(
+          '\nNew remote added, run `git push` to send initial commit to remote repository.'
+        )
+      }
     } catch (err) {
       reportError(err)
     }
