@@ -274,6 +274,25 @@ function commitToGitRepository() {
 }
 
 /**
+ * Remove npm dependencies which are only used by this script
+ * @returns {Promise<any>}
+ */
+function removeScriptDependencies() {
+  return new Promise((resolve, reject) => {
+    exec(
+      'npm uninstall rimraf compare-versions chalk shelljs --save-dev',
+      (err, stdout) => {
+        if (err) {
+          reject(new Error(err))
+        } else {
+          resolve(stdout)
+        }
+      }
+    )
+  })
+}
+
+/**
  * Report the the given error and exits the setup
  * @param {string} error
  */
@@ -317,6 +336,7 @@ function endProcess() {
 
   await installPackages().catch(reason => reportError(reason))
   await deleteCurrentDir().catch(reason => reportError(reason))
+  await removeScriptDependencies().catch(reason => reportError(reason))
 
   if (repoRemoved) {
     process.stdout.write('\n')
