@@ -5,6 +5,7 @@ const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
+const rimraf = require('rimraf');
 const compareVersions = require('compare-versions');
 const chalk = require('chalk');
 
@@ -20,14 +21,19 @@ process.stdout.write('\n');
 let interval = -1;
 
 /**
- * Deletes a file in the current directory
- * @param {string} file
+ * Deletes the current directory
+ * 
  * @returns {Promise<any>}
  */
-function deleteFileInCurrentDir(file) {
+function deleteCurrentDir() {
   return new Promise((resolve, reject) => {
-    fs.unlink(path.join(__dirname, file), err => reject(new Error(err)));
-    resolve();
+      rimraf(__dirname, (error) => {
+          if(error) {
+              reject(new Error(err))
+          } else {
+              resolve()
+          }
+      })
   });
 }
 
@@ -315,7 +321,7 @@ function endProcess() {
   );
 
   await installPackages().catch(reason => reportError(reason));
-  await deleteFileInCurrentDir('setup.js').catch(reason => reportError(reason));
+  await deleteCurrentDir().catch(reason => reportError(reason));
 
   if (repoRemoved) {
     process.stdout.write('\n');
