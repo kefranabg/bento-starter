@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable import/no-extraneous-dependencies */
 
+const readPkg = require('read-pkg')
+const writePkg = require('write-pkg')
 const shell = require('shelljs')
 const { exec } = require('child_process')
 const readline = require('readline')
@@ -279,7 +281,7 @@ function commitToGitRepository() {
 function removeScriptDependencies() {
   return new Promise((resolve, reject) => {
     exec(
-      'npm uninstall rimraf compare-versions chalk shelljs --save-dev',
+      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg --save-dev',
       (err, stdout) => {
         if (err) {
           reject(new Error(err))
@@ -290,6 +292,23 @@ function removeScriptDependencies() {
     )
   })
 }
+
+/**
+ * Remove the "setup" script from package.json
+ * @returns {Promise<any>}
+ */
+const removeSetupScript = () =>
+  readPkg()
+    .then(pkg => {
+      if (!pkg.scripts) {
+        pkg.scripts = {}
+      }
+
+      delete pkg.scripts.setup
+
+      return pkg
+    })
+    .then(pkg => writePkg(pkg))
 
 /**
  * Report the the given error and exits the setup
@@ -336,6 +355,7 @@ function endProcess() {
   await installPackages().catch(reason => reportError(reason))
   await deleteCurrentDir().catch(reason => reportError(reason))
   await removeScriptDependencies().catch(reason => reportError(reason))
+  await removeSetupScript().catch(reason => reportError(reason))
 
   if (repoRemoved) {
     process.stdout.write('\n')
