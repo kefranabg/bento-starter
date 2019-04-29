@@ -6,13 +6,17 @@ describe('app module mutation', () => {
       const state = {
         networkOnLine: false,
         SWRegistrationForNewContent: null,
-        showAddToHomeScreenModalForApple: false
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
       }
+
       mutations.setNetworkOnline(state, true)
+
       expect(state).toEqual({
         networkOnLine: true,
         SWRegistrationForNewContent: null,
-        showAddToHomeScreenModalForApple: false
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
       })
     })
   })
@@ -22,14 +26,18 @@ describe('app module mutation', () => {
       const state = {
         networkOnLine: false,
         SWRegistrationForNewContent: null,
-        showAddToHomeScreenModalForApple: false
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
       }
       const newSW = { id: 'sw' }
+
       mutations.setSWRegistrationForNewContent(state, newSW)
+
       expect(state).toEqual({
         networkOnLine: false,
         SWRegistrationForNewContent: newSW,
-        showAddToHomeScreenModalForApple: false
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
       })
     })
   })
@@ -39,13 +47,37 @@ describe('app module mutation', () => {
       const state = {
         networkOnLine: false,
         SWRegistrationForNewContent: null,
-        showAddToHomeScreenModalForApple: false
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
       }
+
       mutations.setShowAddToHomeScreenModalForApple(state, true)
+
       expect(state).toEqual({
         networkOnLine: false,
         SWRegistrationForNewContent: null,
-        showAddToHomeScreenModalForApple: true
+        showAddToHomeScreenModalForApple: true,
+        refreshingApp: false
+      })
+    })
+  })
+
+  describe('refreshingApp', () => {
+    it('should set refreshingApp state to the value given in parameter', () => {
+      const state = {
+        networkOnLine: false,
+        SWRegistrationForNewContent: null,
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: false
+      }
+
+      mutations.setRefreshingApp(state, true)
+
+      expect(state).toEqual({
+        networkOnLine: false,
+        SWRegistrationForNewContent: null,
+        showAddToHomeScreenModalForApple: false,
+        refreshingApp: true
       })
     })
   })

@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 let refreshing = false
-// This is triggered a new service worker take over
+// This is triggered when a new service worker take over
 navigator.serviceWorker.addEventListener('controllerchange', () => {
   if (refreshing) return
   refreshing = true
