@@ -1,3 +1,3 @@
-const fs = require('fs');
+const fs = require('fs')
 
-module.exports = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+module.exports = JSON.parse(fs.readFileSync('package.json', 'utf8'))
