@@ -1,9 +1,8 @@
 #!/usr/bin/env node
+/* eslint-disable import/no-extraneous-dependencies */
 
 const shell = require('shelljs')
 const { exec } = require('child_process')
-const path = require('path')
-const fs = require('fs')
 const readline = require('readline')
 const rimraf = require('rimraf')
 const compareVersions = require('compare-versions')
@@ -29,7 +28,7 @@ function deleteCurrentDir() {
   return new Promise((resolve, reject) => {
     rimraf(__dirname, error => {
       if (error) {
-        reject(new Error(err))
+        reject(new Error(error))
       } else {
         resolve()
       }
