@@ -6,7 +6,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { isNil } from 'lodash'
+import isNil from 'lodash/isNil'
 
 export default {
   computed: mapState('authentication', ['user']),
