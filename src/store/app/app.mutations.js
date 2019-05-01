@@ -1,6 +1,8 @@
 export default {
   setNetworkOnline: (state, value) => (state.networkOnLine = value),
-  setNewContentAvailable: (state, value) => (state.newContentAvailable = value),
+  setSWRegistrationForNewContent: (state, value) =>
+    (state.SWRegistrationForNewContent = value),
   setShowAddToHomeScreenModalForApple: (state, value) =>
-    (state.showAddToHomeScreenModalForApple = value)
+    (state.showAddToHomeScreenModalForApple = value),
+  setRefreshingApp: (state, value) => (state.refreshingApp = value)
 }
