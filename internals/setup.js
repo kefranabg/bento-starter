@@ -5,26 +5,18 @@ const readPkg = require('read-pkg')
 const writePkg = require('write-pkg')
 const shell = require('shelljs')
 const { exec } = require('child_process')
-const readline = require('readline')
+const inquirer = require('inquirer')
+const ora = require('ora')
 const rimraf = require('rimraf')
 const compareVersions = require('compare-versions')
 const chalk = require('chalk')
 
-const animateProgress = require('./helpers/progress')
-const addCheckMark = require('./helpers/checkmark')
-const addXMark = require('./helpers/xmark')
 const npmConfig = require('./helpers/get-npm-config')
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
 
 process.stdin.resume()
 process.stdin.setEncoding('utf8')
 
 process.stdout.write('\n')
-let interval = -1
 
 /**
  * Deletes the current directory
@@ -104,20 +96,16 @@ function removeGitRepository() {
  * @returns {Promise<boolean>}
  */
 function askUserIfWeShouldRemoveRepo() {
-  return new Promise(resolve => {
-    process.stdout.write('\nDo you want to start with a new repository? [Y/n] ')
-    process.stdin.resume()
-    process.stdin.on('data', pData => {
-      const answer =
-        pData
-          .toString()
-          .trim()
-          .toLowerCase() || 'y'
-
-      /* eslint-disable-next-line no-unused-expressions */
-      answer === 'y' ? resolve(true) : resolve(false)
-    })
-  })
+  const NEW_REPOSITORY = 'NEW_REPOSITORY'
+  return inquirer
+    .prompt([
+      {
+        type: 'confirm',
+        message: 'Do you want to start with a new repository ?',
+        name: NEW_REPOSITORY
+      }
+    ])
+    .then(answers => !!answers[NEW_REPOSITORY])
 }
 
 /**
@@ -125,27 +113,38 @@ function askUserIfWeShouldRemoveRepo() {
  * @returns {Promise<any>}
  */
 const askUserForNewRemote = () => {
-  return new Promise((resolve, reject) => {
-    rl.question(
-      '\nEnter new remote for this repository [Enter to cancel]: ',
-      origin => {
-        if (origin) {
-          exec(`git remote add origin ${origin}`, error => {
-            if (error) {
-              reject(error)
-            } else {
-              resolve(true)
-            }
-          })
-        } else {
-          process.stdout.write(
-            'No remote added, run git remote add origin <url> to add one'
-          )
-          resolve(false)
-        }
+  const NEW_REMOTE = 'NEW_REMOTE'
+
+  return inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'Enter new remote for this repository [Enter to cancel]: ',
+        name: NEW_REMOTE
       }
-    )
-  })
+    ])
+    .then(answers => {
+      const origin = answers[NEW_REMOTE]
+      if (origin) {
+        const spinner = ora('Adding new remote to repository')
+        exec(`git remote add origin ${origin}`, error => {
+          if (error) {
+            spinner.fail('Add remote failed')
+            return false
+          } else {
+            spinner.success(
+              'New remote added, run `git push` to send initial commit to remote repository.'
+            )
+            return true
+          }
+        })
+      } else {
+        process.stdout.write(
+          'No remote added, run git remote add origin <url> to add one'
+        )
+        return false
+      }
+    })
 }
 
 /**
@@ -155,18 +154,14 @@ const askUserForNewRemote = () => {
  * @returns {Promise<boolean>}
  */
 async function cleanCurrentRepository() {
-  const hasGitRepo = await hasGitRepository().catch(reason =>
-    reportError(reason)
-  )
+  const hasGitRepo = await hasGitRepository().catch(onError)
 
   // We are not under Git version control. So, do nothing
   if (hasGitRepo === false) {
     return false
   }
 
-  const isClone = await checkIfRepositoryIsAClone().catch(reason =>
-    reportError(reason)
-  )
+  const isClone = await checkIfRepositoryIsAClone().catch(onError)
 
   // Not our clone so do nothing
   if (isClone === false) {
@@ -176,9 +171,12 @@ async function cleanCurrentRepository() {
   const answer = await askUserIfWeShouldRemoveRepo()
 
   if (answer === true) {
-    process.stdout.write('Removing current repository')
-    await removeGitRepository().catch(reason => reportError(reason))
-    addCheckMark()
+    const spinner = ora('Removing current repository').start()
+    await removeGitRepository().catch(reason => {
+      spinner.fail(reason)
+      onError()
+    })
+    spinner.succeed('Repository removed')
   }
 
   return answer
@@ -191,18 +189,20 @@ async function cleanCurrentRepository() {
  */
 function checkNodeVersion(minimalNodeVersion) {
   return new Promise((resolve, reject) => {
+    const spinner = ora('Checking node version').start()
+
     exec('node --version', (err, stdout) => {
       const nodeVersion = stdout.trim()
       if (err) {
-        reject(new Error(err))
+        spinner.fail(`node version check failed\n${err}`)
+        reject()
       } else if (compareVersions(nodeVersion, minimalNodeVersion) === -1) {
-        reject(
-          new Error(
-            `You need Node.js v${minimalNodeVersion} or above but you have v${nodeVersion}`
-          )
+        spinner.fail(
+          `You need Node.js v${minimalNodeVersion} or above but you have v${nodeVersion}`
         )
+        reject()
       }
-
+      spinner.succeed(`Node version ${nodeVersion} OK`)
       resolve('Node version OK')
     })
   })
@@ -215,19 +215,20 @@ function checkNodeVersion(minimalNodeVersion) {
  */
 function checkNpmVersion(minimalNpmVersion) {
   return new Promise((resolve, reject) => {
+    const spinner = ora('Checking npm version').start()
     exec('npm --version', (err, stdout) => {
       const npmVersion = stdout.trim()
       if (err) {
-        reject(new Error(err))
+        spinner.fail(`npm version check failed\n${err}`)
+        reject()
       } else if (compareVersions(npmVersion, minimalNpmVersion) === -1) {
-        reject(
-          new Error(
-            `You need NPM v${minimalNpmVersion} or above but you have v${npmVersion}`
-          )
+        spinner.fail(
+          `You need NPM v${minimalNpmVersion} or above but you have v${npmVersion}`
         )
+        reject()
       }
-
-      resolve('NPM version OK')
+      spinner.succeed(`npm version ${npmVersion} OK`)
+      resolve()
     })
   })
 }
@@ -238,23 +239,18 @@ function checkNpmVersion(minimalNpmVersion) {
  */
 function installPackages() {
   return new Promise((resolve, reject) => {
-    process.stdout.write(
-      '\nInstalling dependencies... (This might take a while)'
-    )
-
-    setTimeout(() => {
-      readline.cursorTo(process.stdout, 0)
-      interval = animateProgress('Installing dependencies')
-    }, 500)
+    const spinner = ora(
+      'Installing dependencies... (This might take a while)'
+    ).start()
 
     exec('npm install', err => {
       if (err) {
-        reject(new Error(err))
+        spinner.fail(`Packages installation failed\n${err}`)
+        reject()
       }
 
-      clearInterval(interval)
-      addCheckMark()
-      resolve('Packages installed')
+      spinner.succeed('Packages installed')
+      resolve()
     })
   })
 }
@@ -297,10 +293,14 @@ function addToGitRepository() {
  */
 function commitToGitRepository() {
   return new Promise((resolve, reject) => {
+    const spinner = ora('Creating initial commit for new repository').start()
+
     exec('git commit -m ":tada: Initial commit"', (err, stdout) => {
       if (err) {
+        spinner.fail('Commit failed')
         reject(new Error(err))
       } else {
+        spinner.succeed('Initial commit created')
         resolve(stdout)
       }
     })
@@ -313,13 +313,16 @@ function commitToGitRepository() {
  */
 function removeScriptDependencies() {
   return new Promise((resolve, reject) => {
+    const spinner = ora('Uninstalling extraneous dependencies').start()
     exec(
-      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg --save-dev',
-      (err, stdout) => {
+      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev',
+      err => {
         if (err) {
-          reject(new Error(err))
+          spinner.fail(err)
+          reject()
         } else {
-          resolve(stdout)
+          spinner.succeed('Extraneous dependencies uninstalled')
+          resolve()
         }
       }
     )
@@ -344,28 +347,15 @@ const removeSetupScript = () =>
     .then(pkg => writePkg(pkg))
 
 /**
- * Report the the given error and exits the setup
- * @param {string} error
- */
-function reportError(error) {
-  clearInterval(interval)
-
-  if (error) {
-    process.stdout.write('\n\n')
-    rl.close()
-    addXMark(() => process.stderr.write(chalk.red(` ${error}\n`)))
-    process.exit(1)
-  }
-}
-
-/**
  * End the setup process
  */
 function endProcess() {
-  clearInterval(interval)
-  rl.close()
   process.stdout.write(chalk.blue('\n\nDone!\n'))
   process.exit(0)
+}
+
+function onError() {
+  process.exit(1)
 }
 
 /**
@@ -380,17 +370,15 @@ function endProcess() {
   } = npmConfig
 
   const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
-  await checkNodeVersion(requiredNodeVersion).catch(reason =>
-    reportError(reason)
-  )
+  await checkNodeVersion(requiredNodeVersion).catch(onError)
 
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
-  await checkNpmVersion(requiredNpmVersion).catch(reason => reportError(reason))
+  await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  await installPackages().catch(reason => reportError(reason))
-  await deleteCurrentDir().catch(reason => reportError(reason))
-  await removeScriptDependencies().catch(reason => reportError(reason))
-  await removeSetupScript().catch(reason => reportError(reason))
+  await installPackages().catch(onError)
+  await deleteCurrentDir().catch(onError)
+  await removeScriptDependencies().catch(onError)
+  await removeSetupScript().catch(onError)
 
   if (repoRemoved) {
     process.stdout.write('\nInitialising new repository')
@@ -399,19 +387,10 @@ function endProcess() {
       await initGitRepository()
       await addToGitRepository()
       await commitToGitRepository()
-      process.stdout.write('\nInitial commit created.')
-      const newRemoteCreated = await askUserForNewRemote()
-      if (newRemoteCreated) {
-        process.stdout.write(
-          '\nNew remote added, run `git push` to send initial commit to remote repository.'
-        )
-      }
+      await askUserForNewRemote()
     } catch (err) {
-      reportError(err)
+      onError()
     }
-
-    addCheckMark()
-    clearInterval(interval)
   }
 
   endProcess()
