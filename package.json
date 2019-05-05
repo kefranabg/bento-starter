@@ -48,7 +48,7 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-vue": "^5.2.2",
     "firebase-tools": "^6.6.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10",
@@ -60,19 +60,19 @@
   },
   "bundlesize": [
     {
-      "path": "./dist/chunk-vendors.js",
+      "path": "./dist/js/chunk-vendors*.js",
       "maxSize": "125 kB"
     },
     {
-      "path": "./dist/chunk-firestore.js",
+      "path": "./dist/js/chunk-firestore*.js",
       "maxSize": "95 kB"
     },
     {
-      "path": "./dist/app.js",
+      "path": "./dist/js/app*.js",
       "maxSize": "15 kB"
     },
     {
-      "path": "./dist/client-chunk-*.js",
+      "path": "./dist/js/client-chunk-*.js",
       "maxSize": "6 kB"
     }
   ],
