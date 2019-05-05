@@ -13,8 +13,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package-lock.json" }}
-            - v3-dependencies
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps
 
       - run:
           name: 'Install dependencies'
@@ -24,7 +24,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-          key: v3-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-deps-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
@@ -64,8 +64,8 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package-lock.json" }}
-            - v3-dependencies
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
