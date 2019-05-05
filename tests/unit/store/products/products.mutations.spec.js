@@ -1,5 +1,5 @@
 import mutations from '@/store/products/products.mutations'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 
 const product1 = { id: 1, name: 'product1' }
 const product2 = { id: 2, name: 'product2' }

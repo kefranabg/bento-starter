@@ -61,7 +61,7 @@
   "bundlesize": [
     {
       "path": "./dist/js/chunk-vendors*.js",
-      "maxSize": "155 kB"
+      "maxSize": "125 kB"
     },
     {
       "path": "./dist/js/chunk-firestore*.js",

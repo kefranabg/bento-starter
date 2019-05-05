@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import LoginView from '@/views/Login.vue'
 
