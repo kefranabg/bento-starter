@@ -2,12 +2,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer') // eslint-disabl
   .BundleAnalyzerPlugin
 
 module.exports = {
-  css: {
-    extract: {
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
-    }
-  },
   configureWebpack: {
     plugins: [
       /* Refer to https://www.npmjs.com/package/webpack-bundle-analyzer for more details */

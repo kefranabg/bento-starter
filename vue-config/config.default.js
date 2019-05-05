@@ -14,10 +14,6 @@ module.exports = {
     }
   },
   configureWebpack: {
-    output: {
-      filename: '[name].js',
-      chunkFilename: '[name].js'
-    },
     plugins: [
       /* See https://github.com/chrisvfritz/prerender-spa-plugin for more details */
       new PrerenderSPAPlugin({
