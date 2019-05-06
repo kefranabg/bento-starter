@@ -320,6 +320,7 @@ const removeSetupScript = () =>
       }
 
       delete pkg.scripts.setup
+      delete pkg.scripts.presetup
 
       return pkg
     })
