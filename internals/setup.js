@@ -95,7 +95,7 @@ function removeGitRepository() {
  * Ask user if he wants to start with a new repository
  * @returns {Promise<boolean>}
  */
-function askUserIfWeShouldRemoveRepo() {
+function askUserIfWeShouldCreateNewRepo() {
   const NEW_REPOSITORY = 'NEW_REPOSITORY'
   return inquirer
     .prompt([
@@ -159,7 +159,7 @@ async function cleanCurrentRepository() {
 
   // We are not under Git version control. So, do nothing
   if (hasGitRepo === false) {
-    return false
+    return await askUserIfWeShouldCreateNewRepo()
   }
 
   const isClone = await checkIfRepositoryIsAClone().catch(onError)
@@ -169,7 +169,7 @@ async function cleanCurrentRepository() {
     return false
   }
 
-  const answer = await askUserIfWeShouldRemoveRepo()
+  const answer = await askUserIfWeShouldCreateNewRepo()
 
   if (answer === true) {
     const spinner = ora('Removing current repository').start()
