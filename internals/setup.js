@@ -235,28 +235,6 @@ function checkNpmVersion(minimalNpmVersion) {
 }
 
 /**
- * Install all packages
- * @returns {Promise<any>}
- */
-function installPackages() {
-  return new Promise((resolve, reject) => {
-    const spinner = ora(
-      'Installing dependencies... (This might take a while)'
-    ).start()
-
-    exec('npm install', err => {
-      if (err) {
-        spinner.fail(`Packages installation failed\n${err}`)
-        reject()
-      }
-
-      spinner.succeed('Packages installed')
-      resolve()
-    })
-  })
-}
-
-/**
  * Initialize a new Git repository
  * @returns {Promise<any>}
  */
@@ -376,7 +354,6 @@ function onError() {
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  await installPackages().catch(onError)
   await deleteCurrentDir().catch(onError)
   await removeScriptDependencies().catch(onError)
   await removeSetupScript().catch(onError)
