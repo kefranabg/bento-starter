@@ -13,6 +13,7 @@
     "prettier:check": "prettier '**/*.{vue,js}' --list-different",
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
     "bundlesize": "bundlesize",
+    "presetup": "npm install rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev",
     "setup": "node ./internals/setup.js"
   },
   "engines": {
