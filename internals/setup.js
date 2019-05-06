@@ -119,7 +119,7 @@ const askUserForNewRemote = () => {
     .prompt([
       {
         type: 'input',
-        message: 'Enter new remote for this repository [Enter to cancel]: ',
+        message: 'Enter new remote origin (ex: https://github.com/user/my-repo.git) for this repository [Enter to cancel]:  ',
         name: NEW_REMOTE
       }
     ])
