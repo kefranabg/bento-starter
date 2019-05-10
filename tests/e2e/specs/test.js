@@ -4,7 +4,7 @@
 describe('E2E BentoStarter testing using Cypress', () => {
   it('Home page', () => {
     cy.visit('/home')
-    cy.contains('.home-page-title', 'Bento starter')
+    cy.contains('.home-page-title', 'Welcome to Bento starter')
   })
 
   it('Login with Google', () => {
