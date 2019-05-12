@@ -129,10 +129,19 @@ export default {
           cursor: pointer;
         }
 
-        .router-link-exact-active,
-        :hover {
+        @mixin activatedLink() {
           margin-bottom: -2px;
           border-bottom: 2px solid $vue-color;
+        }
+
+        .router-link-active {
+          @include activatedLink;
+        }
+
+        @media (hover) {
+          :hover {
+            @include activatedLink;
+          }
         }
       }
     }
