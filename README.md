@@ -28,6 +28,8 @@ Want to setup this stack ?
 
 :point_right: [https://bento-starter.firebaseapp.com](https://bento-starter.firebaseapp.com)
 
+Install the PWA demo from Google Play Store :point_right: [bento-starter Google Play Store](https://play.google.com/store/apps/details?id=com.bentostarter.bentostarterdemo)
+
 <br />
 
 <p align="center">
