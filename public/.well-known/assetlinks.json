@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.bentostarter.bentostarterdemo",
+               "sha256_cert_fingerprints": ["1E:8E:85:09:84:A0:0C:FD:ED:51:ED:64:C5:32:5E:79:A2:21:0D:7B:DF:19:8A:27:C7:AB:15:3C:8B:9B:AC:2E"] }
+}]
