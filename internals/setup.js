@@ -112,7 +112,7 @@ async function askUserForNewRemote() {
   const origin = answers[NEW_REMOTE]
 
   if (origin) {
-    const spinner = ora('Adding new remote to repository')
+    const spinner = ora('Adding new remote to repository').start()
     try {
       await exec(`git remote add origin ${origin}`)
       spinner.succeed(
