@@ -4,12 +4,13 @@
 const readPkg = require('read-pkg')
 const writePkg = require('write-pkg')
 const shell = require('shelljs')
-const { exec } = require('child_process')
 const inquirer = require('inquirer')
 const ora = require('ora')
 const rimraf = require('rimraf')
 const compareVersions = require('compare-versions')
 const chalk = require('chalk')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 
 const npmConfig = require('./helpers/get-npm-config')
 
@@ -39,41 +40,26 @@ function deleteCurrentDir() {
  * Checks if we are under Git version control
  * @returns {Promise<boolean>}
  */
-function hasGitRepository() {
-  return new Promise((resolve, reject) => {
-    exec('git status', (err, stdout) => {
-      if (err) {
-        reject(new Error(err))
-      }
-
-      const regex = new RegExp(/fatal:\s+Not\s+a\s+git\s+repository/, 'i')
-
-      /* eslint-disable-next-line no-unused-expressions */
-      regex.test(stdout) ? resolve(false) : resolve(true)
-    })
-  })
+async function hasGitRepository() {
+  const { stdout } = await exec('git status')
+  const regex = new RegExp(/fatal:\s+Not\s+a\s+git\s+repository/, 'i')
+  return !regex.test(stdout)
 }
 
 /**
  * Checks if this is a clone from our repo
  * @returns {Promise<any>}
  */
-function checkIfRepositoryIsAClone() {
-  return new Promise((resolve, reject) => {
-    exec('git remote -v', (err, stdout) => {
-      if (err) {
-        reject(new Error(err))
-      }
+async function checkIfRepositoryIsAClone() {
+  const { stdout } = await exec('git remote -v')
 
-      const isClonedRepo = stdout
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(line => line.startsWith('origin'))
-        .filter(line => /kefranabg\/bento-starter\.git/.test(line)).length
+  const isClonedRepo = stdout
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line.startsWith('origin'))
+    .filter(line => /kefranabg\/bento-starter\.git/.test(line)).length
 
-      resolve(!!isClonedRepo)
-    })
-  })
+  return !!isClonedRepo
 }
 
 /**
@@ -95,57 +81,54 @@ function removeGitRepository() {
  * Ask user if he wants to start with a new repository
  * @returns {Promise<boolean>}
  */
-function askUserIfWeShouldCreateNewRepo() {
+async function askUserIfWeShouldCreateNewRepo() {
   const NEW_REPOSITORY = 'NEW_REPOSITORY'
-  return inquirer
-    .prompt([
-      {
-        type: 'confirm',
-        message: 'Do you want to start with a new repository ?',
-        name: NEW_REPOSITORY
-      }
-    ])
-    .then(answers => !!answers[NEW_REPOSITORY])
+  const answers = await inquirer.prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to start with a new repository ?',
+      name: NEW_REPOSITORY
+    }
+  ])
+  return !!answers[NEW_REPOSITORY]
 }
 
 /**
  * Ask user for new origin for this repository. If provided, call git remote add origin
  * @returns {Promise<any>}
  */
-const askUserForNewRemote = () => {
+async function askUserForNewRemote() {
   const NEW_REMOTE = 'NEW_REMOTE'
 
-  return inquirer
-    .prompt([
-      {
-        type: 'input',
-        message:
-          'Enter new remote origin (ex: https://github.com/user/my-repo.git) for this repository [Enter to cancel]:  ',
-        name: NEW_REMOTE
-      }
-    ])
-    .then(answers => {
-      const origin = answers[NEW_REMOTE]
-      if (origin) {
-        const spinner = ora('Adding new remote to repository')
-        exec(`git remote add origin ${origin}`, error => {
-          if (error) {
-            spinner.fail('Add remote failed')
-            return false
-          } else {
-            spinner.success(
-              'New remote added, run `git push` to send initial commit to remote repository.'
-            )
-            return true
-          }
-        })
-      } else {
-        process.stdout.write(
-          'No remote added, run git remote add origin <url> to add one'
-        )
-        return false
-      }
-    })
+  const answers = await inquirer.prompt([
+    {
+      type: 'input',
+      message:
+        'Enter new remote origin (ex: https://github.com/user/my-repo.git) for this repository [Enter to cancel]:  ',
+      name: NEW_REMOTE
+    }
+  ])
+
+  const origin = answers[NEW_REMOTE]
+
+  if (origin) {
+    const spinner = ora('Adding new remote to repository')
+    try {
+      await exec(`git remote add origin ${origin}`)
+      spinner.succeed(
+        'New remote added, run `git push` to send initial commit to remote repository.'
+      )
+      return true
+    } catch (error) {
+      spinner.fail(`Add remote failed\n${error}`)
+      return false
+    }
+  } else {
+    process.stdout.write(
+      'No remote added, run git remote add origin <url> to add one'
+    )
+    return false
+  }
 }
 
 /**
@@ -188,25 +171,26 @@ async function cleanCurrentRepository() {
  * @param {!number} minimalNodeVersion
  * @returns {Promise<any>}
  */
-function checkNodeVersion(minimalNodeVersion) {
-  return new Promise((resolve, reject) => {
-    const spinner = ora('Checking node version').start()
+async function checkNodeVersion(minimalNodeVersion) {
+  const spinner = ora('Checking node version').start()
 
-    exec('node --version', (err, stdout) => {
-      const nodeVersion = stdout.trim()
-      if (err) {
-        spinner.fail(`node version check failed\n${err}`)
-        reject()
-      } else if (compareVersions(nodeVersion, minimalNodeVersion) === -1) {
-        spinner.fail(
-          `You need Node.js v${minimalNodeVersion} or above but you have v${nodeVersion}`
-        )
-        reject()
-      }
-      spinner.succeed(`Node version ${nodeVersion} OK`)
-      resolve('Node version OK')
-    })
-  })
+  let nodeVersion
+  try {
+    const { stdout } = await exec('node --version')
+    nodeVersion = stdout.trim()
+  } catch (err) {
+    spinner.fail(`node version check failed\n${err}`)
+    throw new Error(err)
+  }
+
+  if (compareVersions(nodeVersion, minimalNodeVersion) === -1) {
+    spinner.fail(
+      `You need Node.js v${minimalNodeVersion} or above but you have v${nodeVersion}`
+    )
+    throw new Error()
+  }
+
+  spinner.succeed(`Node version ${nodeVersion} OK`)
 }
 
 /**
@@ -214,24 +198,25 @@ function checkNodeVersion(minimalNodeVersion) {
  * @param {!number} minimalNpmVersion
  * @returns {Promise<any>}
  */
-function checkNpmVersion(minimalNpmVersion) {
-  return new Promise((resolve, reject) => {
-    const spinner = ora('Checking npm version').start()
-    exec('npm --version', (err, stdout) => {
-      const npmVersion = stdout.trim()
-      if (err) {
-        spinner.fail(`npm version check failed\n${err}`)
-        reject()
-      } else if (compareVersions(npmVersion, minimalNpmVersion) === -1) {
-        spinner.fail(
-          `You need NPM v${minimalNpmVersion} or above but you have v${npmVersion}`
-        )
-        reject()
-      }
-      spinner.succeed(`npm version ${npmVersion} OK`)
-      resolve()
-    })
-  })
+async function checkNpmVersion(minimalNpmVersion) {
+  const spinner = ora('Checking npm version').start()
+  let npmVersion
+  try {
+    const { stdout } = await exec('npm --version')
+    npmVersion = stdout.trim()
+  } catch (err) {
+    spinner.fail(`npm version check failed\n${err}`)
+    throw new Error(err)
+  }
+
+  if (compareVersions(npmVersion, minimalNpmVersion) === -1) {
+    spinner.fail(
+      `You need NPM v${minimalNpmVersion} or above but you have v${npmVersion}`
+    )
+    throw new Error()
+  }
+
+  spinner.succeed(`npm version ${npmVersion} OK`)
 }
 
 /**
@@ -239,15 +224,7 @@ function checkNpmVersion(minimalNpmVersion) {
  * @returns {Promise<any>}
  */
 function initGitRepository() {
-  return new Promise((resolve, reject) => {
-    exec('git init', (err, stdout) => {
-      if (err) {
-        reject(new Error(err))
-      } else {
-        resolve(stdout)
-      }
-    })
-  })
+  return exec('git init')
 }
 
 /**
@@ -255,76 +232,60 @@ function initGitRepository() {
  * @returns {Promise<any>}
  */
 function addToGitRepository() {
-  return new Promise((resolve, reject) => {
-    exec('git add .', (err, stdout) => {
-      if (err) {
-        reject(new Error(err))
-      } else {
-        resolve(stdout)
-      }
-    })
-  })
+  return exec('git add .')
 }
 
 /**
  * Initial Git commit
  * @returns {Promise<any>}
  */
-function commitToGitRepository() {
-  return new Promise((resolve, reject) => {
-    const spinner = ora('Creating initial commit for new repository').start()
+async function commitToGitRepository() {
+  const spinner = ora('Creating initial commit for new repository').start()
 
-    exec('git commit -m ":tada: Initial commit"', (err, stdout) => {
-      if (err) {
-        spinner.fail('Commit failed')
-        reject(new Error(err))
-      } else {
-        spinner.succeed('Initial commit created')
-        resolve(stdout)
-      }
-    })
-  })
+  try {
+    const { stdout } = await exec('git commit -m ":tada: Initial commit"')
+    spinner.succeed('Initial commit created')
+    return stdout
+  } catch (err) {
+    spinner.fail('Commit failed')
+    throw new Error(err)
+  }
 }
 
 /**
  * Remove npm dependencies which are only used by this script
  * @returns {Promise<any>}
  */
-function removeScriptDependencies() {
-  return new Promise((resolve, reject) => {
-    const spinner = ora('Uninstalling extraneous dependencies').start()
-    exec(
-      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev',
-      err => {
-        if (err) {
-          spinner.fail(err)
-          reject()
-        } else {
-          spinner.succeed('Extraneous dependencies uninstalled')
-          resolve()
-        }
-      }
+async function removeScriptDependencies() {
+  const spinner = ora('Uninstalling extraneous dependencies').start()
+
+  try {
+    await exec(
+      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev'
     )
-  })
+    spinner.succeed('Extraneous dependencies uninstalled')
+  } catch (err) {
+    spinner.fail(err)
+    throw new Error(err)
+  }
 }
 
 /**
  * Remove the "setup" script from package.json
  * @returns {Promise<any>}
  */
-const removeSetupScript = () =>
-  readPkg()
-    .then(pkg => {
-      if (!pkg.scripts) {
-        pkg.scripts = {}
-      }
+async function removeSetupScript() {
+  const pkg = await readPkg()
 
-      delete pkg.scripts.setup
-      delete pkg.scripts.presetup
+  if (!pkg.scripts) {
+    pkg.scripts = {}
+  }
 
-      return pkg
-    })
-    .then(pkg => writePkg(pkg))
+  delete pkg.scripts.setup
+  delete pkg.scripts.presetup
+
+  return writePkg(pkg)
+}
 
 /**
  * End the setup process
@@ -334,7 +295,8 @@ function endProcess() {
   process.exit(0)
 }
 
-function onError() {
+function onError(e) {
+  console.error('Exiting setup script with the following error\n', e)
   process.exit(1)
 }
 
