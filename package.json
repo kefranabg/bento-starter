@@ -12,7 +12,13 @@
     "prettier:format-all": "prettier --write \"**/*.{vue,scss,sass,js}\"",
     "prettier:check": "prettier \"**/*.{vue,scss,sass,js}\" --list-different",
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
-    "bundlesize": "bundlesize"
+    "bundlesize": "bundlesize",
+    "presetup": "npm install",
+    "setup": "node ./internals/setup.js"
+  },
+  "engines": {
+    "npm": ">=5.5.0",
+    "node": ">=9.3.0"
   },
   "dependencies": {
     "core-js": "^3.0.1",
@@ -41,6 +47,8 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "bundlesize": "github:kefranabg/bundlesize",
+    "chalk": "^2.4.2",
+    "compare-versions": "^3.4.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -48,12 +56,18 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-vue": "^5.2.2",
     "firebase-tools": "^6.8.0",
+    "inquirer": "^6.3.1",
     "node-sass": "^4.12.0",
+    "ora": "^3.4.0",
     "prerender-spa-plugin": "^3.4.0",
+    "read-pkg": "^5.1.1",
+    "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
+    "shelljs": "^0.8.3",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "write-pkg": "^4.0.0"
   },
   "resolutions": {
     "terser": "3.14.1"
