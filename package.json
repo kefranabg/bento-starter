@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "core-js": "^3.0.1",
-    "firebase": "^5.11.1",
+    "firebase": "^6.0.2",
     "is_js": "^0.9.0",
     "lodash": "^4.17.11",
     "pwacompat": "^2.0.8",
@@ -31,10 +31,10 @@
     "vue": "^2.6.10",
     "vue-head": "^2.1.1",
     "vue-router": "^3.0.6",
-    "vuex": "^3.1.0"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.123",
+    "@types/lodash": "^4.14.126",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-e2e-cypress": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
@@ -52,10 +52,10 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-google": "^0.12.0",
+    "eslint-config-google": "^0.13.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-vue": "^5.2.2",
-    "firebase-tools": "^6.8.0",
+    "firebase-tools": "^6.9.2",
     "inquirer": "^6.3.1",
     "node-sass": "^4.12.0",
     "ora": "^3.4.0",
