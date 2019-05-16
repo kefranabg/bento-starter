@@ -10,9 +10,7 @@ export default () => {
     asyncFirestore = import(/* webpackChunkName: "chunk-firestore" */ 'firebase/firestore').then(
       () => {
         firebase.firestore().settings({})
-        firebase
-          .firestore()
-          .enablePersistence({ experimentalTabSynchronization: true })
+        firebase.firestore().enablePersistence({ synchronizeTabs: true })
         return firebase.firestore()
       }
     )
