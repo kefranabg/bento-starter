@@ -1,6 +1,4 @@
-import isNil from 'lodash/isNil'
-import keys from 'lodash/keys'
-import cloneDeep from 'lodash/cloneDeep'
+import { isNil, keys, cloneDeep } from 'lodash'
 import firebase from 'firebase/app'
 
 import firestore from './async-firestore'
