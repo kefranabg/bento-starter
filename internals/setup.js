@@ -12,6 +12,7 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const rimraf = util.promisify(require('rimraf'))
 const copyFile = util.promisify(require('fs').copyFile)
+const writeFile = util.promisify(require('fs').writeFile)
 
 const npmConfig = require('./helpers/get-npm-config')
 
@@ -56,6 +57,29 @@ async function createEnvLocalFile() {
   }
 
   spinner.succeed('Created env local file')
+}
+
+/**
+ * Replace README.md content
+ *
+ * @returns {Promise<any>}
+ */
+async function replaceReadmeContent() {
+  const spinner = ora('Replacing README.md content').start()
+  const newReadmeContent = `# My bento-starter project
+
+## Documentation
+
+Documentation available :point_right: [here](https://bento-starter.netlify.com/)`
+
+  try {
+    await writeFile(`${__dirname}/../README.md`, newReadmeContent)
+  } catch (error) {
+    spinner.fail(`Replace README.md content failed\n${error}`)
+    throw new Error(error)
+  }
+
+  spinner.succeed('README.md content replaced')
 }
 
 /**
@@ -349,9 +373,10 @@ function onError(e) {
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
   await createEnvLocalFile().catch(onError)
-  await deleteUselessResources(resourcesPathsToDelete).catch(onError)
   await removeScriptDependencies().catch(onError)
   await removeSetupScript().catch(onError)
+  await replaceReadmeContent().catch(onError)
+  await deleteUselessResources(resourcesPathsToDelete).catch(onError)
 
   if (repoRemoved) {
     process.stdout.write('\nInitialising new repository')
