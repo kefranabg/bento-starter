@@ -3,7 +3,6 @@
 
 const readPkg = require('read-pkg')
 const writePkg = require('write-pkg')
-const shell = require('shelljs')
 const inquirer = require('inquirer')
 const ora = require('ora')
 const rimraf = require('rimraf')
@@ -13,6 +12,7 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
 const npmConfig = require('./helpers/get-npm-config')
+const gitHelper = require('./helpers/git-helper')
 
 process.stdin.resume()
 process.stdin.setEncoding('utf8')
@@ -33,47 +33,6 @@ function deleteCurrentDir() {
         resolve()
       }
     })
-  })
-}
-
-/**
- * Checks if we are under Git version control
- * @returns {Promise<boolean>}
- */
-async function hasGitRepository() {
-  const { stdout } = await exec('git status')
-  const regex = new RegExp(/fatal:\s+Not\s+a\s+git\s+repository/, 'i')
-  return !regex.test(stdout)
-}
-
-/**
- * Checks if this is a clone from our repo
- * @returns {Promise<any>}
- */
-async function checkIfRepositoryIsAClone() {
-  const { stdout } = await exec('git remote -v')
-
-  const isClonedRepo = stdout
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line.startsWith('origin'))
-    .filter(line => /kefranabg\/bento-starter\.git/.test(line)).length
-
-  return !!isClonedRepo
-}
-
-/**
- * Remove the current Git repository
- * @returns {Promise<any>}
- */
-function removeGitRepository() {
-  return new Promise((resolve, reject) => {
-    try {
-      shell.rm('-rf', '.git/')
-      resolve()
-    } catch (err) {
-      reject(err)
-    }
   })
 }
 
@@ -114,7 +73,7 @@ async function askUserForNewRemote() {
   if (origin) {
     const spinner = ora('Adding new remote to repository').start()
     try {
-      await exec(`git remote add origin ${origin}`)
+      await gitHelper.changeOrigin(origin)
       spinner.succeed(
         'New remote added, run `git push` to send initial commit to remote repository.'
       )
@@ -138,14 +97,14 @@ async function askUserForNewRemote() {
  * @returns {Promise<boolean>}
  */
 async function cleanCurrentRepository() {
-  const hasGitRepo = await hasGitRepository().catch(onError)
+  const hasGitRepo = await gitHelper.hasGitRepository().catch(onError)
 
   // We are not under Git version control. So, do nothing
   if (hasGitRepo === false) {
     return await askUserIfWeShouldCreateNewRepo()
   }
 
-  const isClone = await checkIfRepositoryIsAClone().catch(onError)
+  const isClone = await gitHelper.checkIfRepositoryIsAClone().catch(onError)
 
   // Not our clone so do nothing
   if (isClone === false) {
@@ -156,7 +115,7 @@ async function cleanCurrentRepository() {
 
   if (answer === true) {
     const spinner = ora('Removing current repository').start()
-    await removeGitRepository().catch(reason => {
+    await gitHelper.removeGitRepository().catch(reason => {
       spinner.fail(reason)
       onError()
     })
@@ -220,34 +179,35 @@ async function checkNpmVersion(minimalNpmVersion) {
 }
 
 /**
- * Initialize a new Git repository
+ * Initial Git commit
  * @returns {Promise<any>}
  */
-function initGitRepository() {
-  return exec('git init')
-}
+async function initGitRepository() {
+  const spinner = ora('Creating new repository').start()
 
-/**
- * Add all files to the new repository
- * @returns {Promise<any>}
- */
-function addToGitRepository() {
-  return exec('git add .')
+  try {
+    const { stdout } = await gitHelper.initGitRepository()
+    spinner.succeed('New repository created')
+    return stdout
+  } catch (err) {
+    spinner.fail('Creation of new repository failed')
+    throw new Error(err)
+  }
 }
 
 /**
  * Initial Git commit
  * @returns {Promise<any>}
  */
-async function commitToGitRepository() {
+async function makeInitalCommit() {
   const spinner = ora('Creating initial commit for new repository').start()
 
   try {
-    const { stdout } = await exec('git commit -m ":tada: Initial commit"')
+    const { stdout } = await gitHelper.makeInitalCommit()
     spinner.succeed('Initial commit created')
     return stdout
   } catch (err) {
-    spinner.fail('Commit failed')
+    spinner.fail('Initial commit failed')
     throw new Error(err)
   }
 }
@@ -326,8 +286,7 @@ function onError(e) {
 
     try {
       await initGitRepository()
-      await addToGitRepository()
-      await commitToGitRepository()
+      await makeInitalCommit()
       await askUserForNewRemote()
     } catch (err) {
       onError()
