@@ -25,7 +25,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import isNil from 'lodash/isNil'
+import { isNil } from 'lodash'
 import firebase from 'firebase/app'
 import { desktop as isDekstop } from 'is_js'
 

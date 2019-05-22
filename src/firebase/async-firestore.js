@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import isNil from 'lodash/isNil'
+import { isNil } from 'lodash'
 
 let asyncFirestore = null
 
