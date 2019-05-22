@@ -179,7 +179,7 @@ async function checkNpmVersion(minimalNpmVersion) {
 }
 
 /**
- * Initial Git commit
+ * Initialize a new Git repository
  * @returns {Promise<any>}
  */
 async function initGitRepository() {
@@ -196,7 +196,7 @@ async function initGitRepository() {
 }
 
 /**
- * Initial Git commit
+ * Make the initial Git commit
  * @returns {Promise<any>}
  */
 async function makeInitalCommit() {
