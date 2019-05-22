@@ -6,11 +6,13 @@ const writePkg = require('write-pkg')
 const shell = require('shelljs')
 const inquirer = require('inquirer')
 const ora = require('ora')
-const rimraf = require('rimraf')
 const compareVersions = require('compare-versions')
 const chalk = require('chalk')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
+const rimraf = util.promisify(require('rimraf'))
+const copyFile = util.promisify(require('fs').copyFile)
+const writeFile = util.promisify(require('fs').writeFile)
 
 const npmConfig = require('./helpers/get-npm-config')
 
@@ -20,20 +22,64 @@ process.stdin.setEncoding('utf8')
 process.stdout.write('\n')
 
 /**
- * Deletes the current directory
+ * Delete useless resources
  *
  * @returns {Promise<any>}
  */
-function deleteCurrentDir() {
-  return new Promise((resolve, reject) => {
-    rimraf(__dirname, error => {
-      if (error) {
-        reject(new Error(error))
-      } else {
-        resolve()
-      }
-    })
-  })
+async function deleteUselessResources(paths) {
+  const spinner = ora('Removing useless resources').start()
+
+  try {
+    await Promise.all(paths.map(path => rimraf(path)))
+  } catch (error) {
+    if (error) {
+      spinner.fail(`Remove useless resources failed\n${error}`)
+      throw new Error(error)
+    }
+  }
+
+  spinner.succeed('Useless resources have been deleted')
+}
+
+/**
+ * Create '.env.local' file by copying '.env.example' file
+ *
+ * @returns {Promise<any>}
+ */
+async function createEnvLocalFile() {
+  const spinner = ora('Creating env local file').start()
+
+  try {
+    await copyFile(`${__dirname}/../.env.example`, `${__dirname}/../.env.local`)
+  } catch (error) {
+    spinner.fail(`Create env local file failed\n${error}`)
+    throw new Error(error)
+  }
+
+  spinner.succeed('Created env local file')
+}
+
+/**
+ * Replace README.md content
+ *
+ * @returns {Promise<any>}
+ */
+async function replaceReadmeContent() {
+  const spinner = ora('Replacing README.md content').start()
+  const newReadmeContent = `# My bento-starter project
+
+## Documentation
+
+Documentation available :point_right: [here](https://bento-starter.netlify.com/)`
+
+  try {
+    await writeFile(`${__dirname}/../README.md`, newReadmeContent)
+  } catch (error) {
+    spinner.fail(`Replace README.md content failed\n${error}`)
+    throw new Error(error)
+  }
+
+  spinner.succeed('README.md content replaced')
 }
 
 /**
@@ -312,14 +358,25 @@ function onError(e) {
   } = npmConfig
 
   const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
+  const resourcesPathsToDelete = [
+    __dirname,
+    `${__dirname}/../docs`,
+    `${__dirname}/../.github`,
+    `${__dirname}/../resources`,
+    `${__dirname}/../.env.example`,
+    `${__dirname}/../LICENSE`
+  ]
+
   await checkNodeVersion(requiredNodeVersion).catch(onError)
 
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  await deleteCurrentDir().catch(onError)
+  await createEnvLocalFile().catch(onError)
   await removeScriptDependencies().catch(onError)
   await removeSetupScript().catch(onError)
+  await replaceReadmeContent().catch(onError)
+  await deleteUselessResources(resourcesPathsToDelete).catch(onError)
 
   if (repoRemoved) {
     process.stdout.write('\nInitialising new repository')
