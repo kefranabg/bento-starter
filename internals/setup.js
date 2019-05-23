@@ -199,11 +199,11 @@ async function initGitRepository() {
  * Make the initial Git commit
  * @returns {Promise<any>}
  */
-async function makeInitalCommit() {
+async function doInitalCommit() {
   const spinner = ora('Creating initial commit for new repository').start()
 
   try {
-    const { stdout } = await gitHelper.makeInitalCommit()
+    const { stdout } = await gitHelper.doInitalCommit()
     spinner.succeed('Initial commit created')
     return stdout
   } catch (err) {
@@ -286,7 +286,7 @@ function onError(e) {
 
     try {
       await initGitRepository()
-      await makeInitalCommit()
+      await doInitalCommit()
       await askUserForNewRemote()
     } catch (err) {
       onError()

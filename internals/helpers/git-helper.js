@@ -52,10 +52,10 @@ async function initGitRepository() {
 }
 
 /**
- * Make initial commit
+ * Do initial commit
  * @returns {Promise<any>}
  */
-async function makeInitalCommit() {
+async function doInitalCommit() {
   return exec('git add . && git commit -m ":tada: Initial commit"')
 }
 
@@ -72,6 +72,6 @@ module.exports = {
   hasGitRepository,
   checkIfRepositoryIsAClone,
   removeGitRepository,
-  makeInitalCommit,
+  doInitalCommit,
   changeOrigin
 }
