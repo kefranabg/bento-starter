@@ -7,9 +7,12 @@ const shell = require('shelljs')
  * @returns {Promise<boolean>}
  */
 async function hasGitRepository() {
-  const { stdout } = await exec('git status')
-  const regex = new RegExp(/fatal:\s+Not\s+a\s+git\s+repository/, 'i')
-  return !regex.test(stdout)
+  try {
+    const result = await exec('git status')
+    return !result.stderr
+  } catch (err) {
+    return false
+  }
 }
 
 /**
