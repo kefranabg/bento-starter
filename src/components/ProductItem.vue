@@ -1,6 +1,8 @@
 <template>
   <div class="product-item">
-    <div>#{{ index }} {{ data.name }}</div>
+    <div style="cursor: pointer" @click="$emit('goToProductDetails', data.id)">
+      #{{ index }} {{ data.name }}
+    </div>
     <div
       v-if="!disableActions"
       class="delete-btn"

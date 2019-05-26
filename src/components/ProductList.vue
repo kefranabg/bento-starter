@@ -13,6 +13,7 @@
       :disable-actions="!networkOnLine"
       :data="product"
       @deleteProduct="deleteUserProduct"
+      @goToProductDetails="$router.push('/products/' + $event)"
     ></product-item>
   </div>
 </template>
