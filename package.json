@@ -69,9 +69,6 @@
     "webpack-merge": "^4.2.1",
     "write-pkg": "^4.0.0"
   },
-  "resolutions": {
-    "terser": "3.14.1"
-  },
   "bundlesize": [
     {
       "path": "./dist/js/chunk-vendors*.js",
