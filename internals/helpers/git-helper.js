@@ -36,10 +36,8 @@ async function checkIfRepositoryIsAClone() {
  * @returns {Promise<boolean>}
  */
 async function checkIfRepositoryIsCleanable() {
-  const hasGitRepo = await gitHelper.hasGitRepository().catch(onError)
-  return (
-    hasGitRepo && (await gitHelper.checkIfRepositoryIsAClone().catch(onError))
-  )
+  const hasGitRepo = await hasGitRepository()
+  return hasGitRepo && (await checkIfRepositoryIsAClone())
 }
 
 /**

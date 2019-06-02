@@ -1,3 +1,4 @@
+const util = require('util')
 const rimraf = util.promisify(require('rimraf'))
 
 const resourcesPathsToDelete = [

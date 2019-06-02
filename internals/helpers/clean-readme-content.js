@@ -1,3 +1,4 @@
+const util = require('util')
 const writeFile = util.promisify(require('fs').writeFile)
 
 const newReadmeContent = `# My bento-starter project

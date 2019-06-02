@@ -99,7 +99,7 @@ async function checkNodeVersion(minimalNodeVersion) {
     throw new Error()
   }
 
-  spinner.succeed(`Node version ${nodeVersion} OK`)
+  spinner.succeed(`Node version ${nodeVersion} ${printOk()}`)
 }
 
 /**
@@ -125,16 +125,16 @@ async function checkNpmVersion(minimalNpmVersion) {
     throw new Error()
   }
 
-  spinner.succeed(`npm version ${npmVersion} OK`)
+  spinner.succeed(`npm version ${npmVersion} ${printOk()}`)
 }
 
 async function doCommand(command, commandLog, successLog, failLog) {
   const spinner = ora(commandLog).start()
   try {
     await command()
-    spinner.succeed(successLog)
+    spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
   } catch (err) {
-    spinner.fail(failLog)
+    spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
     throw new Error(err)
   }
 }
@@ -151,8 +151,16 @@ function endProcess() {
  * End the setup process with an error
  */
 function onError(e) {
-  console.error('Exiting setup script with the following error\n', e)
+  console.error('\n\nExiting setup script with the following error :\n', e)
   process.exit(1)
+}
+
+function printOk() {
+  return chalk.green('[OK]')
+}
+
+function printFail() {
+  return chalk.green('[FAIL]')
 }
 
 /**
@@ -175,73 +183,42 @@ function onError(e) {
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  await createEnvLocalFile().catch(onError)
+  // await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
-  await doCommand(
-    setLocalEnvFile,
-    'Creating env local file',
-    'Created env local file',
-    'Create env local file failed'
-    ).catch(onError)
+  // await doCommand(
+  //   cleanUselessDependencies,
+  //   'Uninstalling extraneous dependencies'
+  // ).catch(onError)
 
-  await doCommand(
-    cleanUselessDependencies,
-    'Uninstalling extraneous dependencies',
-    'Extraneous dependencies uninstalled',
-    'Failed to uninstall useless externeous dependencies'
-    ).catch(onError)
+  // await doCommand(
+  //   cleanUselessScripts,
+  //   'Cleaning useless scripts in package.json'
+  // ).catch(onError)
 
-  await doCommand(
-    cleanUselessScripts,
-    'Cleaning useless scripts in package.json',
-    'Scripts in plackage.json cleaned',
-    'Failed to remove useless package.json scripts'
-    ).catch(onError)
+  // await doCommand(cleanReadmeContent, 'Replacing README.md content').catch(
+  //   onError
+  // )
 
-  await doCommand(
-    cleanReadmeContent,
-    'Replacing README.md content',
-    'README.md content replaced',
-    'Replace README.md content failed'
-    ).catch(onError)
+  // await doCommand(cleanUselessResources, 'Removing useless resources').catch(
+  //   onError
+  // )
 
-  await doCommand(
-    cleanUselessResources,
-    'Removing useless resources',
-    'Useless resources have been deleted'
-    'Remove useless resources failed'
-    ).catch(onError)
+  // if (isNewRepositoryWanted) {
+  //   await doCommand(
+  //     gitHelper.removeGitRepository,
+  //     'Removing current repository'
+  //   ).catch(onError)
 
-  if (newRepositoryWanted) {
-    process.stdout.write('\nInitialising new repository')
+  //   await doCommand(
+  //     gitHelper.initGitRepository,
+  //     'Creating new repository'
+  //   ).catch(onError)
 
-    try {
-      await doCommand(
-        removeRepository, 
-        'Removing current repository', 
-        'Repository removed', 
-        'Initial commit failed'
-        ).catch(onError)
+  //   await doCommand(
+  //     gitHelper.doInitalCommit,
+  //     'Creating initial commit for new repository'
+  //   ).catch(onError)
 
-      await doCommand(
-        initGitRepository, 
-        'Creating new repository', 
-        'New repository created', 
-        'Creation of new repository failed'
-        ).catch(onError)
-
-      await doCommand(
-        doInitalCommit, 
-        'Creating initial commit for new repository', 
-        'Initial commit created', 
-        'Initial commit failed'
-        ).catch(onError)
-
-      await askUserForNewRemote()
-    } catch (err) {
-      onError()
-    }
-  }
-
-  endProcess()
+  //   await askUserForNewRemote()
+  // }
 })()
