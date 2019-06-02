@@ -183,42 +183,42 @@ function printFail() {
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  // await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
+  await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
-  // await doCommand(
-  //   cleanUselessDependencies,
-  //   'Uninstalling extraneous dependencies'
-  // ).catch(onError)
+  await doCommand(
+    cleanUselessDependencies,
+    'Uninstalling extraneous dependencies'
+  ).catch(onError)
 
-  // await doCommand(
-  //   cleanUselessScripts,
-  //   'Cleaning useless scripts in package.json'
-  // ).catch(onError)
+  await doCommand(
+    cleanUselessScripts,
+    'Cleaning useless scripts in package.json'
+  ).catch(onError)
 
-  // await doCommand(cleanReadmeContent, 'Replacing README.md content').catch(
-  //   onError
-  // )
+  await doCommand(cleanReadmeContent, 'Replacing README.md content').catch(
+    onError
+  )
 
-  // await doCommand(cleanUselessResources, 'Removing useless resources').catch(
-  //   onError
-  // )
+  await doCommand(cleanUselessResources, 'Removing useless resources').catch(
+    onError
+  )
 
-  // if (isNewRepositoryWanted) {
-  //   await doCommand(
-  //     gitHelper.removeGitRepository,
-  //     'Removing current repository'
-  //   ).catch(onError)
+  if (isNewRepositoryWanted) {
+    await doCommand(
+      gitHelper.removeGitRepository,
+      'Removing current repository'
+    ).catch(onError)
 
-  //   await doCommand(
-  //     gitHelper.initGitRepository,
-  //     'Creating new repository'
-  //   ).catch(onError)
+    await doCommand(
+      gitHelper.initGitRepository,
+      'Creating new repository'
+    ).catch(onError)
 
-  //   await doCommand(
-  //     gitHelper.doInitalCommit,
-  //     'Creating initial commit for new repository'
-  //   ).catch(onError)
+    await doCommand(
+      gitHelper.doInitalCommit,
+      'Creating initial commit for new repository'
+    ).catch(onError)
 
-  //   await askUserForNewRemote()
-  // }
+    await askUserForNewRemote()
+  }
 })()
