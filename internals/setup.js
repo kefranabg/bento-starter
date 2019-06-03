@@ -145,7 +145,7 @@ function endProcess() {
 Thanks for using bento-starter ! Do not hesitate to share your creation to the community on slack :
 https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY
 
-You can also to contact us on twitter ${chalk.blue(
+You can also contact us on twitter ${chalk.blue(
     '@FranckAbgrall'
   )} or ${chalk.blue('@tbetous')}.
 
