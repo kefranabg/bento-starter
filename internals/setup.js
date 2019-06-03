@@ -54,22 +54,19 @@ async function askUserForNewRemote() {
   ])
 
   const origin = answers[NEW_REMOTE]
-
   if (origin) {
     const spinner = ora('Adding new remote to repository').start()
     try {
       await gitHelper.changeOrigin(origin)
-      spinner.succeed(
-        'New remote added, run `git push` to send initial commit to remote repository.'
-      )
+      spinner.succeed(`New remote added ${printOk()}`)
       return true
     } catch (error) {
-      spinner.fail(`Add remote failed\n${error}`)
+      spinner.fail(`Add remote failed ${printFail()}`)
       return false
     }
   } else {
     process.stdout.write(
-      'No remote added, run git remote add origin <url> to add one'
+      `No remote added, run git remote add origin <url> to add one ${printFail()}`
     )
     return false
   }
@@ -143,7 +140,18 @@ async function doCommand(command, commandLog, successLog, failLog) {
  * End the setup process
  */
 function endProcess() {
-  process.stdout.write(chalk.blue('\n\nDone!\n'))
+  process.stdout.write(`
+  
+Thanks for using bento-starter ! Do not hesitate to share your creation to the community on slack :
+https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY
+
+You can also to contact us on twitter ${chalk.blue(
+    '@FranckAbgrall'
+  )} or ${chalk.blue('@tbetous')}.
+
+We hope to hear about your project soon ! 🍱
+
+`)
   process.exit(0)
 }
 
@@ -167,6 +175,7 @@ function printFail() {
  * Run
  */
 ;(async () => {
+  let isNewOrigin
   let isNewRepositoryWanted
   if (await gitHelper.checkIfRepositoryIsCleanable()) {
     isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
@@ -219,6 +228,17 @@ function printFail() {
       'Creating initial commit for new repository'
     ).catch(onError)
 
-    await askUserForNewRemote()
+    isNewOrigin = await askUserForNewRemote()
   }
+
+  if (isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ Run `git push` to send initial commit to remote repository.'
+      )
+    )
+  }
+
+  endProcess()
 })()
