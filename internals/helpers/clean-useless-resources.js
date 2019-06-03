@@ -13,6 +13,5 @@ const resourcesPathsToDelete = [
 /**
  * Delete useless resources
  * */
-module.exports = async () => {
-  return await Promise.all(resourcesPathsToDelete.map(path => rimraf(path)))
-}
+module.exports = async () =>
+  await Promise.all(resourcesPathsToDelete.map(path => rimraf(path)))
