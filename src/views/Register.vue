@@ -1,46 +1,47 @@
 <template>
   <div class="page-wrapper">
-    <h1 class="login-page-title">Login page</h1>
-
-    <!-- Loader -->
-    <div v-show="user === undefined" data-test="loader">Authenticating...</div>
+    <h1 class="register-page-title">Register page</h1>
 
     <!-- Offline instruction -->
     <div v-show="!networkOnLine" data-test="offline-instruction">
-      Please check your connection, login feature is not available offline.
+      Please check your connection, Register feature is not available offline.
     </div>
 
-    <p v-if="loginError">{{ loginError }}</p>
+    <p v-if="registerError">{{ registerError }}</p>
     <!-- Auth UI -->
     <input
       v-model="email"
       type="email"
-      class="login-input"
+      class="register-input"
       required
-      placeholder="Email"
+      placeholder="Enter Your Email"
     />
     <input
       v-model="password"
       type="password"
-      class="login-input"
+      class="register-input"
       required
       placeholder="Password"
     />
+    <input
+      v-model="displayName"
+      type="text"
+      class="register-input"
+      placeholder="Display Name"
+    />
+    <input
+      v-model="photoURL"
+      type="text"
+      class="register-input"
+      placeholder="Your Avatar Photo"
+    />
     <div
-      v-show="user !== undefined && !user && networkOnLine"
-      data-test="login-btn"
-      class="login-btn"
-      @click="login('email')"
+      v-show="networkOnLine"
+      data-test="register-btn"
+      class="register-btn"
+      @click="register"
     >
-      Login with email
-    </div>
-    <div
-      v-show="user !== undefined && !user && networkOnLine"
-      data-test="login-btn"
-      class="login-btn"
-      @click="login('google')"
-    >
-      Login with google
+      Register
     </div>
   </div>
 </template>
@@ -49,13 +50,18 @@
 import { mapState, mapMutations } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
-import { desktop as isDekstop } from 'is_js'
 
 export default {
-  data: () => ({ loginError: null, email: '', password: '' }),
+  data: () => ({
+    registerError: null,
+    email: '',
+    password: '',
+    displayName: '',
+    photoURL: ''
+  }),
   head: {
     title: {
-      inner: 'Login'
+      inner: 'register'
     },
     meta: [
       {
@@ -84,33 +90,26 @@ export default {
   },
   methods: {
     ...mapMutations('authentication', ['setUser']),
-    async login(type) {
-      this.loginError = null
-      if (type === 'google') {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        this.setUser(undefined)
-
-        try {
-          // Firebase signin with popup is faster than redirect
-          // but we can't use it on mobile because it's not well supported
-          // when app is running as standalone on ios & android
-          isDekstop()
-            ? await firebase.auth().signInWithPopup(provider)
-            : await firebase.auth().signInWithRedirect(provider)
-        } catch (err) {
-          this.loginError = err
-          this.setUser(null)
-        }
-      } else if (type === 'email') {
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password)
-          .catch(function(error) {
-            // Handle Errors here.
-            this.loginError(error.message)
-            // ...
+    async register() {
+      this.registerError = null
+      this.setUser(undefined)
+      // set the displayName and photoURL in scope.
+      const displayName = this.displayName
+      const photoURL = this.photoURL
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(function(newUser) {
+          newUser.user.updateProfile({
+            displayName: displayName,
+            photoURL: photoURL
           })
-      }
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          this.registerError(error.message)
+          // ...
+        })
     }
   }
 }
@@ -125,11 +124,11 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  .login-page-title {
+  .register-page-title {
     text-align: center;
   }
 
-  .login-btn {
+  .register-btn {
     margin-top: 20px;
     cursor: pointer;
     padding: 5px 20px;
@@ -143,7 +142,7 @@ export default {
       border-color: $vue-color;
     }
   }
-  .login-input {
+  .register-input {
     margin-top: 10px;
     padding-left: 5px;
     height: 30px;
