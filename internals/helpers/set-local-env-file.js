@@ -6,9 +6,8 @@ const copyFile = util.promisify(require('fs').copyFile)
  *
  * @returns {Promise<any>}
  */
-module.exports = async () => {
-  return await copyFile(
+module.exports = async () =>
+  await copyFile(
     `${__dirname}/../../.env.example`,
     `${__dirname}/../../.env.local`
   )
-}
