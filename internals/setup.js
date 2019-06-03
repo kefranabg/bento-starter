@@ -205,7 +205,7 @@ function printFail() {
 
   await doCommand(
     cleanUselessDependencies,
-    'Uninstalling extraneous dependencies'
+    'Cleaning extraneous dependencies'
   ).catch(onError)
 
   await doCommand(
@@ -213,11 +213,11 @@ function printFail() {
     'Cleaning useless scripts in package.json'
   ).catch(onError)
 
-  await doCommand(cleanReadmeContent, 'Replacing README.md content').catch(
+  await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
     onError
   )
 
-  await doCommand(cleanUselessResources, 'Removing useless resources').catch(
+  await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
     onError
   )
 
