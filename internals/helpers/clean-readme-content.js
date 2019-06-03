@@ -13,4 +13,4 @@ Documentation available :point_right: [here](https://bento-starter.netlify.com/)
  * @returns {Promise<any>}
  */
 module.exports = async () =>
-  await writeFile(`${__dirname}/../README.md`, newReadmeContent)
+  await writeFile(`${__dirname}/../../README.md`, newReadmeContent)
