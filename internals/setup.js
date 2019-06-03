@@ -64,12 +64,8 @@ async function askUserForNewRemote() {
       spinner.fail(`Add remote failed ${printFail()}`)
       return false
     }
-  } else {
-    process.stdout.write(
-      `No remote added, run git remote add origin <url> to add one ${printFail()}`
-    )
-    return false
   }
+  return false
 }
 
 /**
@@ -236,6 +232,13 @@ function printFail() {
     process.stdout.write(
       chalk.blue(
         'ℹ Run `git push` to send initial commit to remote repository.'
+      )
+    )
+  } else {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote added, run `git remote add origin <url>` to add one'
       )
     )
   }
