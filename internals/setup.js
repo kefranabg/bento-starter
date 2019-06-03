@@ -150,7 +150,7 @@ https://tinyurl.com/yxzrc7fq
 You can also contact us on twitter
 ${chalk.blue('@FranckAbgrall')} or ${chalk.blue('@tbetous')}.
 
-We hope to hear about your project soon ! 🍱
+We hope to hear about your project soon !
 `,
       {
         padding: 1,
