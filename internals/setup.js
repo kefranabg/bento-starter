@@ -240,18 +240,25 @@ function printFail() {
     isNewOrigin = await askUserForNewRemote()
   }
 
-  if (isNewOrigin) {
+  if (isNewRepositoryWanted && isNewOrigin) {
     process.stdout.write('\n')
     process.stdout.write(
       chalk.blue(
         'ℹ Run `git push` to send initial commit to remote repository.'
       )
     )
+  } else if (isNewRepositoryWanted && !isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote added, run `git remote add origin <url>` to add one.'
+      )
+    )
   } else {
     process.stdout.write('\n')
     process.stdout.write(
       chalk.blue(
-        'ℹ No remote added, run `git remote add origin <url>` to add one'
+        'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
       )
     )
   }
