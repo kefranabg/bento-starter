@@ -8,5 +8,5 @@ const shell = require('shelljs')
  */
 module.exports = async () =>
   await exec(
-    'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev'
+    'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora boxen --save-dev'
   )

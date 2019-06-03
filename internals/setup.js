@@ -125,7 +125,7 @@ async function checkNpmVersion(minimalNpmVersion) {
 async function doCommand(command, commandLog, successLog, failLog) {
   const spinner = ora(commandLog).start()
   try {
-    // await command()
+    await command()
     spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
   } catch (err) {
     spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
@@ -237,7 +237,7 @@ function printFail() {
       'Creating initial commit for new repository'
     ).catch(onError)
 
-    // isNewOrigin = await askUserForNewRemote()
+    isNewOrigin = await askUserForNewRemote()
   }
 
   if (isNewOrigin) {
