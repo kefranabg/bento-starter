@@ -5,6 +5,7 @@ const inquirer = require('inquirer')
 const ora = require('ora')
 const compareVersions = require('compare-versions')
 const chalk = require('chalk')
+const boxen = require('boxen')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
@@ -124,7 +125,7 @@ async function checkNpmVersion(minimalNpmVersion) {
 async function doCommand(command, commandLog, successLog, failLog) {
   const spinner = ora(commandLog).start()
   try {
-    await command()
+    // await command()
     spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
   } catch (err) {
     spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
@@ -136,20 +137,30 @@ async function doCommand(command, commandLog, successLog, failLog) {
  * End the setup process
  */
 function endProcess() {
-  process.stdout.write(`
-  
-Thank you for using bento-starter ! ❤️ 
+  process.stdout.write(
+    boxen(
+      `
+Thank you for using bento-starter !
 
-Do not hesitate to share your project with the community on slack :
-https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY
+Do not hesitate to share your project with 
+the community on slack : 
 
-You can also contact us on twitter ${chalk.blue(
-    '@FranckAbgrall'
-  )} or ${chalk.blue('@tbetous')}.
+https://tinyurl.com/yxzrc7fq
+
+You can also contact us on twitter
+${chalk.blue('@FranckAbgrall')} or ${chalk.blue('@tbetous')}.
 
 We hope to hear about your project soon ! 🍱
-
-`)
+`,
+      {
+        padding: 1,
+        margin: { top: 3, bottom: 3 },
+        borderColor: 'cyan',
+        align: 'center',
+        borderStyle: 'double'
+      }
+    )
+  )
   process.exit(0)
 }
 
@@ -226,7 +237,7 @@ function printFail() {
       'Creating initial commit for new repository'
     ).catch(onError)
 
-    isNewOrigin = await askUserForNewRemote()
+    // isNewOrigin = await askUserForNewRemote()
   }
 
   if (isNewOrigin) {
