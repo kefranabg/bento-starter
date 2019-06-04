@@ -1,13 +1,16 @@
+const path = require('path')
 const util = require('util')
 const rimraf = util.promisify(require('rimraf'))
 
+const rootDirname = path.resolve(`${__dirname}/../../`)
+
 const resourcesPathsToDelete = [
-  `${__dirname}/../`,
-  `${__dirname}/../../docs`,
-  `${__dirname}/../../.github`,
-  `${__dirname}/../../resources`,
-  `${__dirname}/../../.env.example`,
-  `${__dirname}/../../LICENSE`
+  `${rootDirname}/internals`,
+  `${rootDirname}/docs`,
+  `${rootDirname}/.github`,
+  `${rootDirname}/resources`,
+  `${rootDirname}/.env.example`,
+  `${rootDirname}/LICENSE`
 ]
 
 /**
