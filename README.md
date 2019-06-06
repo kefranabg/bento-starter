@@ -88,4 +88,4 @@ Want to chat with us  ? 👉 [join bento-starter slack](https://join.slack.com/t
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](https://github.com/kefranabg/bento-starter/blob/master/LICENSE)
