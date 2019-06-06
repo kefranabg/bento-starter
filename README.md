@@ -74,10 +74,6 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
 - :sparkles: Products page example to demonstrate app data management with firestore and vuex
 - :muscle: Better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
 
-## Known issues
-
-- Before IOS 12.2, OAuth redirection is not working when the PWA is running in standalone.
-
 ## Show your support
 
 ⭐️ this repo
