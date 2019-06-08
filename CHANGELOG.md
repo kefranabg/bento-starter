@@ -10,6 +10,7 @@
 - ✨ Add setup command to npm scripts ([#140](https://github.com/kefranabg/bento-starter/issues/140)) [[6705d3b](https://github.com/kefranabg/bento-starter/commit/6705d3b00f2c32f388d42426d2e83be7896fc773)]
 - ✨ Improve setup command ([#173](https://github.com/kefranabg/bento-starter/issues/173)) [[1afb74a](https://github.com/kefranabg/bento-starter/commit/1afb74a8be89405399744b4f442a6c5432ec5975)]
 - ✨ Update license link in README ([#184](https://github.com/kefranabg/bento-starter/issues/184)) [[f2e102e](https://github.com/kefranabg/bento-starter/commit/f2e102e86567b25d313cf1ad12a0a25b1d2d0dda)]
+- ✨ Enable hashcontent name for generated files ([#145](https://github.com/kefranabg/bento-starter/issues/145)) [[82335b3](https://github.com/kefranabg/bento-starter/commit/82335b3ecd6eaa7f82088358a1558c08f49cd8c3)]
 
 ### Changed
 
@@ -20,19 +21,18 @@
 - 🎨 Improve lodash imports with babel-plugin-lodash ([#172](https://github.com/kefranabg/bento-starter/issues/172)) [[902eab7](https://github.com/kefranabg/bento-starter/commit/902eab784487272783b1446bc6dd917d7409c9f8)]
 - 🍱 Add missing browsers icons ([#146](https://github.com/kefranabg/bento-starter/issues/146)) [[d968470](https://github.com/kefranabg/bento-starter/commit/d968470b675234fb5db1213d7b5ed01e0aa244f6)]
 - 💄 Fix the activate link into navbar ([#162](https://github.com/kefranabg/bento-starter/issues/162)) [[a51f651](https://github.com/kefranabg/bento-starter/commit/a51f6515f6d1741b39eb72e7c083cc19600c08a9)]
-- ♻️ Refactoring on &#x27;setup&#x27; command code ([#175](https://github.com/kefranabg/bento-starter/issues/175)) [[11cdca8](https://github.com/kefranabg/bento-starter/commit/11cdca859d9c7979d86d321bde44fe271991f746)]
+- ♻️ Setup command refactoring ([#175](https://github.com/kefranabg/bento-starter/issues/175)) [[11cdca8](https://github.com/kefranabg/bento-starter/commit/11cdca859d9c7979d86d321bde44fe271991f746)]
 - ♻️ Setup command refactoring ([#180](https://github.com/kefranabg/bento-starter/issues/180)) [[dc0e280](https://github.com/kefranabg/bento-starter/commit/dc0e28045b2cacbde13df9f5bc48c0d8abc41a0f)]
-- 💬 Fix typo: replace &#x27;Optionnal&#x27; by &#x27;Optional&#x27; in readme ([#124](https://github.com/kefranabg/bento-starter/issues/124)) [[1194e26](https://github.com/kefranabg/bento-starter/commit/1194e26e24c6e7cdd191b615e7e52c7c29aa8d7f)]
+- 💬 Fix typo: replace &#x27;Optionnal&#x27; by &#x27;Optional&#x27; in README ([#124](https://github.com/kefranabg/bento-starter/issues/124)) [[1194e26](https://github.com/kefranabg/bento-starter/commit/1194e26e24c6e7cdd191b615e7e52c7c29aa8d7f)]
 - 💬 Fixed typo errors [[831102a](https://github.com/kefranabg/bento-starter/commit/831102ade2fcaa47fabf0219f65acfc6e5d2a107)]
-- 💬 Adding slack link to readme ([#133](https://github.com/kefranabg/bento-starter/issues/133)) [[4f2a9de](https://github.com/kefranabg/bento-starter/commit/4f2a9de267d473034d61717fccc503c188273269)]
+- 💬 Adding slack link to README ([#133](https://github.com/kefranabg/bento-starter/issues/133)) [[4f2a9de](https://github.com/kefranabg/bento-starter/commit/4f2a9de267d473034d61717fccc503c188273269)]
 - 🔧 Update SHA-256 cert fingerprint to match playstore key [[1f003a3](https://github.com/kefranabg/bento-starter/commit/1f003a3ee76a087a60e0a27b11f515d11c0bdc08)]
 - ⚡ Reduce js vendor bundle size with better lodash imports ([#148](https://github.com/kefranabg/bento-starter/issues/148)) [[4a0ffd8](https://github.com/kefranabg/bento-starter/commit/4a0ffd8ed4959719e896c4e02e40f2cbd6ca3134)]
 
 ### Removed
 
-- 🔥 Remove readme setup section ([#129](https://github.com/kefranabg/bento-starter/issues/129)) [[fd26145](https://github.com/kefranabg/bento-starter/commit/fd261456282a28ce1da62d6a1dd21ee7e8dbf799)]
-- 🔥 Enable hashcontent name for generated files ([#145](https://github.com/kefranabg/bento-starter/issues/145)) [[82335b3](https://github.com/kefranabg/bento-starter/commit/82335b3ecd6eaa7f82088358a1558c08f49cd8c3)]
-- 🔥 Remove known issues from readme ([#183](https://github.com/kefranabg/bento-starter/issues/183)) [[755786f](https://github.com/kefranabg/bento-starter/commit/755786f435d168fefc3b448a6f5b694b886ec112)]
+- 🔥 Remove README setup section ([#129](https://github.com/kefranabg/bento-starter/issues/129)) [[fd26145](https://github.com/kefranabg/bento-starter/commit/fd261456282a28ce1da62d6a1dd21ee7e8dbf799)]
+- 🔥 Remove known issues from README ([#183](https://github.com/kefranabg/bento-starter/issues/183)) [[755786f](https://github.com/kefranabg/bento-starter/commit/755786f435d168fefc3b448a6f5b694b886ec112)]
 - ➖ Set brotli-size dependency as optional ([#152](https://github.com/kefranabg/bento-starter/issues/152)) [[d35fa9f](https://github.com/kefranabg/bento-starter/commit/d35fa9f268c710f0e9e311131a3181ccb2001dee)]
 
 ### Fixed
@@ -43,11 +43,11 @@
 
 ### Miscellaneous
 
-- 📝 add setup in readme ([#123](https://github.com/kefranabg/bento-starter/issues/123)) [[cb0486c](https://github.com/kefranabg/bento-starter/commit/cb0486c24688bdc9ae8a820a6df9ae15711abd6e)]
+- 📝 Add setup in README ([#123](https://github.com/kefranabg/bento-starter/issues/123)) [[cb0486c](https://github.com/kefranabg/bento-starter/commit/cb0486c24688bdc9ae8a820a6df9ae15711abd6e)]
 - 📝 Add code owner and code of conduct ([#130](https://github.com/kefranabg/bento-starter/issues/130)) [[44fa7d0](https://github.com/kefranabg/bento-starter/commit/44fa7d000e657e1c4a50b6b93220ffea2105d1de)]
 - 📝 Add slack in contributing documentation ([#136](https://github.com/kefranabg/bento-starter/issues/136)) [[12b688e](https://github.com/kefranabg/bento-starter/commit/12b688e3121bcfb4c4e34c07b8dca894cae587ff)]
 - 📝 Add bento-starter demo Play Store link in README ([#167](https://github.com/kefranabg/bento-starter/issues/167)) [[17b0ac6](https://github.com/kefranabg/bento-starter/commit/17b0ac6dd26cd489bdc81bd4d0c72e69bae5fc11)]
--  Align title and images in README ([#121](https://github.com/kefranabg/bento-starter/issues/121)) [[e084399](https://github.com/kefranabg/bento-starter/commit/e084399b514ffab6328223fead89a1da5a59df3c)]
+- 📝 Align title and images in README ([#121](https://github.com/kefranabg/bento-starter/issues/121)) [[e084399](https://github.com/kefranabg/bento-starter/commit/e084399b514ffab6328223fead89a1da5a59df3c)]
 
 
 <a name="0.1.0"></a>
@@ -56,9 +56,5 @@
 ### Added
 
 - 🎉 First release [[9129ff7](https://github.com/kefranabg/bento-starter/commit/9129ff7dcb4378db4d38dc6e2649394e2da91f63)]
-
-### Miscellaneous
-
--  Initial commit [[4fad54a](https://github.com/kefranabg/bento-starter/commit/4fad54a7a1f649c94e63cbde3e9976bc0fe58581)]
 
 
