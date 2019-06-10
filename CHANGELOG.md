@@ -3,6 +3,14 @@
 <a name="next"></a>
 ## next
 
+### Miscellaneous
+
+- 📝 Update README description format [[73423bc](https://github.com/kefranabg/bento-starter/commit/73423bc3130fe6393b0522af9f70af0e828bd11a)]
+
+
+<a name="1.0.0"></a>
+## 1.0.0 (2019-06-06)
+
 ### Added
 
 - ✨ Update service worker skipWaiting workflow ([#137](https://github.com/kefranabg/bento-starter/issues/137)) [[f1eb09d](https://github.com/kefranabg/bento-starter/commit/f1eb09d41da9b53f97de02c17787e4914c70f9b8)]
