@@ -30,16 +30,5 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  .delete-btn {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid;
-    display: inline-block;
-    border-radius: 3px;
-    margin-left: 10px;
-    color: $danger-color;
-    border-color: $danger-color;
-  }
 }
 </style>
