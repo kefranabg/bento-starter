@@ -1,6 +1,9 @@
 <template>
   <div class="product-item">
-    <div>#{{ index }} {{ data.name }}</div>
+    <div></div>
+    <router-link :to="{ name: 'product', params: { id: data.id } }">
+      #{{ index }} {{ data.name }}
+    </router-link>
     <div
       v-if="!disableActions"
       class="delete-btn"
