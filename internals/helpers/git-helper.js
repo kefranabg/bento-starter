@@ -1,7 +1,7 @@
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const shell = require('shelljs')
-const os = require('os');
+const os = require('os')
 
 /**
  * Checks if we are under Git version control
@@ -48,8 +48,8 @@ async function checkIfRepositoryIsCleanable() {
 async function removeGitRepository() {
   if (os.platform() === 'win32') {
     return exec('RMDIR .git /S /Q')
-  }else{
-  return exec('rm -Rf .git')
+  } else {
+    return exec('rm -Rf .git')
   }
 }
 
