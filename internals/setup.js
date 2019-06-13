@@ -1,86 +1,26 @@
 #!/usr/bin/env node
 /* eslint-disable import/no-extraneous-dependencies */
 
-const readPkg = require('read-pkg')
-const writePkg = require('write-pkg')
 const inquirer = require('inquirer')
 const ora = require('ora')
 const compareVersions = require('compare-versions')
 const chalk = require('chalk')
+const boxen = require('boxen')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
-const rimraf = util.promisify(require('rimraf'))
-const copyFile = util.promisify(require('fs').copyFile)
-const writeFile = util.promisify(require('fs').writeFile)
 
 const npmConfig = require('./helpers/get-npm-config')
+const cleanUselessScripts = require('./helpers/clean-useless-scripts')
+const cleanUselessResources = require('./helpers/clean-useless-resources')
+const cleanUselessDependencies = require('./helpers/clean-useless-dependencies')
+const cleanReadmeContent = require('./helpers/clean-readme-content')
+const setLocalEnvFile = require('./helpers/set-local-env-file')
 const gitHelper = require('./helpers/git-helper')
 
 process.stdin.resume()
 process.stdin.setEncoding('utf8')
 
 process.stdout.write('\n')
-
-/**
- * Delete useless resources
- *
- * @returns {Promise<any>}
- */
-async function deleteUselessResources(paths) {
-  const spinner = ora('Removing useless resources').start()
-
-  try {
-    await Promise.all(paths.map(path => rimraf(path)))
-  } catch (error) {
-    if (error) {
-      spinner.fail(`Remove useless resources failed\n${error}`)
-      throw new Error(error)
-    }
-  }
-
-  spinner.succeed('Useless resources have been deleted')
-}
-
-/**
- * Create '.env.local' file by copying '.env.example' file
- *
- * @returns {Promise<any>}
- */
-async function createEnvLocalFile() {
-  const spinner = ora('Creating env local file').start()
-
-  try {
-    await copyFile(`${__dirname}/../.env.example`, `${__dirname}/../.env.local`)
-  } catch (error) {
-    spinner.fail(`Create env local file failed\n${error}`)
-    throw new Error(error)
-  }
-
-  spinner.succeed('Created env local file')
-}
-
-/**
- * Replace README.md content
- *
- * @returns {Promise<any>}
- */
-async function replaceReadmeContent() {
-  const spinner = ora('Replacing README.md content').start()
-  const newReadmeContent = `# My bento-starter project
-
-## Documentation
-
-Documentation available :point_right: [here](https://bento-starter.netlify.com/)`
-
-  try {
-    await writeFile(`${__dirname}/../README.md`, newReadmeContent)
-  } catch (error) {
-    spinner.fail(`Replace README.md content failed\n${error}`)
-    throw new Error(error)
-  }
-
-  spinner.succeed('README.md content replaced')
-}
 
 /**
  * Ask user if he wants to start with a new repository
@@ -115,60 +55,18 @@ async function askUserForNewRemote() {
   ])
 
   const origin = answers[NEW_REMOTE]
-
   if (origin) {
     const spinner = ora('Adding new remote to repository').start()
     try {
       await gitHelper.changeOrigin(origin)
-      spinner.succeed(
-        'New remote added, run `git push` to send initial commit to remote repository.'
-      )
+      spinner.succeed(`New remote added ${printOk()}`)
       return true
     } catch (error) {
-      spinner.fail(`Add remote failed\n${error}`)
+      spinner.fail(`Add remote failed ${printFail()}`)
       return false
     }
-  } else {
-    process.stdout.write(
-      'No remote added, run git remote add origin <url> to add one'
-    )
-    return false
   }
-}
-
-/**
- * Checks if we are under Git version control.
- * If we are and this a clone of our repository the user is given a choice to
- * either keep it or start with a new repository.
- * @returns {Promise<boolean>}
- */
-async function cleanCurrentRepository() {
-  const hasGitRepo = await gitHelper.hasGitRepository().catch(onError)
-
-  // We are not under Git version control. So, do nothing
-  if (hasGitRepo === false) {
-    return await askUserIfWeShouldCreateNewRepo()
-  }
-
-  const isClone = await gitHelper.checkIfRepositoryIsAClone().catch(onError)
-
-  // Not our clone so do nothing
-  if (isClone === false) {
-    return false
-  }
-
-  const answer = await askUserIfWeShouldCreateNewRepo()
-
-  if (answer === true) {
-    const spinner = ora('Removing current repository').start()
-    await gitHelper.removeGitRepository().catch(reason => {
-      spinner.fail(reason)
-      onError()
-    })
-    spinner.succeed('Repository removed')
-  }
-
-  return answer
+  return false
 }
 
 /**
@@ -195,7 +93,7 @@ async function checkNodeVersion(minimalNodeVersion) {
     throw new Error()
   }
 
-  spinner.succeed(`Node version ${nodeVersion} OK`)
+  spinner.succeed(`Node version ${nodeVersion} ${printOk()}`)
 }
 
 /**
@@ -221,96 +119,76 @@ async function checkNpmVersion(minimalNpmVersion) {
     throw new Error()
   }
 
-  spinner.succeed(`npm version ${npmVersion} OK`)
+  spinner.succeed(`npm version ${npmVersion} ${printOk()}`)
 }
 
-/**
- * Initialize a new Git repository
- * @returns {Promise<any>}
- */
-async function initGitRepository() {
-  const spinner = ora('Creating new repository').start()
-
+async function doCommand(command, commandLog, successLog, failLog) {
+  const spinner = ora(commandLog).start()
   try {
-    const { stdout } = await gitHelper.initGitRepository()
-    spinner.succeed('New repository created')
-    return stdout
+    await command()
+    spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
   } catch (err) {
-    spinner.fail('Creation of new repository failed')
+    spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
     throw new Error(err)
   }
-}
-
-/**
- * Make the initial Git commit
- * @returns {Promise<any>}
- */
-async function doInitalCommit() {
-  const spinner = ora('Creating initial commit for new repository').start()
-
-  try {
-    const { stdout } = await gitHelper.doInitalCommit()
-    spinner.succeed('Initial commit created')
-    return stdout
-  } catch (err) {
-    spinner.fail('Initial commit failed')
-    throw new Error(err)
-  }
-}
-
-/**
- * Remove npm dependencies which are only used by this script
- * @returns {Promise<any>}
- */
-async function removeScriptDependencies() {
-  const spinner = ora('Uninstalling extraneous dependencies').start()
-
-  try {
-    await exec(
-      'npm uninstall rimraf compare-versions chalk shelljs read-pkg write-pkg inquirer ora --save-dev'
-    )
-    spinner.succeed('Extraneous dependencies uninstalled')
-  } catch (err) {
-    spinner.fail(err)
-    throw new Error(err)
-  }
-}
-
-/**
- * Remove the "setup" script from package.json
- * @returns {Promise<any>}
- */
-async function removeSetupScript() {
-  const pkg = await readPkg()
-
-  if (!pkg.scripts) {
-    pkg.scripts = {}
-  }
-
-  delete pkg.scripts.setup
-  delete pkg.scripts.presetup
-
-  return writePkg(pkg)
 }
 
 /**
  * End the setup process
  */
 function endProcess() {
-  process.stdout.write(chalk.blue('\n\nDone!\n'))
+  process.stdout.write(
+    boxen(
+      `
+Thank you for using bento-starter !
+
+Do not hesitate to share your project with 
+the community on slack : 
+
+https://tinyurl.com/yxzrc7fq
+
+You can also contact us on twitter
+${chalk.blue('@FranckAbgrall')} or ${chalk.blue('@tbetous')}.
+
+We hope to hear about your project soon !
+`,
+      {
+        padding: 1,
+        margin: { top: 3, bottom: 3 },
+        borderColor: 'cyan',
+        align: 'center',
+        borderStyle: 'double'
+      }
+    )
+  )
   process.exit(0)
 }
 
+/**
+ * End the setup process with an error
+ */
 function onError(e) {
-  console.error('Exiting setup script with the following error\n', e)
+  console.error('\n\nExiting setup script with the following error :\n', e)
   process.exit(1)
+}
+
+function printOk() {
+  return chalk.green('[OK]')
+}
+
+function printFail() {
+  return chalk.green('[FAIL]')
 }
 
 /**
  * Run
  */
 ;(async () => {
-  const repoRemoved = await cleanCurrentRepository()
+  let isNewOrigin
+  let isNewRepositoryWanted
+  if (await gitHelper.checkIfRepositoryIsCleanable()) {
+    isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
+  }
 
   // Take the required Node and NPM version from package.json
   const {
@@ -318,36 +196,71 @@ function onError(e) {
   } = npmConfig
 
   const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
-  const resourcesPathsToDelete = [
-    __dirname,
-    `${__dirname}/../docs`,
-    `${__dirname}/../.github`,
-    `${__dirname}/../resources`,
-    `${__dirname}/../.env.example`,
-    `${__dirname}/../LICENSE`
-  ]
-
   await checkNodeVersion(requiredNodeVersion).catch(onError)
 
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  await createEnvLocalFile().catch(onError)
-  await removeScriptDependencies().catch(onError)
-  await removeSetupScript().catch(onError)
-  await replaceReadmeContent().catch(onError)
-  await deleteUselessResources(resourcesPathsToDelete).catch(onError)
+  await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
-  if (repoRemoved) {
-    process.stdout.write('\nInitialising new repository')
+  await doCommand(
+    cleanUselessDependencies,
+    'Cleaning extraneous dependencies'
+  ).catch(onError)
 
-    try {
-      await initGitRepository()
-      await doInitalCommit()
-      await askUserForNewRemote()
-    } catch (err) {
-      onError()
-    }
+  await doCommand(
+    cleanUselessScripts,
+    'Cleaning useless scripts in package.json'
+  ).catch(onError)
+
+  await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
+    onError
+  )
+
+  await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
+    onError
+  )
+
+  if (isNewRepositoryWanted) {
+    await doCommand(
+      gitHelper.removeGitRepository,
+      'Removing current repository'
+    ).catch(onError)
+
+    await doCommand(
+      gitHelper.initGitRepository,
+      'Creating new repository'
+    ).catch(onError)
+
+    await doCommand(
+      gitHelper.doInitalCommit,
+      'Creating initial commit for new repository'
+    ).catch(onError)
+
+    isNewOrigin = await askUserForNewRemote()
+  }
+
+  if (isNewRepositoryWanted && isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ Run `git push` to send initial commit to remote repository.'
+      )
+    )
+  } else if (isNewRepositoryWanted && !isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote added, run `git remote add origin <url>` to add one.'
+      )
+    )
+  } else {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
+      )
+    )
   }
 
   endProcess()

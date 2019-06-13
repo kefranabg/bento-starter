@@ -1,10 +1,13 @@
-[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://bento-starter.netlify.com/)
-[![CircleCI](https://circleci.com/gh/kefranabg/bento-starter/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10)](https://circleci.com/gh/kefranabg/bento-starter/tree/master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kefranabg/bento-starter/blob/master/LICENSE)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/vuesion/vuesion/graphs/commit-activity)
-[![Dependencies](https://img.shields.io/david/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter)
-[![DevDependencies](https://img.shields.io/david/dev/kefranabg/bento-starter.svg)](https://david-dm.org/kefranabg/bento-starter?type=dev)
+<p align="center">
+<img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" alt="Npm version" target="_blank" />
+<a href="https://circleci.com/gh/kefranabg/bento-starter/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/kefranabg/bento-starter/tree/master.svg?style=svg&circle-token=f311e2320782a12321a769faa2ef1d3cdf5e1a10" target="_blank" /></a>
+<a href="https://bento-starter.netlify.com/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" /></a>
+<a href="https://gitHub.com/kefranabg/bento-starter/graphs/commit-activity"><img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" /></a>
+<a href="https://david-dm.org/kefranabg/bento-starter"><img alt="Dependencies" src="https://img.shields.io/david/kefranabg/bento-starter.svg" target="_blank" /></a>
+<a href="https://david-dm.org/kefranabg/bento-starter?type=dev"><img alt="DevDependencies" src="https://img.shields.io/david/dev/kefranabg/bento-starter.svg" target="_blank" /></a>
+<a href="https://github.com/kefranabg/bento-starter/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" /></a>
 <a href="https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY" target="_blank"><img src="https://home-assistant.io/images/supported_brands/slack.png" height="20px" /></a> 
+</p>
 
 <h1 align="center">Welcome to bento-starter :wave:</h1>
 
@@ -14,9 +17,9 @@
 
 <br />
 
-:bento: **bento-starter** is an Open-Source Full-Stack solution that helps you to build fast and maintainable web applications using tools like Vue.js, Firebase, Progressive Web Apps support, dynamic offline support... The goal of this project is to provide a powerful and well configured stack (with CI/CD, hosting...) so you can focus on writing your web application very quickly.
+> :bento: **bento-starter** is an Open-Source Full-Stack solution that helps you to build fast and maintainable web applications using tools like Vue.js, Firebase, Progressive Web Apps support, dynamic offline support... The goal of this project is to provide a powerful and well configured stack (with CI/CD, hosting...) so you can focus on writing your web application very quickly.
 
-As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
+> As this project is a template project and not a CLI, you have access to the entire app configuration so you can change it according to your needs.
 
 ## :book: Documentation
 
@@ -74,10 +77,6 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
 - :sparkles: Products page example to demonstrate app data management with firestore and vuex
 - :muscle: Better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
 
-## Known issues
-
-- Before IOS 12.2, OAuth redirection is not working when the PWA is running in standalone.
-
 ## Show your support
 
 ⭐️ this repo
@@ -88,4 +87,4 @@ Want to chat with us  ? 👉 [join bento-starter slack](https://join.slack.com/t
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+This project is [MIT](https://github.com/kefranabg/bento-starter/blob/master/LICENSE) licensed.

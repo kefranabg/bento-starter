@@ -32,18 +32,20 @@ async function checkIfRepositoryIsAClone() {
 }
 
 /**
+ * Checks if we are under Git version control and if this is a clone of our repository.
+ * @returns {Promise<boolean>}
+ */
+async function checkIfRepositoryIsCleanable() {
+  const hasGitRepo = await hasGitRepository()
+  return hasGitRepo && (await checkIfRepositoryIsAClone())
+}
+
+/**
  * Remove the current Git repository
  * @returns {Promise<any>}
  */
-function removeGitRepository() {
-  return new Promise((resolve, reject) => {
-    try {
-      shell.rm('-rf', '.git/')
-      resolve()
-    } catch (err) {
-      reject(err)
-    }
-  })
+async function removeGitRepository() {
+  return exec('rm -Rf .git')
 }
 
 /**
@@ -74,6 +76,7 @@ module.exports = {
   initGitRepository,
   hasGitRepository,
   checkIfRepositoryIsAClone,
+  checkIfRepositoryIsCleanable,
   removeGitRepository,
   doInitalCommit,
   changeOrigin
