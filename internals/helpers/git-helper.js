@@ -1,6 +1,7 @@
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const shell = require('shelljs')
+const rimraf = util.promisify(require('rimraf'))
 
 /**
  * Checks if we are under Git version control
@@ -45,7 +46,7 @@ async function checkIfRepositoryIsCleanable() {
  * @returns {Promise<any>}
  */
 async function removeGitRepository() {
-  return exec('rm -Rf .git')
+  return rimraf('.git')
 }
 
 /**
