@@ -4,7 +4,7 @@
       <div class="close" @click="$emit('close')"></div>
       <div class="main-content">
         <img class="app-logo" src="@/assets/logo.png" />
-        <h3 class="title">Install bento starter</h3>
+        <h3 class="title">Install {{ appTitle }}</h3>
         <p class="description">
           Install this application to your home screen for quickly and easy
           access when you're on the go.
@@ -21,6 +21,14 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: mapState('app', ['appTitle'])
+}
+</script>
 
 <style lang="scss" scoped>
 .modal-wrapper {

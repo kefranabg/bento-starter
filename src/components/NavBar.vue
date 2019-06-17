@@ -2,10 +2,8 @@
   <header class="navbar" :class="{ offline: !networkOnLine }">
     <router-link to="/home">
       <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
-      <span class="site-name">
-        Bento<span class="can-hide">Starter</span></span
-      ></router-link
-    >
+      <span class="site-name">{{ appTitle }}</span>
+    </router-link>
     <div class="links">
       <nav class="nav-links">
         <div class="nav-item">
@@ -42,7 +40,7 @@ export default {
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
     ...mapState('authentication', ['user']),
-    ...mapState('app', ['networkOnLine'])
+    ...mapState('app', ['networkOnLine', 'appTitle'])
   },
   methods: {
     async logout() {

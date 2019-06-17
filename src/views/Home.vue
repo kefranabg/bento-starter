@@ -17,17 +17,19 @@
 import { mapState } from 'vuex'
 
 export default {
-  head: {
-    title: {
-      inner: 'Home'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Bento-starter home page',
-        id: 'desc'
-      }
-    ]
+  head: function() {
+    return {
+      title: {
+        inner: 'Home'
+      },
+      meta: [
+        {
+          name: 'description',
+          content: `${this.appTitle} home page`,
+          id: 'desc'
+        }
+      ]
+    }
   },
   computed: mapState('app', ['appTitle'])
 }

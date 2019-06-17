@@ -48,6 +48,7 @@
     "boxen": "4.0.0",
     "bundlesize": "github:kefranabg/bundlesize",
     "chalk": "^2.4.2",
+    "change-case": "3.1.0",
     "compare-versions": "^3.4.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
