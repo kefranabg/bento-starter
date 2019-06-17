@@ -28,7 +28,7 @@ const changeProjectNameWithParamCase = async newProjectName =>
 
 const changeProjectNameInConfFile = async newProjectName => {
   const content = await readFile(confPath, 'utf-8')
-  const newContent = content.replace(/Bento starter/, newProjectName)
+  const newContent = content.replace(/Bento Starter/, newProjectName)
   return writeFile(confPath, newContent)
 }
 
