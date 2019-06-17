@@ -71,6 +71,25 @@ async function askUserForNewRemote() {
 }
 
 /**
+ * Ask user for new project name. If provided, change project name
+ * @returns {Promise<any>}
+ */
+async function askUserForNewProjectName() {
+  const NEW_PROJECT_NAME = 'NEW_PROJECT_NAME'
+
+  const answers = await inquirer.prompt([
+    {
+      type: 'input',
+      message:
+        'Enter new project name (ex: Bento Starter) [Enter to cancel]:  ',
+      name: NEW_PROJECT_NAME
+    }
+  ])
+
+  return answers[NEW_PROJECT_NAME]
+}
+
+/**
  * Check Node.js version
  * @param {!number} minimalNodeVersion
  * @returns {Promise<any>}
@@ -123,13 +142,13 @@ async function checkNpmVersion(minimalNpmVersion) {
   spinner.succeed(`npm version ${npmVersion} ${printOk()}`)
 }
 
-async function doCommand(command, commandLog, successLog, failLog) {
+async function doCommand(command, commandLog, ...args) {
   const spinner = ora(commandLog).start()
   try {
-    await command()
-    spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
+    await command(...args)
+    spinner.succeed(`${commandLog} ${printOk()}`)
   } catch (err) {
-    spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
+    spinner.fail(`${commandLog} ${printFail()}`)
     throw new Error(err)
   }
 }
@@ -185,85 +204,95 @@ function printFail() {
  * Run
  */
 ;(async () => {
-  await changeProjectName()
-  // let isNewOrigin
-  // let isNewRepositoryWanted
-  // if (await gitHelper.checkIfRepositoryIsCleanable()) {
-  //   isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
-  // }
+  let isNewOrigin
+  let isNewRepositoryWanted
+  let newProjectName
 
-  // // Take the required Node and NPM version from package.json
-  // const {
-  //   engines: { node, npm }
-  // } = npmConfig
+  if (await gitHelper.checkIfRepositoryIsCleanable()) {
+    isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
+  }
 
-  // const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
-  // await checkNodeVersion(requiredNodeVersion).catch(onError)
+  // Take the required Node and NPM version from package.json
+  const {
+    engines: { node, npm }
+  } = npmConfig
 
-  // const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
-  // await checkNpmVersion(requiredNpmVersion).catch(onError)
+  const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
+  await checkNodeVersion(requiredNodeVersion).catch(onError)
 
-  // await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
+  const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
+  await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  // await doCommand(
-  //   cleanUselessDependencies,
-  //   'Cleaning extraneous dependencies'
-  // ).catch(onError)
+  newProjectName = await askUserForNewProjectName()
+  if (newProjectName) {
+    await doCommand(
+      changeProjectName,
+      'Changing project name',
+      newProjectName
+    ).catch(onError)
+  }
 
-  // await doCommand(
-  //   cleanUselessScripts,
-  //   'Cleaning useless scripts in package.json'
-  // ).catch(onError)
+  await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
-  // await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
-  //   onError
-  // )
+  await doCommand(
+    cleanUselessDependencies,
+    'Cleaning extraneous dependencies'
+  ).catch(onError)
 
-  // await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
-  //   onError
-  // )
+  await doCommand(
+    cleanUselessScripts,
+    'Cleaning useless scripts in package.json'
+  ).catch(onError)
 
-  // if (isNewRepositoryWanted) {
-  //   await doCommand(
-  //     gitHelper.removeGitRepository,
-  //     'Removing current repository'
-  //   ).catch(onError)
+  await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
+    onError
+  )
 
-  //   await doCommand(
-  //     gitHelper.initGitRepository,
-  //     'Creating new repository'
-  //   ).catch(onError)
+  await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
+    onError
+  )
 
-  //   await doCommand(
-  //     gitHelper.doInitalCommit,
-  //     'Creating initial commit for new repository'
-  //   ).catch(onError)
+  if (isNewRepositoryWanted) {
+    await doCommand(
+      gitHelper.removeGitRepository,
+      'Removing current repository'
+    ).catch(onError)
 
-  //   isNewOrigin = await askUserForNewRemote()
-  // }
+    await doCommand(
+      gitHelper.initGitRepository,
+      'Creating new repository'
+    ).catch(onError)
 
-  // if (isNewRepositoryWanted && isNewOrigin) {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ Run `git push` to send initial commit to remote repository.'
-  //     )
-  //   )
-  // } else if (isNewRepositoryWanted && !isNewOrigin) {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ No remote added, run `git remote add origin <url>` to add one.'
-  //     )
-  //   )
-  // } else {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
-  //     )
-  //   )
-  // }
+    await doCommand(
+      gitHelper.doInitalCommit,
+      'Creating initial commit for new repository'
+    ).catch(onError)
+
+    isNewOrigin = await askUserForNewRemote()
+  }
+
+  if (isNewRepositoryWanted && isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ Run `git push` to send initial commit to remote repository.'
+      )
+    )
+  } else if (isNewRepositoryWanted && !isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote added, run `git remote add origin <url>` to add one.'
+      )
+    )
+  } else {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
+      )
+    )
+  }
 
   endProcess()
 })()
