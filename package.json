@@ -134,5 +134,14 @@
     ],
     "testURL": "http://localhost/",
     "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setup.js"
+  },
+  "lighthouse": {
+    "requiredScores": {
+      "performance": 80,
+      "accessibility": 90,
+      "best-practices": 80,
+      "seo": 90,
+      "pwa": 100
+    }
   }
 }

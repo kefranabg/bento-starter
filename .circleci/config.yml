@@ -4,6 +4,11 @@ executors:
   default-executor:
     docker:
       - image: cypress/base:10
+  lighthouse-executor:
+    docker:
+      - image: kporras07/lighthouse-ci
+        environment:
+          - TEST_URL: https://bento-starter.firebaseapp.com/
 
 jobs:
   install-dependencies:
@@ -103,6 +108,14 @@ jobs:
               npm run firebase:deploy:ci
             fi
 
+  lighthouse-audit:
+    executor: lighthouse-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Lighthouse audit'
+          command: lighthouse $TEST_URL --port=9222 --chrome-flags=\"--headless --no-sandbox --disable-gpu\" --output-path=/home/chrome/reports/ci.json --output=json && node ./ci-scripts/analyze_lighthouse.js package.json /home/chrome/reports
 workflows:
   version: 2
   build-and-deploy:
@@ -132,3 +145,6 @@ workflows:
       - deploy:
           requires:
             - check-bundles-sizes
+      - lighthouse-audit:
+          requires:
+            - deploy 
