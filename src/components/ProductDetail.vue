@@ -1,22 +1,13 @@
 <template>
   <div class="product-detail">
-    <h1>{{ currentProduct.name }}</h1>
-    <div>Product description ...</div>
+    <h1>{{ product.name }}</h1>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   props: {
-    id: String
-  },
-  computed: {
-    ...mapGetters('products', ['getProductById']),
-    currentProduct() {
-      return this.getProductById(this.id)
-    }
+    product: Object
   }
 }
 </script>

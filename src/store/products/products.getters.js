@@ -1,9 +1,6 @@
-export default {
-  /**
-   * Check if products are loaded
-   */
-  areProductsLoaded: state => state.products && state.products.length !== 0,
+import { find } from 'lodash'
 
+export default {
   /**
    * Check if a product has deletion pending
    */
@@ -14,5 +11,5 @@ export default {
    * Get product by id
    */
   getProductById: state => productId =>
-    state.products.find(product => product.id === productId)
+    find(state.products, product => product.id === productId)
 }

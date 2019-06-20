@@ -54,9 +54,9 @@ const router = new Router({
     {
       path: '/products/:id',
       name: 'product',
-      props: route => ({ id: route.params.id }),
+      props: true,
       component: () =>
-        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Product.vue')
+        import(/* webpackChunkName: "client-chunk-product-details" */ '@/views/Product.vue')
     },
     { path: '*', redirect: '/home' }
   ]
