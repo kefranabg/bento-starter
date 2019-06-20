@@ -77,7 +77,7 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
 - :sparkles: Products page example to demonstrate app data management with firestore and vuex
 - :muscle: Better PWA support for all browsers with [PWACompat](https://github.com/GoogleChromeLabs/pwacompat)
 
-## Contributors ✨
+## ✨ Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
