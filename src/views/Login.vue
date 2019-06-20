@@ -31,21 +31,23 @@ import { desktop as isDekstop } from 'is_js'
 
 export default {
   data: () => ({ loginError: null }),
-  head: {
-    title: {
-      inner: 'Login'
-    },
-    meta: [
-      {
-        name: 'description',
-        content: 'Sign in or sign up to bento-starter',
-        id: 'desc'
-      }
-    ]
+  head: function() {
+    return {
+      title: {
+        inner: 'Login'
+      },
+      meta: [
+        {
+          name: 'description',
+          content: `Sign in or sign up to ${this.appTitle}`,
+          id: 'desc'
+        }
+      ]
+    }
   },
   computed: {
     ...mapState('authentication', ['user']),
-    ...mapState('app', ['networkOnLine'])
+    ...mapState('app', ['networkOnLine', 'appTitle'])
   },
   watch: {
     user: {

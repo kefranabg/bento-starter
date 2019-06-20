@@ -15,6 +15,7 @@ const cleanUselessResources = require('./helpers/clean-useless-resources')
 const cleanUselessDependencies = require('./helpers/clean-useless-dependencies')
 const cleanReadmeContent = require('./helpers/clean-readme-content')
 const setLocalEnvFile = require('./helpers/set-local-env-file')
+const changeProjectName = require('./helpers/change-project-name')
 const gitHelper = require('./helpers/git-helper')
 
 process.stdin.resume()
@@ -70,6 +71,44 @@ async function askUserForNewRemote() {
 }
 
 /**
+ * Ask user for new project name. If provided, change project name
+ * @returns {Promise<any>}
+ */
+async function askUserForNewProjectName() {
+  const NEW_PROJECT_NAME = 'NEW_PROJECT_NAME'
+  const NEW_PROJECT_SHORT_NAME = 'NEW_PROJECT_SHORT_NAME'
+
+  const answers = await inquirer.prompt([
+    {
+      type: 'input',
+      message:
+        'Enter new project name (ex: Bento Starter) [Use empty value to skip]:',
+      name: NEW_PROJECT_NAME
+    },
+    {
+      type: 'input',
+      message:
+        'Enter new project short name (used for mobile) [max 12 characters] :',
+      name: NEW_PROJECT_SHORT_NAME,
+      when: answers => answers[NEW_PROJECT_NAME],
+      default: answers =>
+        answers[NEW_PROJECT_NAME].length <= 12
+          ? answers[NEW_PROJECT_NAME]
+          : undefined,
+      validate: input =>
+        input && input.length <= 12
+          ? true
+          : 'Your project short name must have a maximum of 12 characters'
+    }
+  ])
+
+  return {
+    projectName: answers[NEW_PROJECT_NAME],
+    projectShortName: answers[NEW_PROJECT_SHORT_NAME]
+  }
+}
+
+/**
  * Check Node.js version
  * @param {!number} minimalNodeVersion
  * @returns {Promise<any>}
@@ -122,13 +161,13 @@ async function checkNpmVersion(minimalNpmVersion) {
   spinner.succeed(`npm version ${npmVersion} ${printOk()}`)
 }
 
-async function doCommand(command, commandLog, successLog, failLog) {
+async function doCommand(command, commandLog, ...args) {
   const spinner = ora(commandLog).start()
   try {
-    await command()
-    spinner.succeed(successLog ? successLog : `${commandLog} ${printOk()}`)
+    await command(...args)
+    spinner.succeed(`${commandLog} ${printOk()}`)
   } catch (err) {
-    spinner.fail(failLog ? failLog : `${commandLog} ${printFail()}`)
+    spinner.fail(`${commandLog} ${printFail()}`)
     throw new Error(err)
   }
 }
@@ -186,6 +225,7 @@ function printFail() {
 ;(async () => {
   let isNewOrigin
   let isNewRepositoryWanted
+
   if (await gitHelper.checkIfRepositoryIsCleanable()) {
     isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
   }
@@ -200,6 +240,16 @@ function printFail() {
 
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
+
+  const { projectName, projectShortName } = await askUserForNewProjectName()
+  if (projectName) {
+    await doCommand(
+      changeProjectName,
+      'Changing project name',
+      projectName,
+      projectShortName
+    ).catch(onError)
+  }
 
   await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
