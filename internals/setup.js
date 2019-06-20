@@ -219,23 +219,23 @@ function printFail() {
  * Run
  */
 ;(async () => {
-  // let isNewOrigin
-  // let isNewRepositoryWanted
+  let isNewOrigin
+  let isNewRepositoryWanted
 
-  // if (await gitHelper.checkIfRepositoryIsCleanable()) {
-  //   isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
-  // }
+  if (await gitHelper.checkIfRepositoryIsCleanable()) {
+    isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
+  }
 
-  // // Take the required Node and NPM version from package.json
-  // const {
-  //   engines: { node, npm }
-  // } = npmConfig
+  // Take the required Node and NPM version from package.json
+  const {
+    engines: { node, npm }
+  } = npmConfig
 
-  // const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
-  // await checkNodeVersion(requiredNodeVersion).catch(onError)
+  const requiredNodeVersion = node.match(/([0-9.]+)/g)[0]
+  await checkNodeVersion(requiredNodeVersion).catch(onError)
 
-  // const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
-  // await checkNpmVersion(requiredNpmVersion).catch(onError)
+  const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
+  await checkNpmVersion(requiredNpmVersion).catch(onError)
 
   const { projectName, projectShortName } = await askUserForNewProjectName()
   if (projectName) {
@@ -247,67 +247,67 @@ function printFail() {
     ).catch(onError)
   }
 
-  // await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
+  await doCommand(setLocalEnvFile, 'Creating env local file').catch(onError)
 
-  // await doCommand(
-  //   cleanUselessDependencies,
-  //   'Cleaning extraneous dependencies'
-  // ).catch(onError)
+  await doCommand(
+    cleanUselessDependencies,
+    'Cleaning extraneous dependencies'
+  ).catch(onError)
 
-  // await doCommand(
-  //   cleanUselessScripts,
-  //   'Cleaning useless scripts in package.json'
-  // ).catch(onError)
+  await doCommand(
+    cleanUselessScripts,
+    'Cleaning useless scripts in package.json'
+  ).catch(onError)
 
-  // await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
-  //   onError
-  // )
+  await doCommand(cleanReadmeContent, 'Cleaning README.md content').catch(
+    onError
+  )
 
-  // await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
-  //   onError
-  // )
+  await doCommand(cleanUselessResources, 'Cleaning useless resources').catch(
+    onError
+  )
 
-  // if (isNewRepositoryWanted) {
-  //   await doCommand(
-  //     gitHelper.removeGitRepository,
-  //     'Removing current repository'
-  //   ).catch(onError)
+  if (isNewRepositoryWanted) {
+    await doCommand(
+      gitHelper.removeGitRepository,
+      'Removing current repository'
+    ).catch(onError)
 
-  //   await doCommand(
-  //     gitHelper.initGitRepository,
-  //     'Creating new repository'
-  //   ).catch(onError)
+    await doCommand(
+      gitHelper.initGitRepository,
+      'Creating new repository'
+    ).catch(onError)
 
-  //   await doCommand(
-  //     gitHelper.doInitalCommit,
-  //     'Creating initial commit for new repository'
-  //   ).catch(onError)
+    await doCommand(
+      gitHelper.doInitalCommit,
+      'Creating initial commit for new repository'
+    ).catch(onError)
 
-  //   isNewOrigin = await askUserForNewRemote()
-  // }
+    isNewOrigin = await askUserForNewRemote()
+  }
 
-  // if (isNewRepositoryWanted && isNewOrigin) {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ Run `git push` to send initial commit to remote repository.'
-  //     )
-  //   )
-  // } else if (isNewRepositoryWanted && !isNewOrigin) {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ No remote added, run `git remote add origin <url>` to add one.'
-  //     )
-  //   )
-  // } else {
-  //   process.stdout.write('\n')
-  //   process.stdout.write(
-  //     chalk.blue(
-  //       'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
-  //     )
-  //   )
-  // }
+  if (isNewRepositoryWanted && isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ Run `git push` to send initial commit to remote repository.'
+      )
+    )
+  } else if (isNewRepositoryWanted && !isNewOrigin) {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote added, run `git remote add origin <url>` to add one.'
+      )
+    )
+  } else {
+    process.stdout.write('\n')
+    process.stdout.write(
+      chalk.blue(
+        'ℹ No remote changed, run `git remote set-url origin <url>` to change it.'
+      )
+    )
+  }
 
   endProcess()
 })()
