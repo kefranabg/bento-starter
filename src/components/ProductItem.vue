@@ -1,6 +1,11 @@
 <template>
   <div class="product-item">
-    <div>#{{ index }} {{ data.name }}</div>
+    <router-link
+      class="product-link"
+      :to="{ name: 'product', params: { id: data.id } }"
+    >
+      #{{ index }} {{ data.name }}
+    </router-link>
     <div
       v-if="!disableActions"
       class="delete-btn"
@@ -30,6 +35,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  .product-link {
+    color: $vue-color;
+  }
 
   .delete-btn {
     cursor: pointer;
