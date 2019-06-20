@@ -2,6 +2,8 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const shell = require('shelljs')
 const rimraf = util.promisify(require('rimraf'))
+const request = require('request-promise')
+const http = require('http')
 
 /**
  * Checks if we are under Git version control
@@ -73,6 +75,26 @@ async function changeOrigin(origin) {
   return exec(`git remote add origin ${origin}`)
 }
 
+async function getLatestTag() {
+  const response = await request.get(
+    'https://api.github.com/repos/kefranabg/bento-starter/git/refs/tags',
+    {
+      headers: {
+        'User-Agent': 'bento-start-app'
+      }
+    }
+  )
+  return JSON.parse(response)
+    .map(value => value.ref.replace('refs/tags/', ''))
+    .sort()
+    .pop()
+}
+
+async function checkoutToLastTag() {
+  const lastTag = await getLatestTag()
+  return exec(`git fetch && git reset --hard tags/${lastTag}`)
+}
+
 module.exports = {
   initGitRepository,
   hasGitRepository,
@@ -80,5 +102,7 @@ module.exports = {
   checkIfRepositoryIsCleanable,
   removeGitRepository,
   doInitalCommit,
-  changeOrigin
+  changeOrigin,
+  getLatestTag,
+  checkoutToLastTag
 }

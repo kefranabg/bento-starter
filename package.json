@@ -26,6 +26,7 @@
     "lodash": "^4.17.11",
     "pwacompat": "^2.0.9",
     "register-service-worker": "^1.6.2",
+    "request-promise": "4.2.4",
     "vue": "^2.6.10",
     "vue-head": "^2.1.1",
     "vue-router": "^3.0.6",

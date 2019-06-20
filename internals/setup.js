@@ -23,90 +23,78 @@ process.stdin.setEncoding('utf8')
 
 process.stdout.write('\n')
 
-/**
- * Ask user if he wants to start with a new repository
- * @returns {Promise<boolean>}
- */
-async function askUserIfWeShouldCreateNewRepo() {
-  const NEW_REPOSITORY = 'NEW_REPOSITORY'
+const NEW_PROJECT_NAME_KEY = 'NEW_PROJECT_NAME'
+const NEW_PROJECT_SHORT_NAME_KEY = 'NEW_PROJECT_SHORT_NAME'
+const NEW_REPOSITORY_KEY = 'NEW_REPOSITORY'
+const NEW_REMOTE_KEY = 'NEW_REMOTE'
+const CHECKOUT_STABLE_KEY = 'CHECKOUT_STABLE_KEY'
+
+async function askUser() {
   const answers = await inquirer.prompt([
-    {
-      type: 'confirm',
-      message: 'Do you want to start with a new repository ?',
-      name: NEW_REPOSITORY
-    }
-  ])
-  return !!answers[NEW_REPOSITORY]
-}
-
-/**
- * Ask user for new origin for this repository. If provided, call git remote add origin
- * @returns {Promise<any>}
- */
-async function askUserForNewRemote() {
-  const NEW_REMOTE = 'NEW_REMOTE'
-
-  const answers = await inquirer.prompt([
-    {
-      type: 'input',
-      message:
-        'Enter new remote origin (ex: https://github.com/user/my-repo.git) for this repository [Enter to cancel]:  ',
-      name: NEW_REMOTE
-    }
-  ])
-
-  const origin = answers[NEW_REMOTE]
-  if (origin) {
-    const spinner = ora('Adding new remote to repository').start()
-    try {
-      await gitHelper.changeOrigin(origin)
-      spinner.succeed(`New remote added ${printOk()}`)
-      return true
-    } catch (error) {
-      spinner.fail(`Add remote failed ${printFail()}`)
-      return false
-    }
-  }
-  return false
-}
-
-/**
- * Ask user for new project name. If provided, change project name
- * @returns {Promise<any>}
- */
-async function askUserForNewProjectName() {
-  const NEW_PROJECT_NAME = 'NEW_PROJECT_NAME'
-  const NEW_PROJECT_SHORT_NAME = 'NEW_PROJECT_SHORT_NAME'
-
-  const answers = await inquirer.prompt([
-    {
-      type: 'input',
-      message:
-        'Enter new project name (ex: Bento Starter) [Use empty value to skip]:',
-      name: NEW_PROJECT_NAME
-    },
-    {
-      type: 'input',
-      message:
-        'Enter new project short name (used for mobile) [max 12 characters] :',
-      name: NEW_PROJECT_SHORT_NAME,
-      when: answers => answers[NEW_PROJECT_NAME],
-      default: answers =>
-        answers[NEW_PROJECT_NAME].length <= 12
-          ? answers[NEW_PROJECT_NAME]
-          : undefined,
-      validate: input =>
-        input && input.length <= 12
-          ? true
-          : 'Your project short name must have a maximum of 12 characters'
-    }
+    ...projectNameQuestions,
+    ...gitRepositoryQuestions
   ])
 
   return {
-    projectName: answers[NEW_PROJECT_NAME],
-    projectShortName: answers[NEW_PROJECT_SHORT_NAME]
+    projectName: answers[NEW_PROJECT_NAME_KEY],
+    projectShortName: answers[NEW_PROJECT_SHORT_NAME_KEY],
+    checkoutStable: answers[CHECKOUT_STABLE_KEY],
+    isNewRepositoryWanted: answers[NEW_REPOSITORY_KEY],
+    newOrigin: answers[NEW_REMOTE_KEY]
   }
 }
+
+const projectNameQuestions = [
+  {
+    type: 'input',
+    message:
+      'Enter new project name (ex: Bento Starter) [Use empty value to skip]:',
+    name: NEW_PROJECT_NAME_KEY
+  },
+  {
+    type: 'input',
+    message:
+      'Enter new project short name (used for mobile) [max 12 characters] :',
+    name: NEW_PROJECT_SHORT_NAME_KEY,
+    when: answers => answers[NEW_PROJECT_NAME_KEY],
+    default: answers =>
+      answers[NEW_PROJECT_NAME_KEY].length <= 12
+        ? answers[NEW_PROJECT_NAME_KEY]
+        : undefined,
+    validate: input =>
+      input && input.length <= 12
+        ? true
+        : 'Your project short name must have a maximum of 12 characters'
+  }
+]
+
+const gitRepositoryQuestions = [
+  {
+    type: 'list',
+    message: 'Which version of bento-starter do you want start from?',
+    name: CHECKOUT_STABLE_KEY,
+    choices: async () => [
+      { name: `stable (${await gitHelper.getLatestTag()})`, value: true },
+      { name: `unstable (master:HEAD)`, value: false }
+    ],
+    when: async () =>
+      (await gitHelper.hasGitRepository()) &&
+      (await gitHelper.checkIfRepositoryIsAClone())
+  },
+  {
+    type: 'confirm',
+    message: 'Do you want to start with a new repository ?',
+    name: NEW_REPOSITORY_KEY,
+    when: async () => await gitHelper.checkIfRepositoryIsCleanable()
+  },
+  {
+    type: 'input',
+    message:
+      'Enter new remote origin (ex: https://github.com/user/my-repo.git) for this repository [Enter to cancel]:  ',
+    name: NEW_REMOTE_KEY,
+    when: async answers => answers[NEW_REPOSITORY_KEY]
+  }
+]
 
 /**
  * Check Node.js version
@@ -223,13 +211,6 @@ function printFail() {
  * Run
  */
 ;(async () => {
-  let isNewOrigin
-  let isNewRepositoryWanted
-
-  if (await gitHelper.checkIfRepositoryIsCleanable()) {
-    isNewRepositoryWanted = await askUserIfWeShouldCreateNewRepo()
-  }
-
   // Take the required Node and NPM version from package.json
   const {
     engines: { node, npm }
@@ -241,7 +222,25 @@ function printFail() {
   const requiredNpmVersion = npm.match(/([0-9.]+)/g)[0]
   await checkNpmVersion(requiredNpmVersion).catch(onError)
 
-  const { projectName, projectShortName } = await askUserForNewProjectName()
+  process.stdout.write('\n')
+
+  const {
+    projectName,
+    projectShortName,
+    checkoutStable,
+    isNewRepositoryWanted,
+    newOrigin
+  } = await askUser()
+
+  process.stdout.write('\n')
+
+  if (checkoutStable) {
+    await doCommand(
+      gitHelper.checkoutToLastTag,
+      'Checkout to stable version'
+    ).catch(onError)
+  }
+
   if (projectName) {
     await doCommand(
       changeProjectName,
@@ -287,17 +286,23 @@ function printFail() {
       'Creating initial commit for new repository'
     ).catch(onError)
 
-    isNewOrigin = await askUserForNewRemote()
+    if (newOrigin) {
+      await doCommand(
+        await gitHelper.changeOrigin,
+        'Adding new remote to repository',
+        newOrigin
+      ).catch(onError)
+    }
   }
 
-  if (isNewRepositoryWanted && isNewOrigin) {
+  if (isNewRepositoryWanted && newOrigin) {
     process.stdout.write('\n')
     process.stdout.write(
       chalk.blue(
         'ℹ Run `git push` to send initial commit to remote repository.'
       )
     )
-  } else if (isNewRepositoryWanted && !isNewOrigin) {
+  } else if (isNewRepositoryWanted && !newOrigin) {
     process.stdout.write('\n')
     process.stdout.write(
       chalk.blue(
