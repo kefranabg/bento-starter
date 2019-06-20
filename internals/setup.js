@@ -82,19 +82,20 @@ async function askUserForNewProjectName() {
     {
       type: 'input',
       message:
-        'Enter new project name (ex: Bento Starter) [Use empty value to skip]:  ',
+        'Enter new project name (ex: Bento Starter) [Use empty value to skip]:',
       name: NEW_PROJECT_NAME
     },
     {
       type: 'input',
       message:
-        'Enter new project short name (used for mobile) [max 12 characters] :  ',
+        'Enter new project short name (used for mobile) [max 12 characters] :',
       name: NEW_PROJECT_SHORT_NAME,
       when: answers => answers[NEW_PROJECT_NAME],
+      default: (answers) => answers[NEW_PROJECT_NAME].length <= 12 : answers[NEW_PROJECT_NAME] : ''
       validate: input =>
-        input.length <= 12
+        input && input.length <= 12
           ? true
-          : 'Your short name must have a maximum of 12 characters'
+          : 'Your project short name must have a maximum of 12 characters'
     }
   ])
 
