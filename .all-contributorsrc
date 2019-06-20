@@ -1,0 +1,118 @@
+{
+  "projectName": "bento-starter",
+  "projectOwner": "Franck Abgrall",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 75,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "tbetous",
+      "name": "Thomas Betous",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4435536?v=4",
+      "profile": "https://github.com/tbetous",
+      "contributions": [
+        "code",
+        "doc",
+        "question",
+        "ideas",
+        "review",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "kefranabg",
+      "name": "Franck Abgrall",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/9840435?v=4",
+      "profile": "https://www.franck-abgrall.me/",
+      "contributions": [
+        "code",
+        "doc",
+        "question",
+        "ideas",
+        "review",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "Errorname",
+      "name": "Thibaud Courtoison",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6669733?v=4",
+      "profile": "https://errorna.me",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "mbernardeau",
+      "name": "Mathias Bernardeau",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7049049?v=4",
+      "profile": "https://github.com/mbernardeau",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "perkinsjr",
+      "name": "James Perkins",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/45409975?v=4",
+      "profile": "https://jamesperkins.io/",
+      "contributions": [
+        "code",
+        "bug",
+        "question"
+      ]
+    },
+    {
+      "login": "antoinecellier",
+      "name": "Antoine CELLIER",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5922848?v=4",
+      "profile": "https://github.com/antoinecellier",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "0xflotus",
+      "name": "0xflotus",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26602940?v=4",
+      "profile": "https://github.com/0xflotus",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "GregoryBevan",
+      "name": "Gr3gory B3van",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4266007?v=4",
+      "profile": "https://github.com/GregoryBevan",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "RoyBkker",
+      "name": "Roy Bakker",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10207274?v=4",
+      "profile": "https://www.linkedin.com/pub/roy-bakker/41/aa7/335",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "NOtherDev",
+      "name": "Adam Bar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1309057?v=4",
+      "profile": "https://adambar.pl",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
