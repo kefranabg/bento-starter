@@ -91,7 +91,10 @@ async function askUserForNewProjectName() {
         'Enter new project short name (used for mobile) [max 12 characters] :',
       name: NEW_PROJECT_SHORT_NAME,
       when: answers => answers[NEW_PROJECT_NAME],
-      default: (answers) => answers[NEW_PROJECT_NAME].length <= 12 : answers[NEW_PROJECT_NAME] : ''
+      default: answers =>
+        answers[NEW_PROJECT_NAME].length <= 12
+          ? answers[NEW_PROJECT_NAME]
+          : undefined,
       validate: input =>
         input && input.length <= 12
           ? true
