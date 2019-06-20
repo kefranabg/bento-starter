@@ -3,7 +3,7 @@
     <router-link to="/home">
       <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
       <span class="site-name title-desktop">{{ appTitle }}</span>
-      <span class="title-mobile">{{ appShortTitle }}</span>
+      <span class="site-name title-mobile">{{ appShortTitle }}</span>
     </router-link>
     <div class="links">
       <nav class="nav-links">
