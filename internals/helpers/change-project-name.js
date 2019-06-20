@@ -1,6 +1,7 @@
 const util = require('util')
 const readFile = util.promisify(require('fs').readFile)
 const writeFile = util.promisify(require('fs').writeFile)
+const exec = util.promisify(require('child_process').exec)
 const path = require('path')
 const changeCase = require('change-case')
 
@@ -17,30 +18,34 @@ const manifestPath = `${rootDirname}/public/manifest.json`
 
 const processPackageJson = async newProjectName => {
   packageJson.name = changeCase.paramCase(newProjectName)
-  return writeFile(path, JSON.stringify(packageJsonPath))
+  return writeFile(packageJsonPath, JSON.stringify(packageJson))
 }
 
 const processPackageLock = async newProjectName => {
   packageLock.name = changeCase.paramCase(newProjectName)
-  return writeFile(path, JSON.stringify(packageLockPath))
+  return writeFile(packageLockPath, JSON.stringify(packageLock))
 }
 
 const processManifest = async (newProjectName, newProjectShortName) => {
   manifest.name = newProjectName
   manifest.short_name = newProjectShortName
-  return writeFile(path, JSON.stringify(manifestPath))
+  return writeFile(manifestPath, JSON.stringify(manifest))
 }
 
-const processConfig = async newProjectName => {
+const processConfig = async (newProjectName, newProjectShortName) => {
   const content = await readFile(confPath, 'utf-8')
-  const newContent = content.replace(/Bento Starter/, newProjectName)
+  const newContent = content
+    .replace(/Bento Starter/, newProjectName)
+    .replace(/Bento/, newProjectShortName)
   return writeFile(confPath, newContent)
 }
 
-module.exports = async (newProjectName, newProjectShortName) =>
-  Promise.all([
+module.exports = async (newProjectName, newProjectShortName) => {
+  await Promise.all([
     processPackageJson(newProjectName),
     processPackageLock(newProjectName),
     processManifest(newProjectName, newProjectShortName),
-    processConfig(newProjectName)
+    processConfig(newProjectName, newProjectShortName)
   ])
+  return exec('npm run prettier:format-all')
+}
