@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import authentication from './authentication'
 import app from './app'
 import products from './products'
+import contributors from './contributors'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   modules: {
     authentication,
     app,
-    products
+    products,
+    contributors
   }
 })
