@@ -6,8 +6,15 @@ const copyFile = util.promisify(require('fs').copyFile)
  *
  * @returns {Promise<any>}
  */
-module.exports = async () =>
+module.exports = async () => {
   await copyFile(
     `${__dirname}/../../.env.example`,
     `${__dirname}/../../.env.local`
   )
+
+  // We need this file to get cypress tests working on circleCI
+  await copyFile(
+    `${__dirname}/../../.env.example`,
+    `${__dirname}/../../.env.production`
+  )
+}
