@@ -6,6 +6,7 @@
 <a href="https://david-dm.org/kefranabg/bento-starter"><img alt="Dependencies" src="https://img.shields.io/david/kefranabg/bento-starter.svg" target="_blank" /></a>
 <a href="https://david-dm.org/kefranabg/bento-starter?type=dev"><img alt="DevDependencies" src="https://img.shields.io/david/dev/kefranabg/bento-starter.svg" target="_blank" /></a>
 <a href="https://github.com/kefranabg/bento-starter/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" /></a>
+<a href="https://github.com/ullaakut/astronomer"> <img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fastronomer.ullaakut.eu%2Fshields%3Fowner%3Dkefranabg%26name%3Dbento-starter&style=flat" /></a>
 <a href="https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY" target="_blank"><img src="https://home-assistant.io/images/supported_brands/slack.png" height="20px" /></a> 
 </p>
 
