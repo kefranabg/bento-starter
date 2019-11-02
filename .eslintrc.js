@@ -11,8 +11,8 @@ module.exports = {
     '@vue/prettier'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warning' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warning' : 'off',
     'vue/require-default-prop': 'off',
     'import/no-unresolved': 'off',
     'no-param-reassign': 'off',
