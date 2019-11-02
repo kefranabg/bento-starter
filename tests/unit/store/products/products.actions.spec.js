@@ -77,7 +77,7 @@ describe('products module action', () => {
     })
   })
 
-  describe('triggerAddProductAction', async () => {
+  describe('triggerAddProductAction', () => {
     describe('when the name of the product is empty', () => {
       const state = {
         productNameToCreate: ''
