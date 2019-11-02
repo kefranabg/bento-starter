@@ -62,7 +62,7 @@
     "ora": "^3.4.0",
     "prerender-spa-plugin": "^3.4.0",
     "read-pkg": "^5.1.1",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "shelljs": "^0.8.3",
     "vue-template-compiler": "^2.6.10",
