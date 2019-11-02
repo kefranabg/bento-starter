@@ -69,7 +69,9 @@ export default class GenericDB {
     let query = collectionRef
 
     if (constraints) {
-      constraints.forEach(constraint => (query = query.where(...constraint)))
+      constraints.forEach(constraint => {
+        query = query.where(...constraint)
+      })
     }
 
     const formatResult = result =>
@@ -88,7 +90,7 @@ export default class GenericDB {
    * @param data
    */
   async update(data) {
-    const id = data.id
+    const { id } = data
     const clonedData = cloneDeep(data)
     delete clonedData.id
 
@@ -119,13 +121,21 @@ export default class GenericDB {
    * @param obj
    */
   convertObjectTimestampPropertiesToDate(obj) {
+    const newObj = {}
+
     keys(obj)
       .filter(prop => obj[prop] instanceof Object)
-      .forEach(prop =>
-        obj[prop] instanceof firebase.firestore.Timestamp
-          ? (obj[prop] = obj[prop].toDate())
-          : this.convertObjectTimestampPropertiesToDate(obj[prop])
-      )
-    return obj
+      .forEach(prop => {
+        if (obj[prop] instanceof firebase.firestore.Timestamp) {
+          newObj[prop] = obj[prop].toDate()
+        } else {
+          this.convertObjectTimestampPropertiesToDate(obj[prop])
+        }
+      })
+
+    return {
+      ...obj,
+      newObj
+    }
   }
 }

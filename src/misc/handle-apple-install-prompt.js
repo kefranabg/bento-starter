@@ -13,7 +13,7 @@ if (isIosOnBrowser) {
   )
 
   if (!isNil(addToHomeIosPromptLastDate)) {
-    limitDate = new Date(parseInt(addToHomeIosPromptLastDate))
+    limitDate = new Date(parseInt(addToHomeIosPromptLastDate, 10))
     limitDate.setMonth(limitDate.getMonth() + 1)
   }
 

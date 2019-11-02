@@ -65,6 +65,7 @@ const router = new Router({
 /**
  * Handle user redirections
  */
+// eslint-disable-next-line consistent-return
 router.beforeEach((to, from, next) => {
   if (
     !(to.meta && to.meta.authNotRequired) &&

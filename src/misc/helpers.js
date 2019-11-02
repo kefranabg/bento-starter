@@ -14,5 +14,5 @@ export const createNewUserFromFirebaseAuthUser = async firebaseAuthUser => {
     email
   }
 
-  return await userDb.create(user, firebaseAuthUser.uid)
+  return userDb.create(user, firebaseAuthUser.uid)
 }

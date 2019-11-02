@@ -31,7 +31,7 @@ import { desktop as isDekstop } from 'is_js'
 
 export default {
   data: () => ({ loginError: null }),
-  head: function() {
+  head() {
     return {
       title: {
         inner: 'Login'
@@ -73,6 +73,7 @@ export default {
         // Firebase signin with popup is faster than redirect
         // but we can't use it on mobile because it's not well supported
         // when app is running as standalone on ios & android
+        // eslint-disable-next-line no-unused-expressions
         isDekstop()
           ? await firebase.auth().signInWithPopup(provider)
           : await firebase.auth().signInWithRedirect(provider)
