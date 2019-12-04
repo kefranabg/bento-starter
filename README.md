@@ -108,7 +108,7 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
 
 ## 💬 Chat
 
-Want to chat with us  ? 👉 [join bento-starter slack](https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTVjYjM3YjMzMGQ4NjgzYzY5YWMwNDkyY2VmMzg4ODg0OTkwZDRhMzg3OWU0MGY1MGYwMmVjYThiMmU2YzBjODY)
+Want to chat with us  ? 👉 [join bento-starter slack](https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTQ1N2M0NzAxYWM1OTJmYTA4YTIxMmM4MDhiNTI0MGNjZGIyNDFjY2UwNjE2Nzc3NzMzMzViOTYyOGViYjkxYzY)
 
 ## License
 
