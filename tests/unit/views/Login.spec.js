@@ -26,7 +26,57 @@ const defaultStoreStructure = {
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
+const $router = {
+  push: jest.fn()
+}
+
 describe('LoginView', () => {
+  describe('when user is defined', () => {
+    let storeStructure
+
+    beforeEach(() => {
+      storeStructure = cloneDeep(defaultStoreStructure)
+      storeStructure.modules.authentication.state.user = 'Evan'
+    })
+
+    describe('and redirectUrl is defined', () => {
+      it('should redirect to redirectUrl', () => {
+        const store = new Vuex.Store(storeStructure)
+        const redirectUrl = '/redirectUrl'
+        shallowMount(LoginView, {
+          store,
+          localVue,
+          mocks: {
+            $route: {
+              query: {
+                redirectUrl
+              }
+            },
+            $router
+          }
+        })
+        expect($router.push).toHaveBeenCalledWith(redirectUrl)
+      })
+    })
+
+    describe('but redirectUrl not defined', () => {
+      it('should redirect to /products', () => {
+        const store = new Vuex.Store(storeStructure)
+        shallowMount(LoginView, {
+          store,
+          localVue,
+          mocks: {
+            $route: {
+              query: {}
+            },
+            $router
+          }
+        })
+        expect($router.push).toHaveBeenCalledWith('/products')
+      })
+    })
+  })
+
   describe('when user is null', () => {
     let storeStructure
     beforeEach(() => {
