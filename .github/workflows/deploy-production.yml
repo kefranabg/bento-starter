@@ -47,6 +47,8 @@ jobs:
         with:
           name: build
       - name: Deploy project to firebase
-        run: npm run firebase:deploy:ci
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --non-interactive
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.DEV_FIREBASE_TOKEN }}
