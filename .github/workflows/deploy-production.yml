@@ -23,7 +23,7 @@ jobs:
       - name: Run e2e tests
         run: npm run test:e2e:headless
       - name: Build project
-        run: npm build
+        run: npm run build
       - name: Check bundle size
         run: npm run bundlesize
       - name: Upload build
