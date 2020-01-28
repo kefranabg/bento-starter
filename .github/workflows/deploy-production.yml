@@ -51,4 +51,4 @@ jobs:
         with:
           args: deploy --non-interactive
         env:
-          FIREBASE_TOKEN: ${{ secrets.DEV_FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
