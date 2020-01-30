@@ -12,7 +12,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-      - name: Cache node modules
       uses: actions/cache@v1
         env:
           cache-name: cache-node-modules
