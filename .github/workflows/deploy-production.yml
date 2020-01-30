@@ -13,14 +13,11 @@ jobs:
         with:
           node-version: 10
       - uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
+            ${{ runner.os }}-node-modules-
             ${{ runner.os }}-
       - name: Install dependencies
         run: npm ci --cache-min=9999 --no-audit --progress=false
