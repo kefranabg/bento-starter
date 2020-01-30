@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.132",
     "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-e2e-cypress": "^4.0.5",
+    "@vue/cli-plugin-e2e-cypress": "4.1.2",
     "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/cli-plugin-pwa": "^3.8.0",
     "@vue/cli-plugin-unit-jest": "^4.0.5",
