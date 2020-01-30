@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-      uses: actions/cache@v1
+      - uses: actions/cache@v1
         env:
           cache-name: cache-node-modules
         with:
