@@ -18,7 +18,8 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-console.log(`
+// eslint-disable-next-line no-console
+console.info(`
 🍱 This app was bootstrapped with bento-starter 🍱
 
 👉 https://bento-starter.netlify.com/
