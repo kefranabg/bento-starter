@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <p>test</p>
     <nav-bar></nav-bar>
     <div class="main-wrapper">
       <router-view />
@@ -15,8 +16,7 @@
       v-if="showAddToHomeScreenModalForApple"
       class="apple-add-to-home-screen-modal"
       @close="closeAddToHomeScreenModalForApple(false)"
-    >
-    </apple-add-to-home-screen-modal>
+    ></apple-add-to-home-screen-modal>
   </div>
 </template>
 <script>
