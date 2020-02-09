@@ -16,9 +16,17 @@ Vue.use(Head, {
 
 /* If you don't know about VueRouter, please refer to https://router.vuejs.org/ */
 
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    return savedPosition
+  }
+  return { x: 0, y: 0 }
+}
+
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior,
   routes: [
     {
       path: '/home',
