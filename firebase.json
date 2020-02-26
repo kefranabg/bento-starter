@@ -6,7 +6,12 @@
     "headers": [
       {
         "source": "/service-worker.js",
-        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       },
       {
         "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
@@ -18,11 +23,11 @@
         ]
       },
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg)",
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|css|js|)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=2592000"
           }
         ]
       },
