@@ -6,7 +6,7 @@
 <a href="https://david-dm.org/kefranabg/bento-starter"><img alt="Dependencies" src="https://img.shields.io/david/kefranabg/bento-starter.svg" target="_blank" /></a>
 <a href="https://david-dm.org/kefranabg/bento-starter?type=dev"><img alt="DevDependencies" src="https://img.shields.io/david/dev/kefranabg/bento-starter.svg" target="_blank" /></a>
 <a href="https://github.com/kefranabg/bento-starter/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" /></a>
-<a href="https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTQ1N2M0NzAxYWM1OTJmYTA4YTIxMmM4MDhiNTI0MGNjZGIyNDFjY2UwNjE2Nzc3NzMzMzViOTYyOGViYjkxYzY" target="_blank"><img src="https://home-assistant.io/images/supported_brands/slack.png" height="20px" /></a> 
+<a href="https://join.slack.com/t/bento-starter/shared_invite/enQtNjE5OTI5MzQyMTE3LTQ1N2M0NzAxYWM1OTJmYTA4YTIxMmM4MDhiNTI0MGNjZGIyNDFjY2UwNjE2Nzc3NzMzMzViOTYyOGViYjkxYzY" target="_blank"><img src="https://home-assistant.io/images/supported_brands/slack.png" height="20px" /></a>
 </p>
 
 <h1 align="center">Welcome to bento-starter :wave:</h1>
@@ -96,6 +96,7 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
     <td align="center"><a href="https://www.linkedin.com/pub/roy-bakker/41/aa7/335"><img src="https://avatars2.githubusercontent.com/u/10207274?v=4" width="75px;" alt="Roy Bakker"/><br /><sub><b>Roy Bakker</b></sub></a><br /><a href="https://github.com/kefranabg/bento-starter/issues?q=author%3ARoyBkker" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://adambar.pl"><img src="https://avatars0.githubusercontent.com/u/1309057?v=4" width="75px;" alt="Adam Bar"/><br /><sub><b>Adam Bar</b></sub></a><br /><a href="#ideas-NOtherDev" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/6ones"><img src="https://avatars3.githubusercontent.com/u/25098427?v=4" width="75px;" alt="Chidindu Ogbonna "/><br /><sub><b>Chidindu Ogbonna </b></sub></a><br /><a href="https://github.com/kefranabg/bento-starter/commits?author=6ones" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/VincentBourdeau"><img src="https://avatars1.githubusercontent.com/u/8518122?v=4" width="75px;" alt="Vincent Bourdeau"/><br /><sub><b>Vincent Bourdeau</b></sub></a><br /><a href="https://github.com/kefranabg/bento-starter/commits?author=VincentBourdeau" title="Code">💻</a></td>
   </tr>
 </table>
 
