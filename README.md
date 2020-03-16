@@ -45,9 +45,12 @@ Install the PWA demo from Google Play Store :point_right: [bento-starter Google 
 
 ![Lighthouse score](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/lighthouse-score-report.jpg)
 
-**Optional CircleCI preconfigured workflow :**
+**Optional preconfigured Github Actions workflow :**
 
-![CI Workflow](https://raw.githubusercontent.com/kefranabg/bento-starter/master/resources/ci-workflow.jpg)
+- :heavy_check_mark: Check tests and quality
+- :gear: Build the project
+- :rocket: Deploy to firebase hosting
+
 
 **The stack is made up of :**
 
