@@ -6,7 +6,7 @@
         <img class="app-logo" src="@/assets/logo.png" />
         <h3 class="title">Install {{ appTitle }}</h3>
         <p class="description">
-          Install this application to your home screen for quickly and easy
+          Install this application to your home screen for quick and easy
           access when you're on the go.
         </p>
       </div>
