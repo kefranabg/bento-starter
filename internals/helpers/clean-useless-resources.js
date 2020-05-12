@@ -7,7 +7,8 @@ const rootDirname = path.resolve(`${__dirname}/../../`)
 const resourcesPathsToDelete = [
   `${rootDirname}/internals`,
   `${rootDirname}/docs`,
-  `${rootDirname}/.github`,
+  `${rootDirname}/.github/ISSUE_TEMPLATE`,
+  `${rootDirname}/.github/FUNDING.yml`,
   `${rootDirname}/resources`,
   `${rootDirname}/.env.example`,
   `${rootDirname}/LICENSE`
